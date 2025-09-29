@@ -3,34 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-lang-key="title">Optimizador de Imágenes</title>
+    
+    <!-- =================================================================== -->
+    <!-- ============== INICIO DE OPTIMIZACIÓN SEO (BÁSICO) ================ -->
+    <!-- =================================================================== -->
 
-    <!-- SEO Meta Tags -->
-    <meta id="meta-description" name="description" content="Optimiza y reduce el tamaño de tus capturas de pantalla y otras imágenes fácilmente. Soporta JPEG, PNG y WebP con ajustes de calidad y escala.">
-    <meta name="keywords" content="optimizador de imagen, reducir tamaño imagen, compresor de imagen, optimizar captura de pantalla, cleanshot, image optimizer, resize image, image compressor, seo images">
+    <title data-lang-key="title">Optimizador de Imágenes y Capturas - Comprime JPEG, PNG, WebP</title>
+    
+    <!-- Descripción para Motores de Búsqueda (150-160 caracteres) -->
+    <meta id="meta-description" name="description" content="Reduce el tamaño de tus imágenes y capturas de pantalla con nuestro optimizador online gratuito. Comprime JPEG, PNG y WebP al instante sin perder calidad.">
+    
+    <!-- Palabras Clave -->
+    <meta name="keywords" content="optimizador de imagen, reducir tamaño imagen, compresor de imagen, optimizar captura de pantalla, cleanshot, comprimir imagen online, bajar peso de imagen, optimizador de fotos para web, reducir kb de imagen, image optimizer, resize image, image compressor, seo images">
+    
+    <!-- Autor y Robots -->
     <meta name="author" content="Hitster Ai">
-    <!-- Reemplaza [TU-URL-AQUI.COM] con la URL final de tu sitio -->
-    <link rel="canonical" href="https://[TU-URL-AQUI.COM]">
+    <meta name="robots" content="index, follow"> <!-- Permite a los bots indexar y seguir los enlaces de la página -->
+
+    <!-- URL Canónica (IMPORTANTE: REEMPLAZA ESTO CON TU URL REAL) -->
+    <link rel="canonical" href="https://[TU-DOMINIO-FINAL.COM]">
+
+    <!-- =================================================================== -->
+    <!-- ============ INICIO DE FAVICONS (REEMPLAZA LOS ARCHIVOS) =========== -->
+    <!-- =================================================================== -->
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png"> <!-- 180x180px -->
+    <link rel="manifest" href="/site.webmanifest"> <!-- Para PWA -->
+
+    <!-- =================================================================== -->
+    <!-- ======== INICIO DE METAETIQUETAS PARA REDES SOCIALES (OG & TWITTER) ====== -->
+    <!-- =================================================================== -->
+    <!-- (IMPORTANTE: REEMPLAZA LAS URLs DE IMAGEN Y LA URL PRINCIPAL) -->
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://[TU-URL-AQUI.COM]">
-    <meta property="og:title" content="Optimizador de Imágenes para CleanShot | Hitster Ai">
-    <meta property="og:description" content="Herramienta web gratuita para reducir el tamaño de tus imágenes y capturas de pantalla sin perder calidad. Rápido, seguro y en tu navegador.">
-    <meta property="og:image" content="https://[TU-URL-AQUI.COM]/og-image.jpg"> <!-- URL a una imagen representativa para redes sociales -->
+    <meta property="og:url" content="https://[TU-DOMINIO-FINAL.COM]">
+    <meta property="og:title" content="Optimizador de Imágenes Online y Gratuito | Hitster Ai">
+    <meta property="og:description" content="Herramienta web para reducir el tamaño de tus imágenes y capturas de pantalla sin perder calidad. Rápido, seguro y en tu navegador.">
+    <meta property="og:image" content="https://[TU-DOMINIO-FINAL.COM]/og-image.jpg"> <!-- Imagen de 1200x630px -->
 
     <!-- Twitter Card -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://[TU-URL-AQUI.COM]">
-    <meta property="twitter:title" content="Optimizador de Imágenes para CleanShot | Hitster Ai">
-    <meta property="twitter:description" content="Herramienta web gratuita para reducir el tamaño de tus imágenes y capturas de pantalla sin perder calidad. Rápido, seguro y en tu navegador.">
-    <meta property="twitter:image" content="https://[TU-URL-AQUI.COM]/twitter-image.jpg"> <!-- URL a una imagen para Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://[TU-DOMINIO-FINAL.COM]">
+    <meta name="twitter:title" content="Optimizador de Imágenes Online y Gratuito | Hitster Ai">
+    <meta name="twitter:description" content="Herramienta web para reducir el tamaño de tus imágenes y capturas de pantalla sin perder calidad. Rápido, seguro y en tu navegador.">
+    <meta name="twitter:image" content="https://[TU-DOMINIO-FINAL.COM]/twitter-image.jpg"> <!-- Imagen de 1200x675px -->
 
-    <!--
-    NOTA SEO: Para una optimización completa, no olvides crear y subir
-    un archivo 'robots.txt' a la raíz de tu sitio para guiar a los bots de búsqueda,
-    y un 'sitemap.xml' para ayudarles a descubrir tu página.
-    -->
+    <!-- =================================================================== -->
+    <!-- ======================= FIN DE LA SECCIÓN SEO ===================== -->
+    <!-- =================================================================== -->
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,7 +71,6 @@
         input[type="number"] {
             -moz-appearance: textfield;
         }
-        /* Estilo para el input de rango */
         input[type="range"] {
             -webkit-appearance: none;
             appearance: none;
@@ -76,23 +98,26 @@
             border-radius: 50%;
             border: 2px solid #262626; /* neutral-800 */
         }
-        #copy-feedback {
+        #copy-feedback, #error-feedback {
             transition: opacity 0.5s ease-in-out;
         }
     </style>
 </head>
 <body class="bg-neutral-900 text-neutral-300 flex flex-col min-h-screen">
 
-    <!-- Notificación de copiado -->
-    <div id="copy-feedback" class="fixed top-5 right-5 bg-green-500 text-white py-2 px-4 rounded-lg shadow-lg opacity-0 pointer-events-none">
+    <!-- Notificaciones -->
+    <div id="copy-feedback" class="fixed top-5 right-5 bg-green-500 text-white py-2 px-4 rounded-lg shadow-lg opacity-0 pointer-events-none z-50">
         <span data-lang-key="copied_feedback">¡Copiado al portapapeles!</span>
     </div>
+    <div id="error-feedback" class="fixed top-5 right-5 bg-red-500 text-white py-2 px-4 rounded-lg shadow-lg opacity-0 pointer-events-none z-50">
+        <span id="error-message"></span>
+    </div>
+
 
     <!-- Contenedor principal -->
     <main class="flex-grow container mx-auto p-4 md:p-8">
         <div class="max-w-4xl mx-auto">
             
-            <!-- Cabecera y selector de idioma -->
             <header class="flex justify-between items-center mb-8">
                 <h1 class="text-3xl md:text-4xl font-bold text-white" data-lang-key="main_header">Optimizador de Capturas</h1>
                 <div class="flex items-center space-x-2">
@@ -101,7 +126,6 @@
                 </div>
             </header>
 
-            <!-- Área de carga de imagen -->
             <div id="upload-area" class="w-full border-4 border-dashed border-neutral-700 rounded-2xl p-8 text-center cursor-pointer hover:border-neutral-600 transition-colors bg-neutral-800">
                 <input type="file" id="image-input" class="hidden" accept="image/*">
                 <div class="flex flex-col items-center">
@@ -111,10 +135,8 @@
                 </div>
             </div>
 
-            <!-- Área de edición y previsualización (oculta por defecto) -->
             <div id="editor-area" class="hidden mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
                 
-                <!-- Columna de previsualización -->
                 <div class="flex flex-col items-center justify-center bg-neutral-800 p-4 rounded-2xl">
                     <img id="image-preview" src="#" alt="Previsualización de la imagen a optimizar" class="max-w-full max-h-[400px] object-contain rounded-lg">
                     <div class="text-center mt-4 w-full">
@@ -123,14 +145,12 @@
                     </div>
                 </div>
 
-                <!-- Columna de opciones -->
                 <div class="bg-neutral-800 p-6 rounded-2xl flex flex-col space-y-6">
-                    <!-- NUEVO: Controles de dimensión -->
                     <div>
                         <label class="block mb-2 font-medium" data-lang-key="dimensions_label">Dimensiones</label>
                         <div class="flex items-center space-x-2">
                             <input type="number" id="width-input" class="w-full bg-neutral-700 border border-neutral-600 rounded-md px-3 py-2 text-center text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ancho">
-                            <button id="aspect-lock-btn" class="p-2 rounded-md bg-neutral-600 hover:bg-neutral-500 transition-colors" title="Mantener proporción">
+                            <button id="aspect-lock-btn" class="p-2 rounded-md bg-neutral-600 hover:bg-neutral-500 transition-colors" title="Mantener proporción" aria-label="Bloquear o desbloquear la proporción de aspecto">
                                 <svg id="lock-icon" class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd"></path></svg>
                                 <svg id="unlock-icon" class="w-5 h-5 text-white hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5a3 3 0 10-6 0V9h6zM10 5.5a3 3 0 00-3 3V9h2V8.5a1 1 0 112 0V9h2V8.5a3 3 0 00-3-3z"></path></svg>
                             </button>
@@ -152,9 +172,8 @@
                         <input type="range" id="quality" min="10" max="100" value="80" class="w-full">
                     </div>
                     
-                    <div class="flex-grow"></div> <!-- Espaciador -->
+                    <div class="flex-grow"></div>
 
-                    <!-- NUEVO: Botones de acción actualizados -->
                     <div class="pt-4 border-t border-neutral-700 flex flex-col space-y-3">
                          <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
                             <button id="copy-btn" class="w-full sm:w-1/2 bg-green-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-green-700 transition-colors disabled:bg-neutral-500 disabled:cursor-not-allowed flex items-center justify-center" data-lang-key="copy_button" disabled>
@@ -173,7 +192,6 @@
         </div>
     </main>
 
-    <!-- Pie de página -->
     <footer class="w-full text-center p-4 text-neutral-500 text-sm">
         <p>
             <span data-lang-key="footer_rights">Todos los derechos reservados para</span>
@@ -182,20 +200,22 @@
         </p>
     </footer>
 
-    <!-- Structured Data for SEO -->
+    <!-- DATOS ESTRUCTURADOS (SCHEMA.ORG) PARA RICH SNIPPETS -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "Optimizador de Imágenes para CleanShot",
-      "description": "Una herramienta web para reducir el tamaño y optimizar capturas de pantalla e imágenes. Permite cambiar el formato (JPEG, PNG, WebP), la escala y la calidad.",
+      "description": "Una herramienta web gratuita para reducir el tamaño y optimizar capturas de pantalla e imágenes. Permite cambiar el formato (JPEG, PNG, WebP), la escala y la calidad.",
       "applicationCategory": "MultimediaApplication",
       "operatingSystem": "All",
       "browserRequirements": "Requires HTML5 support",
       "offers": {
         "@type": "Offer",
-        "price": "0"
+        "price": "0",
+        "priceCurrency": "USD"
       },
+      "screenshot": "https://[TU-DOMINIO-FINAL.COM]/screenshot.jpg",
       "creator": {
         "@type": "Organization",
         "name": "Hitster Ai",
@@ -205,10 +225,9 @@
     </script>
 
     <script>
-        // --- Diccionario de traducciones ---
         const translations = {
             es: {
-                title: "Optimizador de Imágenes",
+                title: "Optimizador de Imágenes y Capturas - Comprime JPEG, PNG, WebP",
                 main_header: "Optimizador de Capturas",
                 upload_prompt_main: "Arrastra y suelta una imagen aquí",
                 upload_prompt_sub: "o haz clic para seleccionar un archivo",
@@ -224,12 +243,13 @@
                 new_size_label: "Nuevo:",
                 footer_rights: "Todos los derechos reservados para",
                 footer_contact: "Contáctanos",
-                meta_description: "Optimiza y reduce el tamaño de tus capturas de pantalla y otras imágenes fácilmente. Soporta JPEG, PNG y WebP con ajustes de calidad y escala.",
+                meta_description: "Reduce el tamaño de tus imágenes y capturas de pantalla con nuestro optimizador online gratuito. Comprime JPEG, PNG y WebP al instante sin perder calidad.",
                 image_preview_alt: "Previsualización de la imagen a optimizar",
                 copied_feedback: "¡Copiado al portapapeles!",
+                copy_error_feedback: "Error al copiar. Su navegador puede no admitirlo o la página no tener permisos.",
             },
             en: {
-                title: "Image Optimizer",
+                title: "Image & Screenshot Optimizer - Compress JPEG, PNG, WebP",
                 main_header: "Screenshot Optimizer",
                 upload_prompt_main: "Drag and drop an image here",
                 upload_prompt_sub: "or click to select a file",
@@ -245,13 +265,13 @@
                 new_size_label: "New:",
                 footer_rights: "All rights reserved for",
                 footer_contact: "Contact us",
-                meta_description: "Easily optimize and reduce the file size of your screenshots and other images. Supports JPEG, PNG, and WebP with quality and scale adjustments.",
+                meta_description: "Reduce the file size of your images and screenshots with our free online optimizer. Instantly compress JPEG, PNG, and WebP files without losing quality.",
                 image_preview_alt: "Preview of the image to be optimized",
                 copied_feedback: "Copied to clipboard!",
+                copy_error_feedback: "Copy failed. Your browser may not support this or the page may lack permission.",
             }
         };
 
-        // --- Variables y referencias al DOM ---
         let currentLang = 'es';
         let originalImage = null;
         let originalFileName = '';
@@ -279,10 +299,9 @@
         const originalSizeDisplay = document.getElementById('original-size');
         const newSizeDisplay = document.getElementById('new-size');
         const copyFeedback = document.getElementById('copy-feedback');
+        const errorFeedback = document.getElementById('error-feedback');
+        const errorMessage = document.getElementById('error-message');
 
-        // --- Funciones ---
-
-        // Función para cambiar el idioma
         const setLanguage = (lang) => {
             if (lang === currentLang) return;
             currentLang = lang;
@@ -293,19 +312,16 @@
                 if (translations[lang][key] && !['copy_button', 'download_button'].includes(key)) {
                      element.textContent = translations[lang][key];
                 } else if (key === 'copy_button' || key === 'download_button') {
-                    // Solo actualiza el texto del botón, manteniendo el SVG
                     const textNode = Array.from(element.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
                     if(textNode) textNode.textContent = ` ${translations[lang][key]}`;
                 }
             });
 
-            // Actualizar atributos específicos para SEO y accesibilidad
             document.getElementById('meta-description').setAttribute('content', translations[lang].meta_description);
             document.getElementById('image-preview').setAttribute('alt', translations[lang].image_preview_alt);
             widthInput.setAttribute('placeholder', translations[lang].width_placeholder);
             heightInput.setAttribute('placeholder', translations[lang].height_placeholder);
             
-            // Actualizar botones de idioma
             document.getElementById('lang-es').classList.toggle('bg-neutral-600', lang === 'es');
             document.getElementById('lang-es').classList.toggle('text-white', lang === 'es');
             document.getElementById('lang-es').classList.toggle('bg-neutral-800', lang !== 'es');
@@ -341,7 +357,7 @@
                         
                         uploadArea.classList.add('hidden');
                         editorArea.classList.remove('hidden');
-                        originalFileName = file.name || 'image.png'; // Asignar un nombre por defecto para archivos del portapapeles
+                        originalFileName = file.name || 'image.png';
                         originalFileSize = file.size;
                         updateSizeDisplays();
                         processImage();
@@ -357,7 +373,6 @@
         const updateSizeDisplays = (newSize) => {
             const originalLabel = translations[currentLang].original_size_label;
             originalSizeDisplay.textContent = `${originalLabel} ${formatBytes(originalFileSize)}`;
-            
             if (newSize) {
                 const newLabel = translations[currentLang].new_size_label;
                 newSizeDisplay.textContent = `${newLabel} ${formatBytes(newSize)}`;
@@ -368,79 +383,62 @@
 
         const processImage = () => {
             if (!originalImage) return;
-
             const newWidth = parseInt(widthInput.value);
             const newHeight = parseInt(heightInput.value);
             const quality = parseInt(qualitySlider.value) / 100;
-            
             if (isNaN(newWidth) || isNaN(newHeight) || newWidth <= 0 || newHeight <= 0) return;
-
             const canvas = document.createElement('canvas');
             canvas.width = newWidth;
             canvas.height = newHeight;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(originalImage, 0, 0, canvas.width, canvas.height);
-
-            canvas.toBlob((blob) => {
-                if(blob) {
-                    updateSizeDisplays(blob.size);
-                }
-            }, `image/${outputFormat}`, quality);
+            canvas.getContext('2d').drawImage(originalImage, 0, 0, canvas.width, canvas.height);
+            canvas.toBlob((blob) => { if(blob) { updateSizeDisplays(blob.size); } }, `image/${outputFormat}`, quality);
         };
         
         const getFinalBlob = () => {
             return new Promise((resolve) => {
                 if (!originalImage) return resolve(null);
-                
                 const newWidth = parseInt(widthInput.value);
                 const newHeight = parseInt(heightInput.value);
                 const quality = parseInt(qualitySlider.value) / 100;
-                
-                if (isNaN(newWidth) || isNaN(newHeight) || newWidth <= 0 || newHeight <= 0) {
-                    return resolve(null);
-                }
-
+                if (isNaN(newWidth) || isNaN(newHeight) || newWidth <= 0 || newHeight <= 0) return resolve(null);
                 const canvas = document.createElement('canvas');
                 canvas.width = newWidth;
                 canvas.height = newHeight;
-                const ctx = canvas.getContext('2d');
-                ctx.drawImage(originalImage, 0, 0, canvas.width, canvas.height);
-
+                canvas.getContext('2d').drawImage(originalImage, 0, 0, canvas.width, canvas.height);
                 canvas.toBlob((blob) => { resolve(blob); }, `image/${outputFormat}`, quality);
             });
         };
         
         const showCopyFeedback = () => {
             copyFeedback.classList.remove('opacity-0');
-            setTimeout(() => {
-                copyFeedback.classList.add('opacity-0');
-            }, 2000);
+            setTimeout(() => { copyFeedback.classList.add('opacity-0'); }, 2000);
+        };
+        
+        const showErrorFeedback = (message) => {
+            errorMessage.textContent = message;
+            errorFeedback.classList.remove('opacity-0');
+            setTimeout(() => { errorFeedback.classList.add('opacity-0'); }, 3000);
         };
 
         // --- Event Listeners ---
         document.getElementById('lang-es').addEventListener('click', () => setLanguage('es'));
         document.getElementById('lang-en').addEventListener('click', () => setLanguage('en'));
-
         uploadArea.addEventListener('click', () => imageInput.click());
         uploadArea.addEventListener('dragover', (e) => { e.preventDefault(); uploadArea.classList.add('border-blue-500'); });
         uploadArea.addEventListener('dragleave', () => { uploadArea.classList.remove('border-blue-500'); });
         uploadArea.addEventListener('drop', (e) => {
             e.preventDefault();
             uploadArea.classList.remove('border-blue-500');
-            const file = e.dataTransfer.files[0];
-            handleFile(file);
+            handleFile(e.dataTransfer.files[0]);
         });
         imageInput.addEventListener('change', (e) => handleFile(e.target.files[0]));
         
-        // NUEVO: Escuchar el evento de pegar en toda la página
         document.addEventListener('paste', (e) => {
             const items = (e.clipboardData || window.clipboardData).items;
             if (!items) return;
-
             for (let i = 0; i < items.length; i++) {
                 if (items[i].type.indexOf('image') !== -1) {
                     const file = items[i].getAsFile();
-                    // Solo procesar si el área de carga está visible.
                     if (!uploadArea.classList.contains('hidden')) {
                          e.preventDefault();
                          handleFile(file);
@@ -480,12 +478,8 @@
         formatButtons.forEach(button => {
             button.addEventListener('click', () => {
                 outputFormat = button.dataset.format;
-                formatButtons.forEach(btn => {
-                    btn.classList.remove('bg-neutral-600', 'text-white');
-                    btn.classList.add('bg-neutral-700', 'text-neutral-300');
-                });
-                button.classList.add('bg-neutral-600', 'text-white');
-                button.classList.remove('bg-neutral-700', 'text-neutral-300');
+                formatButtons.forEach(btn => btn.classList.replace('bg-neutral-600', 'bg-neutral-700'));
+                button.classList.replace('bg-neutral-700', 'bg-neutral-600');
                 qualityControl.style.display = (outputFormat === 'png') ? 'none' : 'block';
                 processImage();
             });
@@ -506,15 +500,58 @@
         
         copyBtn.addEventListener('click', async () => {
             const blob = await getFinalBlob();
-            if (blob) {
+            if (!blob) return;
+
+            if (navigator.clipboard && navigator.clipboard.write) {
                 try {
-                    await navigator.clipboard.write([ new ClipboardItem({ [blob.type]: blob }) ]);
+                    await navigator.clipboard.write([new ClipboardItem({ [blob.type]: blob })]);
                     showCopyFeedback();
+                    return;
                 } catch (err) {
-                    console.error('Failed to copy image: ', err);
-                    const alertMsg = currentLang === 'es' ? 'Error: No se pudo copiar la imagen al portapapeles.' : 'Error: Could not copy image to clipboard.';
-                    alert(alertMsg);
+                    console.warn('La API moderna del portapapeles falló. Intentando método alternativo.', err);
                 }
+            }
+
+            try {
+                const reader = new FileReader();
+                reader.onload = function() {
+                    const dataUrl = reader.result;
+                    const tempDiv = document.createElement('div');
+                    tempDiv.contentEditable = true;
+                    tempDiv.style.position = 'absolute';
+                    tempDiv.style.left = '-9999px';
+
+                    const img = document.createElement('img');
+                    img.src = dataUrl;
+                    tempDiv.appendChild(img);
+                    document.body.appendChild(tempDiv);
+
+                    const range = document.createRange();
+                    range.selectNodeContents(tempDiv);
+                    
+                    const selection = window.getSelection();
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+
+                    const success = document.execCommand('copy');
+                    
+                    document.body.removeChild(tempDiv);
+                    selection.removeAllRanges();
+
+                    if (success) {
+                        showCopyFeedback();
+                    } else {
+                        throw new Error('document.execCommand("copy") devolvió false.');
+                    }
+                };
+                reader.onerror = function() {
+                     throw new Error('FileReader falló al leer el blob.');
+                };
+                reader.readAsDataURL(blob);
+            } catch (err) {
+                console.error('El método alternativo para copiar también falló:', err);
+                const errorMsg = translations[currentLang].copy_error_feedback;
+                showErrorFeedback(errorMsg);
             }
         });
 
@@ -531,16 +568,17 @@
             qualitySlider.value = 80;
             qualityValue.textContent = '80';
             outputFormat = 'jpeg';
-            formatButtons.forEach(btn => {
-                btn.classList.remove('bg-neutral-600', 'text-white');
-                btn.classList.add('bg-neutral-700', 'text-neutral-300');
-            });
-            document.querySelector('button[data-format="jpeg"]').classList.add('bg-neutral-600', 'text-white');
-            document.querySelector('button[data-format="jpeg"]').classList.remove('bg-neutral-700', 'text-neutral-300');
+            formatButtons.forEach(btn => btn.classList.replace('bg-neutral-600', 'bg-neutral-700'));
+            document.querySelector('button[data-format="jpeg"]').classList.replace('bg-neutral-700', 'bg-neutral-600');
             qualityControl.style.display = 'block';
             aspectRatioLocked = true;
             lockIcon.classList.remove('hidden');
             unlockIcon.classList.add('hidden');
+        });
+
+        // Sincronizar el título y la meta descripción con el idioma al cargar
+        document.addEventListener('DOMContentLoaded', () => {
+            setLanguage(currentLang); 
         });
     </script>
 </body>
