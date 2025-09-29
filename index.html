@@ -5,23 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- =================================================================== -->
-    <!-- ============== INICIO DE OPTIMIZACIÓN SEO (BÁSICO) ================ -->
+    <!-- ============== INICIO DE OPTIMIZACIÓN SEO AVANZADA ================ -->
     <!-- =================================================================== -->
 
-    <title data-lang-key="title">Optimizador de Imágenes y Capturas - Comprime JPEG, PNG, WebP</title>
+    <title data-lang-key="title">Optimizador de Imágenes Responsivo - Comprime y Redimensiona al Instante</title>
     
     <!-- Descripción para Motores de Búsqueda (150-160 caracteres) -->
-    <meta id="meta-description" name="description" content="Reduce el tamaño de tus imágenes y capturas de pantalla con nuestro optimizador online gratuito. Comprime JPEG, PNG y WebP al instante sin perder calidad.">
+    <meta id="meta-description" name="description" content="Optimiza imágenes al instante con nuestra herramienta web responsiva. Pega desde el portapapeles, arrastra y suelta, o selecciona archivos. Redimensiona, comprime y convierte a JPEG, PNG y WebP en cualquier dispositivo.">
     
     <!-- Palabras Clave -->
-    <meta name="keywords" content="optimizador de imagen, reducir tamaño imagen, compresor de imagen, optimizar captura de pantalla, cleanshot, comprimir imagen online, bajar peso de imagen, optimizador de fotos para web, reducir kb de imagen, image optimizer, resize image, image compressor, seo images">
+    <meta name="keywords" content="optimizador de imagen, compresor de imagen, redimensionar imagen, diseño responsivo, web tool, cleanshot, pegar imagen, arrastrar y soltar, convertir imagen, reducir tamaño, optimizar para web, multi-idioma, image optimizer, responsive design, image compressor, resize image, paste from clipboard, drag and drop">
     
     <!-- Autor y Robots -->
     <meta name="author" content="Hitster Ai">
-    <meta name="robots" content="index, follow"> <!-- Permite a los bots indexar y seguir los enlaces de la página -->
+    <meta name="robots" content="index, follow"> 
 
     <!-- URL Canónica (IMPORTANTE: REEMPLAZA ESTO CON TU URL REAL) -->
     <link rel="canonical" href="https://[TU-DOMINIO-FINAL.COM]">
+
+    <!-- SEO para Múltiples Idiomas en la Misma URL -->
+    <link rel="alternate" hreflang="es" href="https://[TU-DOMINIO-FINAL.COM]">
+    <link rel="alternate" hreflang="en" href="https://[TU-DOMINIO-FINAL.COM]">
+    <link rel="alternate" hreflang="x-default" href="https://[TU-DOMINIO-FINAL.COM]">
+
 
     <!-- =================================================================== -->
     <!-- ============ INICIO DE FAVICONS (REEMPLAZA LOS ARCHIVOS) =========== -->
@@ -29,27 +35,27 @@
 
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png"> <!-- 180x180px -->
-    <link rel="manifest" href="/site.webmanifest"> <!-- Para PWA -->
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png"> 
+    <link rel="manifest" href="/site.webmanifest">
 
     <!-- =================================================================== -->
     <!-- ======== INICIO DE METAETIQUETAS PARA REDES SOCIALES (OG & TWITTER) ====== -->
     <!-- =================================================================== -->
-    <!-- (IMPORTANTE: REEMPLAZA LAS URLs DE IMAGEN Y LA URL PRINCIPAL) -->
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Hitster Ai Image Optimizer">
     <meta property="og:url" content="https://[TU-DOMINIO-FINAL.COM]">
     <meta property="og:title" content="Optimizador de Imágenes Online y Gratuito | Hitster Ai">
-    <meta property="og:description" content="Herramienta web para reducir el tamaño de tus imágenes y capturas de pantalla sin perder calidad. Rápido, seguro y en tu navegador.">
-    <meta property="og:image" content="https://[TU-DOMINIO-FINAL.COM]/og-image.jpg"> <!-- Imagen de 1200x630px -->
+    <meta property="og:description" content="Herramienta web responsiva para reducir el tamaño de tus imágenes y capturas de pantalla sin perder calidad. Rápido, seguro y en tu navegador.">
+    <meta property="og:image" content="https://[TU-DOMINIO-FINAL.COM]/og-image.jpg"> 
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://[TU-DOMINIO-FINAL.COM]">
     <meta name="twitter:title" content="Optimizador de Imágenes Online y Gratuito | Hitster Ai">
-    <meta name="twitter:description" content="Herramienta web para reducir el tamaño de tus imágenes y capturas de pantalla sin perder calidad. Rápido, seguro y en tu navegador.">
-    <meta name="twitter:image" content="https://[TU-DOMINIO-FINAL.COM]/twitter-image.jpg"> <!-- Imagen de 1200x675px -->
+    <meta name="twitter:description" content="Herramienta web responsiva para reducir el tamaño de tus imágenes y capturas de pantalla sin perder calidad. Rápido, seguro y en tu navegador.">
+    <meta name="twitter:image" content="https://[TU-DOMINIO-FINAL.COM]/twitter-image.jpg"> 
 
     <!-- =================================================================== -->
     <!-- ======================= FIN DE LA SECCIÓN SEO ===================== -->
@@ -63,7 +69,6 @@
         body {
             font-family: 'Inter', sans-serif;
         }
-        /* Ocultar flechas en inputs de tipo número */
         input[type="number"]::-webkit-inner-spin-button,
         input[type="number"]::-webkit-outer-spin-button {
             -webkit-appearance: none;
@@ -72,13 +77,12 @@
         input[type="number"] {
             -moz-appearance: textfield;
         }
-        /* Estilos personalizados para el slider de rango */
         input[type="range"] {
             -webkit-appearance: none;
             appearance: none;
             width: 100%;
             height: 8px;
-            background: #404040; /* neutral-700 */
+            background: #404040;
             border-radius: 5px;
             outline: none;
         }
@@ -87,20 +91,19 @@
             appearance: none;
             width: 20px;
             height: 20px;
-            background: #a3a3a3; /* neutral-400 */
+            background: #a3a3a3;
             cursor: pointer;
             border-radius: 50%;
-            border: 2px solid #262626; /* neutral-800 */
+            border: 2px solid #262626;
         }
         input[type="range"]::-moz-range-thumb {
             width: 20px;
             height: 20px;
-            background: #a3a3a3; /* neutral-400 */
+            background: #a3a3a3;
             cursor: pointer;
             border-radius: 50%;
-            border: 2px solid #262626; /* neutral-800 */
+            border: 2px solid #262626;
         }
-        /* Transición para las notificaciones */
         #copy-feedback, #error-feedback {
             transition: opacity 0.5s ease-in-out;
         }
@@ -108,28 +111,71 @@
 </head>
 <body class="bg-neutral-900 text-neutral-300 flex flex-col min-h-screen">
 
+    <!-- Modal de Instrucciones -->
+    <div id="instructions-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50">
+        <div class="bg-neutral-800 rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col">
+            <header class="flex items-center justify-between p-4 border-b border-neutral-700">
+                <h2 class="text-xl font-bold text-white" data-lang-key="instructions_title">Instrucciones de Uso</h2>
+                <button id="close-instructions-modal-btn" class="text-neutral-400 hover:text-white">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </button>
+            </header>
+            <div class="p-6 overflow-y-auto" data-lang-key="instructions_content"></div>
+        </div>
+    </div>
+
+    <!-- Modal de Aviso de Privacidad -->
+    <div id="privacy-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50">
+        <div class="bg-neutral-800 rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col">
+            <header class="flex items-center justify-between p-4 border-b border-neutral-700">
+                <h2 class="text-xl font-bold text-white" data-lang-key="privacy_policy_title">Aviso de Privacidad</h2>
+                <button id="close-privacy-modal-btn" class="text-neutral-400 hover:text-white">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </button>
+            </header>
+            <div class="p-6 overflow-y-auto" data-lang-key="privacy_policy_content"></div>
+        </div>
+    </div>
+
     <!-- Notificaciones flotantes -->
-    <div id="copy-feedback" class="fixed top-5 right-5 bg-green-500 text-white py-2 px-4 rounded-lg shadow-lg opacity-0 pointer-events-none z-50">
+    <div id="copy-feedback" class="fixed top-20 right-5 bg-green-500 text-white py-2 px-4 rounded-lg shadow-lg opacity-0 pointer-events-none z-50">
         <span data-lang-key="copied_feedback">¡Copiado al portapapeles!</span>
     </div>
-    <div id="error-feedback" class="fixed top-5 right-5 bg-red-500 text-white py-2 px-4 rounded-lg shadow-lg opacity-0 pointer-events-none z-50">
+    <div id="error-feedback" class="fixed top-20 right-5 bg-red-500 text-white py-2 px-4 rounded-lg shadow-lg opacity-0 pointer-events-none z-50">
         <span id="error-message"></span>
     </div>
 
+    <!-- Cabecera Fija -->
+    <header class="sticky top-0 z-40 w-full bg-neutral-900/80 backdrop-blur-sm border-b border-neutral-700/50">
+        <div class="container mx-auto px-4 sm:px-6 md:px-8">
+            <div class="grid grid-cols-3 items-center h-16">
+                <div class="col-start-1"></div>
+                <div class="col-start-2 flex justify-center">
+                    <h1 class="text-xl sm:text-2xl md:text-3xl font-bold whitespace-nowrap bg-gradient-to-r from-neutral-200 to-neutral-400 bg-clip-text text-transparent text-center" data-lang-key="main_header">Optimizador de Capturas</h1>
+                </div>
+                <div class="col-start-3 flex justify-end">
+                    <div class="relative" id="language-dropdown-container">
+                        <button id="language-toggle-btn" class="flex items-center space-x-2 px-3 py-1 text-sm rounded-md bg-neutral-800 text-neutral-400 font-semibold hover:bg-neutral-700 transition-colors">
+                            <span data-lang-key="language_label">Lenguaje</span>
+                            <svg class="w-4 h-4 text-neutral-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                        <div id="language-menu" class="hidden absolute right-0 mt-2 w-32 bg-neutral-800 border border-neutral-700 rounded-md shadow-lg z-50">
+                            <a href="#" id="lang-es" class="block px-4 py-2 text-sm text-neutral-300 hover:bg-neutral-700">Español</a>
+                            <a href="#" id="lang-en" class="block px-4 py-2 text-sm text-neutral-300 hover:bg-neutral-700">English</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 
     <!-- Contenedor principal -->
     <main class="flex-grow container mx-auto p-4 sm:p-6 md:p-8">
         <div class="max-w-4xl mx-auto">
             
-            <header class="flex justify-between items-center mb-8">
-                <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white" data-lang-key="main_header">Optimizador de Capturas</h1>
-                <div class="flex items-center space-x-2">
-                    <button id="lang-es" class="px-3 py-1 text-sm rounded-md bg-neutral-600 text-white font-semibold">ES</button>
-                    <button id="lang-en" class="px-3 py-1 text-sm rounded-md bg-neutral-800 text-neutral-400 font-semibold">EN</button>
-                </div>
-            </header>
-
-            <div id="upload-area" class="w-full border-4 border-dashed border-neutral-700 rounded-2xl p-6 md:p-8 text-center cursor-pointer hover:border-neutral-600 transition-colors bg-neutral-800">
+            <div id="upload-area" class="w-full border-4 border-dashed border-neutral-700 rounded-2xl p-6 md:p-8 text-center cursor-pointer hover:border-neutral-600 transition-colors bg-neutral-800 mt-8">
                 <input type="file" id="image-input" class="hidden" accept="image/*">
                 <div class="flex flex-col items-center">
                     <svg class="w-12 h-12 md:w-16 md:h-16 text-neutral-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
@@ -171,7 +217,9 @@
                     </div>
 
                     <div id="quality-control">
-                        <label for="quality" class="block mb-2 font-medium" data-lang-key="quality_label">Calidad (<span id="quality-value">80</span>%)</label>
+                         <label for="quality" class="block mb-2 font-medium">
+                            <span data-lang-key="quality_label">Calidad</span> (<span id="quality-value">80</span>%)
+                        </label>
                         <input type="range" id="quality" min="10" max="100" value="80" class="w-full">
                     </div>
                     
@@ -179,13 +227,13 @@
 
                     <div class="pt-4 border-t border-neutral-700 flex flex-col space-y-3">
                          <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
-                            <button id="copy-btn" class="w-full sm:w-1/2 bg-green-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-green-700 transition-colors disabled:bg-neutral-500 disabled:cursor-not-allowed flex items-center justify-center" data-lang-key="copy_button" disabled>
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-                                Copiar
+                            <button id="copy-btn" class="w-full sm:w-1/2 bg-green-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-green-700 transition-colors disabled:bg-neutral-500 disabled:cursor-not-allowed flex items-center justify-center" disabled>
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                <span class="ml-2" data-lang-key="copy_button">Copiar</span>
                             </button>
-                             <button id="download-btn" class="w-full sm:w-1/2 bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors disabled:bg-neutral-500 disabled:cursor-not-allowed flex items-center justify-center" data-lang-key="download_button" disabled>
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                                Descargar
+                             <button id="download-btn" class="w-full sm:w-1/2 bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors disabled:bg-neutral-500 disabled:cursor-not-allowed flex items-center justify-center" disabled>
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                <span class="ml-2" data-lang-key="download_button">Descargar</span>
                             </button>
                          </div>
                          <button id="reset-btn" class="w-full bg-neutral-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-neutral-500 transition-colors" data-lang-key="reset_button">Cargar otra imagen</button>
@@ -194,10 +242,15 @@
             </div>
         </div>
     </main>
+    
+    <div class="w-full flex justify-center items-center space-x-4 pb-4">
+        <button id="privacy-btn" class="px-3 py-1 text-sm rounded-md bg-neutral-800 text-neutral-400 font-semibold hover:bg-neutral-700 transition-colors" data-lang-key="privacy_policy_title_short">Aviso de Privacidad</button>
+        <button id="instructions-btn" class="px-3 py-1 text-sm rounded-md bg-neutral-800 text-neutral-400 font-semibold hover:bg-neutral-700 transition-colors" data-lang-key="instructions_title_short">Instrucciones</button>
+    </div>
 
     <footer class="w-full text-center p-4 text-neutral-500 text-sm">
         <p>
-            <span data-lang-key="footer_rights">Todos los derechos reservados para</span>
+            2026 <span data-lang-key="footer_rights">Todos los derechos reservados para</span>
             <a href="https://studio--hitsterai.us-central1.hosted.app/es" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline">Hitster Ai</a> | 
             <a href="mailto:baez@hitster.page" class="text-blue-400 hover:underline" data-lang-key="footer_contact">Contáctanos</a>
         </p>
@@ -208,8 +261,8 @@
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "Optimizador de Imágenes para CleanShot",
-      "description": "Una herramienta web gratuita para reducir el tamaño y optimizar capturas de pantalla e imágenes. Permite cambiar el formato (JPEG, PNG, WebP), la escala y la calidad.",
+      "name": "Optimizador de Imágenes y Capturas de Pantalla",
+      "description": "Herramienta web gratuita y responsiva para optimizar, redimensionar y comprimir imágenes. Soporta múltiples formatos (JPEG, PNG, WebP), carga de archivos por arrastrar y soltar, y pegado directo desde el portapapeles. Disponible en español e inglés.",
       "applicationCategory": "MultimediaApplication",
       "operatingSystem": "All",
       "browserRequirements": "Requires HTML5 support",
@@ -230,7 +283,7 @@
     <script>
         const translations = {
             es: {
-                title: "Optimizador de Imágenes y Capturas - Comprime JPEG, PNG, WebP",
+                title: "Optimizador de Imágenes Responsivo - Comprime y Redimensiona al Instante",
                 main_header: "Optimizador de Capturas",
                 upload_prompt_main: "Arrastra y suelta una imagen aquí",
                 upload_prompt_sub: "o haz clic para seleccionar un archivo",
@@ -246,13 +299,144 @@
                 new_size_label: "Nuevo:",
                 footer_rights: "Todos los derechos reservados para",
                 footer_contact: "Contáctanos",
-                meta_description: "Reduce el tamaño de tus imágenes y capturas de pantalla con nuestro optimizador online gratuito. Comprime JPEG, PNG y WebP al instante sin perder calidad.",
+                language_label: "Lenguaje",
+                meta_description: "Optimiza imágenes al instante con nuestra herramienta web responsiva. Pega desde el portapapeles, arrastra y suelta, o selecciona archivos. Redimensiona, comprime y convierte a JPEG, PNG y WebP en cualquier dispositivo.",
                 image_preview_alt: "Previsualización de la imagen a optimizar",
                 copied_feedback: "¡Copiado al portapapeles!",
                 copy_error_feedback: "Error al copiar. Su navegador puede no admitirlo o la página no tener permisos.",
+                instructions_title: "Instrucciones de Uso",
+                privacy_policy_title: "Aviso de Privacidad",
+                privacy_policy_title_short: "Aviso de Privacidad",
+                instructions_title_short: "Instrucciones",
+                instructions_content: `
+                    <div class="text-neutral-400 space-y-4 text-left">
+                        <h3 class="text-xl font-semibold text-white">Guía de Usuario: Optimizador de Imágenes</h3>
+                        <p>¡Bienvenido! Esta guía te mostrará cómo usar todas las funciones de la aplicación para reducir el tamaño de tus imágenes y capturas de pantalla de forma rápida y sencilla.</p>
+                        
+                        <h4 class="text-lg font-semibold text-white pt-2">Paso 1: Cargar tu Imagen</h4>
+                        <p>Tienes tres formas muy fáciles de empezar:</p>
+                        <ul class="list-disc list-inside ml-4 space-y-2">
+                            <li><strong>Arrastrar y Soltar:</strong> Simplemente arrastra un archivo de imagen desde tu escritorio y suéltalo en el área punteada.</li>
+                            <li><strong>Pegar desde el Portapapeles:</strong> Toma una captura de pantalla (<code>Cmd+Shift+4</code>, <code>Win+Shift+S</code>, etc.) y pégala directamente en la página con <code>Ctrl+V</code> o <code>Cmd+V</code>. ¡No necesitas guardar el archivo primero!</li>
+                            <li><strong>Seleccionar Archivo:</strong> Haz clic en el área punteada para abrir el explorador de archivos y selecciona la imagen que deseas optimizar.</li>
+                        </ul>
+                        <p>Una vez cargada, verás la previsualización de tu imagen a la izquierda y las herramientas de optimización a la derecha.</p>
+                        
+                        <h4 class="text-lg font-semibold text-white pt-2">Paso 2: Optimizar tu Imagen</h4>
+                        <p>Ahora puedes ajustar la configuración para obtener el resultado perfecto.</p>
+                        <p class="font-semibold text-neutral-200">Dimensiones:</p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Ingresa el ancho (Width) o alto (Height) deseado en píxeles.</li>
+                            <li>Por defecto, la proporción de la imagen se mantiene. Haz clic en el ícono del candado para desactivar esta opción y ajustar las dimensiones libremente.</li>
+                        </ul>
+                        <p class="font-semibold text-neutral-200 mt-2">Formato de Salida:</p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li><strong>JPEG:</strong> Ideal para fotografías. Ofrece un buen equilibrio entre calidad y tamaño.</li>
+                            <li><strong>PNG:</strong> Perfecto para imágenes con transparencias o gráficos con texto. La compresión es sin pérdida de calidad, pero los archivos pueden ser más grandes.</li>
+                            <li><strong>WebP:</strong> Un formato moderno que ofrece una excelente compresión con alta calidad. Es ideal para la web, pero asegúrate de que sea compatible donde la vayas a usar.</li>
+                        </ul>
+                        <p class="font-semibold text-neutral-200 mt-2">Calidad (Solo para JPEG y WebP):</p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Mueve el deslizador para ajustar el nivel de compresión. Un valor más bajo (ej. 70%) resultará en un archivo más pequeño, mientras que un valor más alto (ej. 90%) mantendrá más calidad.</li>
+                            <li>El valor recomendado para un buen equilibrio es 80%.</li>
+                        </ul>
+                        <p>Mientras haces los cambios, verás el nuevo tamaño del archivo actualizado en tiempo real debajo de la imagen.</p>
+
+                        <h4 class="text-lg font-semibold text-white pt-2">Paso 3: Usar tu Imagen Optimizada</h4>
+                        <p>Una vez que estés satisfecho con el resultado, tienes dos opciones:</p>
+                        <p class="font-semibold text-neutral-200">Copiar al Portapapeles (¡La opción más rápida!):</p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Haz clic en el botón verde "Copiar".</li>
+                            <li>La imagen optimizada se copiará en tu portapapeles, lista para ser pegada (<code>Ctrl+V</code> / <code>Cmd+V</code>) en un correo, documento, chat o cualquier otra aplicación.</li>
+                        </ul>
+                        <p class="font-semibold text-neutral-200 mt-2">Descargar el Archivo:</p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Haz clic en el botón azul "Descargar".</li>
+                            <li>La imagen optimizada se guardará en tu carpeta de descargas con el sufijo "-optimized".</li>
+                        </ul>
+
+                        <h4 class="text-lg font-semibold text-white pt-2">Funciones Adicionales</h4>
+                        <ul class="list-disc list-inside ml-4">
+                            <li><strong>Cambiar Idioma:</strong> Usa los botones ES / EN en la esquina superior derecha para cambiar el idioma de la interfaz.</li>
+                            <li><strong>Cargar otra Imagen:</strong> Haz clic en el botón "Cargar otra imagen" para reiniciar el proceso y empezar con un nuevo archivo.</li>
+                        </ul>
+                    </div>
+                `,
+                privacy_policy_content: `
+                    <div class="text-neutral-400 space-y-4 text-left">
+                        <p class="text-sm">Fecha de última actualización: 23 de junio de 2025</p>
+                        <p>Bienvenido a Hitster Ai. Tu privacidad es de suma importancia para nosotros. Este Aviso de Privacidad describe cómo recopilamos, utilizamos, protegemos y compartimos tu información personal cuando visitas y utilizas nuestro sitio web y nuestros servicios. Al utilizar Hitster Ai, aceptas las prácticas descritas en este documento.</p>
+                        
+                        <h3 class="text-lg font-semibold text-white pt-2">1. Identidad y Domicilio del Responsable</h3>
+                        <p>Hitster Ai (en adelante, "nosotros", "nuestro"), con domicilio en Avenida Francisco I. Madero 104, Colonia Céspedes, Pachuca de Soto, Hidalgo, C.P. 42090, es el responsable del tratamiento de tus datos personales.</p>
+                        <p>Para cualquier asunto relacionado con este aviso, puedes contactarnos a través del correo electrónico: <a href="mailto:baez@hitster.page" class="text-blue-400 hover:underline">baez@hitster.page</a></p>
+                        
+                        <h3 class="text-lg font-semibold text-white pt-2">2. Datos Personales que Recabamos</h3>
+                        <p>Recopilamos diferentes tipos de datos personales para operar y mejorar nuestros servicios:</p>
+                        <p><strong>A. Datos que nos proporcionas directamente:</strong></p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Información de contacto y cuenta: Nombre completo, dirección de correo electrónico, contraseña y otra información que proporciones al registrarte.</li>
+                            <li>Información de perfil: Datos adicionales que decidas agregar a tu perfil de usuario.</li>
+                            <li>Comunicaciones: Información que nos proporcionas al contactar a nuestro equipo de soporte o al comunicarte con nosotros por cualquier otro medio.</li>
+                        </ul>
+                        <p><strong>B. Datos que recopilamos automáticamente:</strong></p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Información de uso: Registramos cómo interactúas con nuestra plataforma, qué funcionalidades utilizas, la frecuencia y duración de tus visitas.</li>
+                            <li>Datos del dispositivo y conexión: Dirección IP, tipo y versión del navegador, sistema operativo, identificadores únicos de dispositivo y otra información técnica.</li>
+                            <li>Cookies y tecnologías similares: Utilizamos cookies, balizas web y otras tecnologías para recopilar información, mejorar la experiencia del usuario y para fines de análisis. Consulta nuestra sección sobre "Uso de Cookies" para más detalles.</li>
+                        </ul>
+
+                        <h3 class="text-lg font-semibold text-white pt-2">3. Finalidades del Tratamiento de Datos</h3>
+                        <p>Utilizamos tus datos personales para las siguientes finalidades:</p>
+                        <p><strong>A. Finalidades Primarias (necesarias para el servicio):</strong></p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Proveer, operar y mantener nuestros servicios de inteligencia artificial.</li>
+                            <li>Crear, gestionar y asegurar tu cuenta de usuario.</li>
+                            <li>Procesar tus solicitudes, responder a tus preguntas y brindarte soporte técnico.</li>
+                            <li>Garantizar la seguridad, prevenir fraudes y hacer cumplir nuestros términos y condiciones.</li>
+                            <li>Enviarte comunicaciones transaccionales importantes sobre tu cuenta o cambios en el servicio.</li>
+                        </ul>
+                        <p><strong>B. Finalidades Secundarias (requieren tu consentimiento):</strong></p>
+                         <ul class="list-disc list-inside ml-4">
+                            <li>Realizar análisis estadísticos y de comportamiento para mejorar y optimizar nuestros servicios y desarrollar nuevas funcionalidades.</li>
+                            <li>Personalizar tu experiencia en nuestra plataforma.</li>
+                            <li>Enviarte boletines informativos (newsletters), promociones, ofertas especiales y otras comunicaciones de marketing sobre nuestros productos.</li>
+                        </ul>
+                        <p>Si no deseas que tus datos sean utilizados para estas finalidades secundarias, puedes manifestarlo enviando un correo a baez@hitster.page.</p>
+
+                        <h3 class="text-lg font-semibold text-white pt-2">4. Transferencia de Datos Personales</h3>
+                        <p>No vendemos ni alquilamos tu información personal. Podemos compartir tus datos con terceros únicamente en las siguientes circunstancias:</p>
+                         <ul class="list-disc list-inside ml-4">
+                            <li>Proveedores de Servicios: Compartimos información con terceros que nos prestan servicios, como proveedores de alojamiento en la nube (ej. AWS, Google Cloud), plataformas de análisis (ej. Google Analytics) y procesadores de pagos. Estos proveedores solo tienen acceso a los datos necesarios para realizar sus funciones y están obligados contractualmente a protegerlos.</li>
+                            <li>Cumplimiento de la Ley: Podremos divulgar tu información si así lo exige la ley, una orden judicial o para proteger nuestros derechos, propiedad o seguridad, así como los de nuestros usuarios o el público en general.</li>
+                        </ul>
+
+                        <h3 class="text-lg font-semibold text-white pt-2">5. Uso de Cookies y Tecnologías Similares</h3>
+                        <p>Utilizamos cookies para mejorar la funcionalidad de nuestro sitio. Las cookies son pequeños archivos de texto que se almacenan en tu dispositivo. Puedes configurar tu navegador para rechazar todas las cookies o para que te avise cuando se envía una. Sin embargo, si no aceptas las cookies, es posible que no puedas utilizar algunas partes de nuestro servicio.</p>
+
+                        <h3 class="text-lg font-semibold text-white pt-2">6. Derechos ARCO (Acceso, Rectificación, Cancelación y Oposición)</h3>
+                        <p>Como titular de los datos, tienes derecho a:</p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Acceder a los datos personales que poseemos sobre ti.</li>
+                            <li>Rectificar tus datos si son inexactos o están incompletos.</li>
+                            <li>Cancelar tus datos cuando consideres que no se están utilizando conforme a los principios y deberes establecidos.</li>
+                            <li>Oponerte al tratamiento de tus datos para fines específicos.</li>
+                        </ul>
+                        <p>Para ejercer tus Derechos ARCO, envía una solicitud detallada a baez@hitster.page, incluyendo tu nombre completo, copia de una identificación oficial y una descripción clara de tu solicitud. Te responderemos en los plazos que marca la ley.</p>
+
+                        <h3 class="text-lg font-semibold text-white pt-2">7. Revocación del Consentimiento</h3>
+                        <p>Puedes revocar el consentimiento que nos hayas otorgado para el tratamiento de tus datos personales en cualquier momento. Ten en cuenta que la revocación no tendrá efectos retroactivos. Para revocar tu consentimiento, envía tu solicitud a baez@hitster.page.</p>
+
+                        <h3 class="text-lg font-semibold text-white pt-2">8. Medidas de Seguridad</h3>
+                        <p>Hemos implementado medidas de seguridad administrativas, técnicas y físicas para proteger tus datos personales contra daño, pérdida, alteración, destrucción o el uso, acceso o tratamiento no autorizado.</p>
+
+                        <h3 class="text-lg font-semibold text-white pt-2">9. Cambios a este Aviso de Privacidad</h3>
+                        <p>Nos reservamos el derecho de efectuar en cualquier momento modificaciones o actualizaciones al presente aviso de privacidad. Cualquier cambio será notificado a través de nuestro sitio web o mediante comunicación directa a tu correo electrónico. Te recomendamos revisar periódicamente este aviso.</p>
+                    </div>
+                `,
             },
             en: {
-                title: "Image & Screenshot Optimizer - Compress JPEG, PNG, WebP",
+                title: "Responsive Image Optimizer - Instantly Compress & Resize",
                 main_header: "Screenshot Optimizer",
                 upload_prompt_main: "Drag and drop an image here",
                 upload_prompt_sub: "or click to select a file",
@@ -268,14 +452,145 @@
                 new_size_label: "New:",
                 footer_rights: "All rights reserved for",
                 footer_contact: "Contact us",
-                meta_description: "Reduce the file size of your images and screenshots with our free online optimizer. Instantly compress JPEG, PNG, and WebP files without losing quality.",
+                language_label: "Language",
+                meta_description: "Instantly optimize images with our responsive web tool. Paste from clipboard, drag and drop, or select files. Resize, compress, and convert to JPEG, PNG, and WebP on any device.",
                 image_preview_alt: "Preview of the image to be optimized",
                 copied_feedback: "Copied to clipboard!",
                 copy_error_feedback: "Copy failed. Your browser may not support this or the page may lack permission.",
+                instructions_title: "How to Use",
+                privacy_policy_title: "Privacy Policy",
+                privacy_policy_title_short: "Privacy Policy",
+                instructions_title_short: "Instructions",
+                instructions_content: `
+                    <div class="text-neutral-400 space-y-4 text-left">
+                        <h3 class="text-xl font-semibold text-white">User Guide: Image Optimizer</h3>
+                        <p>Welcome! This guide will show you how to use all the app's features to reduce the size of your images and screenshots quickly and easily.</p>
+                        
+                        <h4 class="text-lg font-semibold text-white pt-2">Step 1: Upload Your Image</h4>
+                        <p>You have three easy ways to start:</p>
+                        <ul class="list-disc list-inside ml-4 space-y-2">
+                            <li><strong>Drag and Drop:</strong> Simply drag an image file from your desktop and drop it onto the dashed area.</li>
+                            <li><strong>Paste from Clipboard:</strong> Take a screenshot (<code>Cmd+Shift+4</code>, <code>Win+Shift+S</code>, etc.) and paste it directly on the page with <code>Ctrl+V</code> or <code>Cmd+V</code>. No need to save the file first!</li>
+                            <li><strong>Select File:</strong> Click the dashed area to open your file browser and select the image you want to optimize.</li>
+                        </ul>
+                        <p>Once uploaded, you will see the preview of your image on the left and the optimization tools on the right.</p>
+                        
+                        <h4 class="text-lg font-semibold text-white pt-2">Step 2: Optimize Your Image</h4>
+                        <p>Now you can adjust the settings to get the perfect result.</p>
+                        <p class="font-semibold text-neutral-200">Dimensions:</p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Enter the desired width or height in pixels.</li>
+                            <li>By default, the aspect ratio is maintained. Click the lock icon to disable this option and adjust dimensions freely.</li>
+                        </ul>
+                        <p class="font-semibold text-neutral-200 mt-2">Output Format:</p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li><strong>JPEG:</strong> Ideal for photographs. It offers a good balance between quality and file size.</li>
+                            <li><strong>PNG:</strong> Perfect for images with transparency or graphics with text. Compression is lossless, but files can be larger.</li>
+                            <li><strong>WebP:</strong> A modern format that offers excellent compression with high quality. It's great for the web, but make sure it's compatible where you plan to use it.</li>
+                        </ul>
+                        <p class="font-semibold text-neutral-200 mt-2">Quality (For JPEG and WebP only):</p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Move the slider to adjust the compression level. A lower value (e.g., 70%) will result in a smaller file, while a higher value (e.g., 90%) will maintain more quality.</li>
+                            <li>The recommended value for a good balance is 80%.</li>
+                        </ul>
+                        <p>As you make changes, you'll see the new file size update in real-time below the image.</p>
+
+                        <h4 class="text-lg font-semibold text-white pt-2">Step 3: Use Your Optimized Image</h4>
+                        <p>Once you are satisfied with the result, you have two options:</p>
+                        <p class="font-semibold text-neutral-200">Copy to Clipboard (The fastest option!):</p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Click the green "Copy" button.</li>
+                            <li>The optimized image will be copied to your clipboard, ready to be pasted (<code>Ctrl+V</code> / <code>Cmd+V</code>) into an email, document, chat, or any other application.</li>
+                        </ul>
+                        <p class="font-semibold text-neutral-200 mt-2">Download the File:</p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Click the blue "Download" button.</li>
+                            <li>The optimized image will be saved to your downloads folder with the "-optimized" suffix.</li>
+                        </ul>
+
+                        <h4 class="text-lg font-semibold text-white pt-2">Additional Features</h4>
+                        <ul class="list-disc list-inside ml-4">
+                            <li><strong>Switch Language:</strong> Use the ES / EN buttons in the top-right corner to change the interface language.</li>
+                            <li><strong>Upload Another Image:</strong> Click the "Upload another image" button to reset the process and start with a new file.</li>
+                        </ul>
+                    </div>
+                `,
+                privacy_policy_content: `
+                    <div class="text-neutral-400 space-y-4 text-left">
+                        <p class="text-sm">Last updated: June 23, 2025</p>
+                        <p>Welcome to Hitster Ai. Your privacy is of the utmost importance to us. This Privacy Notice describes how we collect, use, protect, and share your personal information when you visit and use our website and services. By using Hitster Ai, you agree to the practices described in this document.</p>
+                        
+                        <h3 class="text-lg font-semibold text-white pt-2">1. Identity and Address of the Controller</h3>
+                        <p>Hitster Ai (hereinafter, "we", "us", "our"), with address at Avenida Francisco I. Madero 104, Colonia Céspedes, Pachuca de Soto, Hidalgo, C.P. 42090, is the controller of your personal data.</p>
+                        <p>For any matter related to this notice, you can contact us via email: <a href="mailto:baez@hitster.page" class="text-blue-400 hover:underline">baez@hitster.page</a></p>
+                        
+                        <h3 class="text-lg font-semibold text-white pt-2">2. Personal Data We Collect</h3>
+                        <p>We collect different types of personal data to operate and improve our services:</p>
+                        <p><strong>A. Data you provide directly to us:</strong></p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Contact and account information: Full name, email address, password, and other information you provide when you register.</li>
+                            <li>Profile information: Additional data you choose to add to your user profile.</li>
+                            <li>Communications: Information you provide when contacting our support team or communicating with us by any other means.</li>
+                        </ul>
+                        <p><strong>B. Data we collect automatically:</strong></p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Usage information: We record how you interact with our platform, what features you use, the frequency and duration of your visits.</li>
+                            <li>Device and connection data: IP address, browser type and version, operating system, unique device identifiers, and other technical information.</li>
+                            <li>Cookies and similar technologies: We use cookies, web beacons, and other technologies to collect information, improve the user experience, and for analysis purposes. See our "Use of Cookies" section for more details.</li>
+                        </ul>
+
+                        <h3 class="text-lg font-semibold text-white pt-2">3. Purposes of Data Processing</h3>
+                        <p>We use your personal data for the following purposes:</p>
+                        <p><strong>A. Primary Purposes (necessary for the service):</strong></p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>To provide, operate, and maintain our artificial intelligence services.</li>
+                            <li>To create, manage, and secure your user account.</li>
+                            <li>To process your requests, answer your questions, and provide you with technical support.</li>
+                            <li>To ensure security, prevent fraud, and enforce our terms and conditions.</li>
+                            <li>To send you important transactional communications about your account or changes to the service.</li>
+                        </ul>
+                        <p><strong>B. Secondary Purposes (require your consent):</strong></p>
+                         <ul class="list-disc list-inside ml-4">
+                            <li>To perform statistical and behavioral analysis to improve and optimize our services and develop new features.</li>
+                            <li>To personalize your experience on our platform.</li>
+                            <li>To send you newsletters, promotions, special offers, and other marketing communications about our products.</li>
+                        </ul>
+                        <p>If you do not want your data to be used for these secondary purposes, you can state this by sending an email to baez@hitster.page.</p>
+
+                        <h3 class="text-lg font-semibold text-white pt-2">4. Transfer of Personal Data</h3>
+                        <p>We do not sell or rent your personal information. We may share your data with third parties only in the following circumstances:</p>
+                         <ul class="list-disc list-inside ml-4">
+                            <li>Service Providers: We share information with third parties who provide services to us, such as cloud hosting providers (e.g., AWS, Google Cloud), analytics platforms (e.g., Google Analytics), and payment processors. These providers only have access to the data necessary to perform their functions and are contractually obligated to protect it.</li>
+                            <li>Compliance with the Law: We may disclose your information if required by law, a court order, or to protect our rights, property, or safety, as well as those of our users or the general public.</li>
+                        </ul>
+
+                        <h3 class="text-lg font-semibold text-white pt-2">5. Use of Cookies and Similar Technologies</h3>
+                        <p>We use cookies to improve the functionality of our site. Cookies are small text files that are stored on your device. You can set your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some parts of our service.</p>
+
+                        <h3 class="text-lg font-semibold text-white pt-2">6. ARCO Rights (Access, Rectification, Cancellation, and Opposition)</h3>
+                        <p>As the data subject, you have the right to:</p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Access the personal data we hold about you.</li>
+                            <li>Rectify your data if it is inaccurate or incomplete.</li>
+                            <li>Cancel your data when you consider that it is not being used in accordance with the established principles and duties.</li>
+                            <li>Object to the processing of your data for specific purposes.</li>
+                        </ul>
+                        <p>To exercise your ARCO Rights, send a detailed request to baez@hitster.page, including your full name, a copy of an official ID, and a clear description of your request. We will respond within the time limits established by law.</p>
+
+                        <h3 class="text-lg font-semibold text-white pt-2">7. Revocation of Consent</h3>
+                        <p>You may revoke the consent you have given us for the processing of your personal data at any time. Please note that the revocation will not have retroactive effects. To revoke your consent, send your request to baez@hitster.page.</p>
+
+                        <h3 class="text-lg font-semibold text-white pt-2">8. Security Measures</h3>
+                        <p>We have implemented administrative, technical, and physical security measures to protect your personal data against damage, loss, alteration, destruction, or unauthorized use, access, or processing.</p>
+
+                        <h3 class="text-lg font-semibold text-white pt-2">9. Changes to this Privacy Notice</h3>
+                        <p>We reserve the right to make changes or updates to this privacy notice at any time. Any changes will be notified through our website or by direct communication to your email. We recommend that you review this notice periodically.</p>
+                    </div>
+                `,
             }
         };
 
-        let currentLang = 'es';
+        let currentLang = null; 
         let originalImage = null;
         let originalFileName = '';
         let originalFileSize = 0;
@@ -283,61 +598,41 @@
         let aspectRatioLocked = true;
         let originalAspectRatio = 1;
         
-        const uploadArea = document.getElementById('upload-area');
-        const imageInput = document.getElementById('image-input');
-        const editorArea = document.getElementById('editor-area');
-        const imagePreview = document.getElementById('image-preview');
-        const widthInput = document.getElementById('width-input');
-        const heightInput = document.getElementById('height-input');
-        const aspectLockBtn = document.getElementById('aspect-lock-btn');
-        const lockIcon = document.getElementById('lock-icon');
-        const unlockIcon = document.getElementById('unlock-icon');
-        const formatButtons = document.querySelectorAll('.format-btn');
-        const qualityControl = document.getElementById('quality-control');
-        const qualitySlider = document.getElementById('quality');
-        const qualityValue = document.getElementById('quality-value');
-        const downloadBtn = document.getElementById('download-btn');
-        const copyBtn = document.getElementById('copy-btn');
-        const resetBtn = document.getElementById('reset-btn');
-        const originalSizeDisplay = document.getElementById('original-size');
-        const newSizeDisplay = document.getElementById('new-size');
-        const copyFeedback = document.getElementById('copy-feedback');
-        const errorFeedback = document.getElementById('error-feedback');
-        const errorMessage = document.getElementById('error-message');
-
         const setLanguage = (lang) => {
-            if (lang === currentLang) return;
+            if (lang === currentLang) return; 
             currentLang = lang;
             document.documentElement.lang = lang;
 
             document.querySelectorAll('[data-lang-key]').forEach(element => {
                 const key = element.getAttribute('data-lang-key');
+                const translation = translations[lang][key];
+                if (translation === undefined) return;
+
                 if (key === 'title') {
-                    document.title = translations[lang][key];
-                    return;
-                }
-                const textNode = Array.from(element.childNodes).find(node => node.nodeType === Node.TEXT_NODE && node.textContent.trim().length > 0);
-                if (translations[lang][key] && textNode) {
-                    textNode.textContent = element.tagName === 'BUTTON' ? ` ${translations[lang][key]}` : translations[lang][key];
+                    document.title = translation;
+                } else if (key.endsWith('_content')) {
+                    element.innerHTML = translation;
+                } else {
+                    const icon = element.querySelector('svg');
+                    if (icon) {
+                        element.textContent = '';
+                        element.appendChild(icon);
+                        element.appendChild(document.createTextNode(` ${translation}`));
+                    } else {
+                        element.textContent = translation;
+                    }
                 }
             });
 
             document.getElementById('meta-description').setAttribute('content', translations[lang].meta_description);
             document.getElementById('image-preview').setAttribute('alt', translations[lang].image_preview_alt);
-            widthInput.setAttribute('placeholder', translations[lang].width_placeholder);
-            heightInput.setAttribute('placeholder', translations[lang].height_placeholder);
+            document.getElementById('width-input').setAttribute('placeholder', translations[lang].width_placeholder);
+            document.getElementById('height-input').setAttribute('placeholder', translations[lang].height_placeholder);
             
-            document.getElementById('lang-es').classList.toggle('bg-neutral-600', lang === 'es');
-            document.getElementById('lang-es').classList.toggle('text-white', lang === 'es');
-            document.getElementById('lang-es').classList.toggle('bg-neutral-800', lang !== 'es');
-            document.getElementById('lang-es').classList.toggle('text-neutral-400', lang !== 'es');
-
-            document.getElementById('lang-en').classList.toggle('bg-neutral-600', lang === 'en');
-            document.getElementById('lang-en').classList.toggle('text-white', lang === 'en');
-            document.getElementById('lang-en').classList.toggle('bg-neutral-800', lang !== 'en');
-            document.getElementById('lang-en').classList.toggle('text-neutral-400', lang !== 'en');
+            document.getElementById('lang-es').classList.toggle('bg-neutral-700', lang === 'es');
+            document.getElementById('lang-en').classList.toggle('bg-neutral-700', lang === 'en');
             
-            updateSizeDisplays();
+            if(originalImage) updateSizeDisplays();
         };
 
         const formatBytes = (bytes, decimals = 2) => {
@@ -355,6 +650,11 @@
                 reader.onload = (e) => {
                     originalImage = new Image();
                     originalImage.onload = () => {
+                        const {
+                            uploadArea, editorArea, imagePreview, widthInput, 
+                            heightInput, downloadBtn, copyBtn 
+                        } = getDOMElements();
+                        
                         imagePreview.src = e.target.result;
                         originalAspectRatio = originalImage.width / originalImage.height;
                         widthInput.value = originalImage.width;
@@ -376,11 +676,19 @@
         };
 
         const updateSizeDisplays = (newSize) => {
+            const { originalSizeDisplay, newSizeDisplay } = getDOMElements();
             const originalLabel = translations[currentLang].original_size_label;
             originalSizeDisplay.textContent = `${originalLabel} ${formatBytes(originalFileSize)}`;
-            if (newSize) {
+            if (newSize !== undefined) {
                 const newLabel = translations[currentLang].new_size_label;
                 newSizeDisplay.textContent = `${newLabel} ${formatBytes(newSize)}`;
+            } else if (originalImage) {
+                 getFinalBlob().then(blob => {
+                    if (blob) {
+                        const newLabel = translations[currentLang].new_size_label;
+                        newSizeDisplay.textContent = `${newLabel} ${formatBytes(blob.size)}`;
+                    }
+                 });
             } else {
                 newSizeDisplay.textContent = '';
             }
@@ -388,6 +696,7 @@
 
         const processImage = () => {
             if (!originalImage) return;
+            const { widthInput, heightInput, qualitySlider } = getDOMElements();
             const newWidth = parseInt(widthInput.value);
             const newHeight = parseInt(heightInput.value);
             const quality = parseInt(qualitySlider.value) / 100;
@@ -402,6 +711,7 @@
         const getFinalBlob = () => {
             return new Promise((resolve) => {
                 if (!originalImage) return resolve(null);
+                const { widthInput, heightInput, qualitySlider } = getDOMElements();
                 const newWidth = parseInt(widthInput.value);
                 const newHeight = parseInt(heightInput.value);
                 const quality = parseInt(qualitySlider.value) / 100;
@@ -415,175 +725,269 @@
         };
         
         const showCopyFeedback = () => {
+            const { copyFeedback } = getDOMElements();
             copyFeedback.classList.remove('opacity-0');
             setTimeout(() => { copyFeedback.classList.add('opacity-0'); }, 2000);
         };
         
         const showErrorFeedback = (message) => {
+            const { errorFeedback, errorMessage } = getDOMElements();
             errorMessage.textContent = message;
             errorFeedback.classList.remove('opacity-0');
             setTimeout(() => { errorFeedback.classList.add('opacity-0'); }, 3000);
         };
-
-        // --- Event Listeners ---
-        document.getElementById('lang-es').addEventListener('click', () => setLanguage('es'));
-        document.getElementById('lang-en').addEventListener('click', () => setLanguage('en'));
-        uploadArea.addEventListener('click', () => imageInput.click());
-        uploadArea.addEventListener('dragover', (e) => { e.preventDefault(); uploadArea.classList.add('border-blue-500'); });
-        uploadArea.addEventListener('dragleave', () => { uploadArea.classList.remove('border-blue-500'); });
-        uploadArea.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadArea.classList.remove('border-blue-500');
-            handleFile(e.dataTransfer.files[0]);
-        });
-        imageInput.addEventListener('change', (e) => handleFile(e.target.files[0]));
         
-        document.addEventListener('paste', (e) => {
-            const items = (e.clipboardData || window.clipboardData).items;
-            if (!items) return;
-            for (let i = 0; i < items.length; i++) {
-                if (items[i].type.indexOf('image') !== -1) {
-                    const file = items[i].getAsFile();
-                    if (!uploadArea.classList.contains('hidden')) {
-                         e.preventDefault();
-                         handleFile(file);
-                    }
-                    break; 
+        function getDOMElements() {
+            return {
+                uploadArea: document.getElementById('upload-area'),
+                imageInput: document.getElementById('image-input'),
+                editorArea: document.getElementById('editor-area'),
+                imagePreview: document.getElementById('image-preview'),
+                widthInput: document.getElementById('width-input'),
+                heightInput: document.getElementById('height-input'),
+                aspectLockBtn: document.getElementById('aspect-lock-btn'),
+                lockIcon: document.getElementById('lock-icon'),
+                unlockIcon: document.getElementById('unlock-icon'),
+                formatButtons: document.querySelectorAll('.format-btn'),
+                qualityControl: document.getElementById('quality-control'),
+                qualitySlider: document.getElementById('quality'),
+                qualityValue: document.getElementById('quality-value'),
+                downloadBtn: document.getElementById('download-btn'),
+                copyBtn: document.getElementById('copy-btn'),
+                resetBtn: document.getElementById('reset-btn'),
+                originalSizeDisplay: document.getElementById('original-size'),
+                newSizeDisplay: document.getElementById('new-size'),
+                copyFeedback: document.getElementById('copy-feedback'),
+                errorFeedback: document.getElementById('error-feedback'),
+                errorMessage: document.getElementById('error-message'),
+                instructionsBtns: document.querySelectorAll('#instructions-btn'),
+                privacyBtns: document.querySelectorAll('#privacy-btn'),
+                instructionsModal: document.getElementById('instructions-modal'),
+                closeInstructionsModalBtn: document.getElementById('close-instructions-modal-btn'),
+                privacyModal: document.getElementById('privacy-modal'),
+                closePrivacyModalBtn: document.getElementById('close-privacy-modal-btn'),
+                languageToggleBtn: document.getElementById('language-toggle-btn'),
+                languageMenu: document.getElementById('language-menu'),
+                languageDropdownContainer: document.getElementById('language-dropdown-container'),
+            };
+        }
+
+        function setupEventListeners() {
+            const elements = getDOMElements();
+
+            document.getElementById('lang-es').addEventListener('click', (e) => {
+                e.preventDefault();
+                setLanguage('es');
+                elements.languageMenu.classList.add('hidden');
+            });
+            document.getElementById('lang-en').addEventListener('click', (e) => {
+                e.preventDefault();
+                setLanguage('en');
+                elements.languageMenu.classList.add('hidden');
+            });
+
+            elements.languageToggleBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                elements.languageMenu.classList.toggle('hidden');
+            });
+
+            document.addEventListener('click', (e) => {
+                if (elements.languageDropdownContainer && !elements.languageDropdownContainer.contains(e.target)) {
+                    elements.languageMenu.classList.add('hidden');
                 }
-            }
-        });
+            });
+            
+            elements.uploadArea.addEventListener('click', () => elements.imageInput.click());
+            elements.uploadArea.addEventListener('dragover', (e) => { e.preventDefault(); elements.uploadArea.classList.add('border-blue-500'); });
+            elements.uploadArea.addEventListener('dragleave', () => { elements.uploadArea.classList.remove('border-blue-500'); });
+            elements.uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                elements.uploadArea.classList.remove('border-blue-500');
+                handleFile(e.dataTransfer.files[0]);
+            });
+            elements.imageInput.addEventListener('change', (e) => handleFile(e.target.files[0]));
+            
+            document.addEventListener('paste', (e) => {
+                const items = (e.clipboardData || window.clipboardData).items;
+                if (!items) return;
+                for (let i = 0; i < items.length; i++) {
+                    if (items[i].type.indexOf('image') !== -1) {
+                        const file = items[i].getAsFile();
+                        if (!getDOMElements().uploadArea.classList.contains('hidden')) {
+                             e.preventDefault();
+                             handleFile(file);
+                        }
+                        break; 
+                    }
+                }
+            });
 
-        widthInput.addEventListener('input', () => {
-            if (aspectRatioLocked && originalAspectRatio) {
-                const newWidth = parseInt(widthInput.value);
-                if (!isNaN(newWidth) && newWidth > 0) heightInput.value = Math.round(newWidth / originalAspectRatio);
-            }
-            processImage();
-        });
-
-        heightInput.addEventListener('input', () => {
-            if (aspectRatioLocked && originalAspectRatio) {
-                const newHeight = parseInt(heightInput.value);
-                if (!isNaN(newHeight) && newHeight > 0) widthInput.value = Math.round(newHeight * originalAspectRatio);
-            }
-            processImage();
-        });
-        
-        aspectLockBtn.addEventListener('click', () => {
-            aspectRatioLocked = !aspectRatioLocked;
-            lockIcon.classList.toggle('hidden', !aspectRatioLocked);
-            unlockIcon.classList.toggle('hidden', aspectRatioLocked);
-        });
-
-        qualitySlider.addEventListener('input', (e) => {
-            qualityValue.textContent = e.target.value;
-            processImage();
-        });
-
-        formatButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                outputFormat = button.dataset.format;
-                formatButtons.forEach(btn => btn.classList.replace('bg-neutral-600', 'bg-neutral-700'));
-                button.classList.replace('bg-neutral-700', 'bg-neutral-600');
-                qualityControl.style.display = (outputFormat === 'png') ? 'none' : 'block';
+            elements.widthInput.addEventListener('input', () => {
+                if (aspectRatioLocked && originalAspectRatio) {
+                    const newWidth = parseInt(elements.widthInput.value);
+                    if (!isNaN(newWidth) && newWidth > 0) elements.heightInput.value = Math.round(newWidth / originalAspectRatio);
+                }
                 processImage();
             });
-        });
-        
-        downloadBtn.addEventListener('click', async () => {
-            const blob = await getFinalBlob();
-            if (blob) {
-                const url = URL.createObjectURL(blob);
-                const link = document.createElement('a');
-                const baseName = originalFileName.substring(0, originalFileName.lastIndexOf('.'));
-                link.download = `${baseName}-optimized.${outputFormat}`;
-                link.href = url;
-                link.click();
-                URL.revokeObjectURL(url);
-            }
-        });
-        
-        copyBtn.addEventListener('click', async () => {
-            const blob = await getFinalBlob();
-            if (!blob) return;
 
-            if (navigator.clipboard && navigator.clipboard.write) {
-                try {
-                    await navigator.clipboard.write([new ClipboardItem({ [blob.type]: blob })]);
-                    showCopyFeedback();
-                    return;
-                } catch (err) {
-                    console.warn('La API moderna del portapapeles falló. Intentando método alternativo.', err);
+            elements.heightInput.addEventListener('input', () => {
+                if (aspectRatioLocked && originalAspectRatio) {
+                    const newHeight = parseInt(elements.heightInput.value);
+                    if (!isNaN(newHeight) && newHeight > 0) elements.widthInput.value = Math.round(newHeight * originalAspectRatio);
                 }
-            }
-
-            try {
-                const reader = new FileReader();
-                reader.onload = function() {
-                    const dataUrl = reader.result;
-                    const tempDiv = document.createElement('div');
-                    tempDiv.contentEditable = true;
-                    tempDiv.style.position = 'absolute';
-                    tempDiv.style.left = '-9999px';
-
-                    const img = document.createElement('img');
-                    img.src = dataUrl;
-                    tempDiv.appendChild(img);
-                    document.body.appendChild(tempDiv);
-
-                    const range = document.createRange();
-                    range.selectNodeContents(tempDiv);
-                    
-                    const selection = window.getSelection();
-                    selection.removeAllRanges();
-                    selection.addRange(range);
-
-                    const success = document.execCommand('copy');
-                    
-                    document.body.removeChild(tempDiv);
-                    selection.removeAllRanges();
-
-                    if (success) {
-                        showCopyFeedback();
-                    } else {
-                        throw new Error('document.execCommand("copy") devolvió false.');
-                    }
-                };
-                reader.onerror = function() {
-                     throw new Error('FileReader falló al leer el blob.');
-                };
-                reader.readAsDataURL(blob);
-            } catch (err) {
-                console.error('El método alternativo para copiar también falló:', err);
-                const errorMsg = translations[currentLang].copy_error_feedback;
-                showErrorFeedback(errorMsg);
-            }
-        });
-
-        resetBtn.addEventListener('click', () => {
-            originalImage = null;
-            imageInput.value = '';
-            editorArea.classList.add('hidden');
-            uploadArea.classList.remove('hidden');
-            downloadBtn.disabled = true;
-            copyBtn.disabled = true;
+                processImage();
+            });
             
-            widthInput.value = '';
-            heightInput.value = '';
-            qualitySlider.value = 80;
-            qualityValue.textContent = '80';
-            outputFormat = 'jpeg';
-            formatButtons.forEach(btn => btn.classList.replace('bg-neutral-600', 'bg-neutral-700'));
-            document.querySelector('button[data-format="jpeg"]').classList.replace('bg-neutral-700', 'bg-neutral-600');
-            qualityControl.style.display = 'block';
-            aspectRatioLocked = true;
-            lockIcon.classList.remove('hidden');
-            unlockIcon.classList.add('hidden');
-        });
+            elements.aspectLockBtn.addEventListener('click', () => {
+                aspectRatioLocked = !aspectRatioLocked;
+                elements.lockIcon.classList.toggle('hidden', !aspectRatioLocked);
+                elements.unlockIcon.classList.toggle('hidden', aspectRatioLocked);
+            });
 
-        // Sincronizar el título y la meta descripción con el idioma al cargar
+            elements.qualitySlider.addEventListener('input', (e) => {
+                elements.qualityValue.textContent = e.target.value;
+                processImage();
+            });
+
+            elements.formatButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    outputFormat = button.dataset.format;
+                    elements.formatButtons.forEach(btn => btn.classList.replace('bg-neutral-600', 'bg-neutral-700'));
+                    button.classList.replace('bg-neutral-700', 'bg-neutral-600');
+                    elements.qualityControl.style.display = (outputFormat === 'png') ? 'none' : 'block';
+                    processImage();
+                });
+            });
+            
+            elements.downloadBtn.addEventListener('click', async () => {
+                const blob = await getFinalBlob();
+                if (blob) {
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    const baseName = originalFileName.substring(0, originalFileName.lastIndexOf('.'));
+                    link.download = `${baseName}-optimized.${outputFormat}`;
+                    link.href = url;
+                    link.click();
+                    URL.revokeObjectURL(url);
+                }
+            });
+            
+            elements.copyBtn.addEventListener('click', async () => {
+                const blob = await getFinalBlob();
+                if (!blob) return;
+
+                if (navigator.clipboard && navigator.clipboard.write) {
+                    try {
+                        await navigator.clipboard.write([new ClipboardItem({ [blob.type]: blob })]);
+                        showCopyFeedback();
+                        return;
+                    } catch (err) {
+                        console.warn('La API moderna del portapapeles falló. Intentando método alternativo.', err);
+                    }
+                }
+
+                try {
+                    const reader = new FileReader();
+                    reader.onload = function() {
+                        const dataUrl = reader.result;
+                        const tempDiv = document.createElement('div');
+                        tempDiv.contentEditable = true;
+                        tempDiv.style.position = 'absolute';
+                        tempDiv.style.left = '-9999px';
+
+                        const img = document.createElement('img');
+                        img.src = dataUrl;
+                        tempDiv.appendChild(img);
+                        document.body.appendChild(tempDiv);
+
+                        const range = document.createRange();
+                        range.selectNodeContents(tempDiv);
+                        
+                        const selection = window.getSelection();
+                        selection.removeAllRanges();
+                        selection.addRange(range);
+
+                        const success = document.execCommand('copy');
+                        
+                        document.body.removeChild(tempDiv);
+                        selection.removeAllRanges();
+
+                        if (success) {
+                            showCopyFeedback();
+                        } else {
+                            throw new Error('document.execCommand("copy") devolvió false.');
+                        }
+                    };
+                    reader.onerror = function() {
+                         throw new Error('FileReader falló al leer el blob.');
+                    };
+                    reader.readAsDataURL(blob);
+                } catch (err) {
+                    console.error('El método alternativo para copiar también falló:', err);
+                    const errorMsg = translations[currentLang].copy_error_feedback;
+                    showErrorFeedback(errorMsg);
+                }
+            });
+
+            elements.resetBtn.addEventListener('click', () => {
+                const {
+                    uploadArea, editorArea, imageInput, downloadBtn, copyBtn,
+                    widthInput, heightInput, qualitySlider, qualityValue,
+                    formatButtons, qualityControl, lockIcon, unlockIcon
+                } = getDOMElements();
+
+                originalImage = null;
+                imageInput.value = '';
+                editorArea.classList.add('hidden');
+                uploadArea.classList.remove('hidden');
+                downloadBtn.disabled = true;
+                copyBtn.disabled = true;
+                
+                widthInput.value = '';
+                heightInput.value = '';
+                qualitySlider.value = 80;
+                qualityValue.textContent = '80';
+                outputFormat = 'jpeg';
+                formatButtons.forEach(btn => btn.classList.replace('bg-neutral-600', 'bg-neutral-700'));
+                document.querySelector('button[data-format="jpeg"]').classList.replace('bg-neutral-700', 'bg-neutral-600');
+                qualityControl.style.display = 'block';
+                aspectRatioLocked = true;
+                lockIcon.classList.remove('hidden');
+                unlockIcon.classList.add('hidden');
+            });
+
+            elements.instructionsBtns.forEach(btn => btn.addEventListener('click', () => {
+                elements.instructionsModal.classList.remove('hidden');
+            }));
+
+            elements.closeInstructionsModalBtn.addEventListener('click', () => {
+                elements.instructionsModal.classList.add('hidden');
+            });
+
+            elements.instructionsModal.addEventListener('click', (e) => {
+                if (e.target === elements.instructionsModal) {
+                    elements.instructionsModal.classList.add('hidden');
+                }
+            });
+            
+            elements.privacyBtns.forEach(btn => btn.addEventListener('click', () => {
+                elements.privacyModal.classList.remove('hidden');
+            }));
+
+            elements.closePrivacyModalBtn.addEventListener('click', () => {
+                elements.privacyModal.classList.add('hidden');
+            });
+            
+            elements.privacyModal.addEventListener('click', (e) => {
+                if (e.target === elements.privacyModal) {
+                    elements.privacyModal.classList.add('hidden');
+                }
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
-            setLanguage(currentLang); 
+            setupEventListeners();
+            setLanguage('es'); 
         });
     </script>
 </body>
