@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-key="title">Optimizador de Imágenes</title>
+
+    <!-- SEO Meta Tags -->
+    <meta id="meta-description" name="description" content="Optimiza y reduce el tamaño de tus capturas de pantalla y otras imágenes fácilmente. Soporta JPEG, PNG y WebP con ajustes de calidad y escala.">
+    <meta name="keywords" content="optimizador de imagen, reducir tamaño imagen, compresor de imagen, optimizar captura de pantalla, cleanshot, image optimizer, resize image, image compressor, seo images">
+    <meta name="author" content="Hitster Ai">
+    <!-- Reemplaza [TU-URL-AQUI.COM] con la URL final de tu sitio -->
+    <link rel="canonical" href="https://[TU-URL-AQUI.COM]">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://[TU-URL-AQUI.COM]">
+    <meta property="og:title" content="Optimizador de Imágenes para CleanShot | Hitster Ai">
+    <meta property="og:description" content="Herramienta web gratuita para reducir el tamaño de tus imágenes y capturas de pantalla sin perder calidad. Rápido, seguro y en tu navegador.">
+    <meta property="og:image" content="https://[TU-URL-AQUI.COM]/og-image.jpg"> <!-- URL a una imagen representativa para redes sociales -->
+
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://[TU-URL-AQUI.COM]">
+    <meta property="twitter:title" content="Optimizador de Imágenes para CleanShot | Hitster Ai">
+    <meta property="twitter:description" content="Herramienta web gratuita para reducir el tamaño de tus imágenes y capturas de pantalla sin perder calidad. Rápido, seguro y en tu navegador.">
+    <meta property="twitter:image" content="https://[TU-URL-AQUI.COM]/twitter-image.jpg"> <!-- URL a una imagen para Twitter -->
+
+    <!--
+    NOTA SEO: Para una optimización completa, no olvides crear y subir
+    un archivo 'robots.txt' a la raíz de tu sitio para guiar a los bots de búsqueda,
+    y un 'sitemap.xml' para ayudarles a descubrir tu página.
+    -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        /* Estilo para el input de rango */
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 8px;
+            background: #404040; /* neutral-700 */
+            border-radius: 5px;
+            outline: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #a3a3a3; /* neutral-400 */
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid #262626; /* neutral-800 */
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #a3a3a3; /* neutral-400 */
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid #262626; /* neutral-800 */
+        }
+        #copy-feedback {
+            transition: opacity 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-neutral-900 text-neutral-300 flex flex-col min-h-screen">
+
+    <!-- Notificación de copiado -->
+    <div id="copy-feedback" class="fixed top-5 right-5 bg-green-500 text-white py-2 px-4 rounded-lg shadow-lg opacity-0 pointer-events-none">
+        <span data-lang-key="copied_feedback">¡Copiado al portapapeles!</span>
+    </div>
+
+    <!-- Contenedor principal -->
+    <main class="flex-grow container mx-auto p-4 md:p-8">
+        <div class="max-w-4xl mx-auto">
+            
+            <!-- Cabecera y selector de idioma -->
+            <header class="flex justify-between items-center mb-8">
+                <h1 class="text-3xl md:text-4xl font-bold text-white" data-lang-key="main_header">Optimizador de Capturas</h1>
+                <div class="flex items-center space-x-2">
+                    <button id="lang-es" class="px-3 py-1 text-sm rounded-md bg-neutral-600 text-white font-semibold">ES</button>
+                    <button id="lang-en" class="px-3 py-1 text-sm rounded-md bg-neutral-800 text-neutral-400 font-semibold">EN</button>
+                </div>
+            </header>
+
+            <!-- Área de carga de imagen -->
+            <div id="upload-area" class="w-full border-4 border-dashed border-neutral-700 rounded-2xl p-8 text-center cursor-pointer hover:border-neutral-600 transition-colors bg-neutral-800">
+                <input type="file" id="image-input" class="hidden" accept="image/*">
+                <div class="flex flex-col items-center">
+                    <svg class="w-16 h-16 text-neutral-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    <p class="text-lg" data-lang-key="upload_prompt_main">Arrastra y suelta una imagen aquí</p>
+                    <p class="text-neutral-500" data-lang-key="upload_prompt_sub">o haz clic para seleccionar un archivo</p>
+                </div>
+            </div>
+
+            <!-- Área de edición y previsualización (oculta por defecto) -->
+            <div id="editor-area" class="hidden mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Columna de previsualización -->
+                <div class="flex flex-col items-center justify-center bg-neutral-800 p-4 rounded-2xl">
+                    <img id="image-preview" src="#" alt="Previsualización de la imagen a optimizar" class="max-w-full max-h-[400px] object-contain rounded-lg">
+                    <div class="text-center mt-4 w-full">
+                        <p id="original-size" class="text-sm text-neutral-400"></p>
+                        <p id="new-size" class="text-lg font-semibold text-green-400"></p>
+                    </div>
+                </div>
+
+                <!-- Columna de opciones -->
+                <div class="bg-neutral-800 p-6 rounded-2xl flex flex-col space-y-6">
+                    <!-- NUEVO: Controles de dimensión -->
+                    <div>
+                        <label class="block mb-2 font-medium" data-lang-key="dimensions_label">Dimensiones</label>
+                        <div class="flex items-center space-x-2">
+                            <input type="number" id="width-input" class="w-full bg-neutral-700 border border-neutral-600 rounded-md px-3 py-2 text-center text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ancho">
+                            <button id="aspect-lock-btn" class="p-2 rounded-md bg-neutral-600 hover:bg-neutral-500 transition-colors" title="Mantener proporción">
+                                <svg id="lock-icon" class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd"></path></svg>
+                                <svg id="unlock-icon" class="w-5 h-5 text-white hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5a3 3 0 10-6 0V9h6zM10 5.5a3 3 0 00-3 3V9h2V8.5a1 1 0 112 0V9h2V8.5a3 3 0 00-3-3z"></path></svg>
+                            </button>
+                            <input type="number" id="height-input" class="w-full bg-neutral-700 border border-neutral-600 rounded-md px-3 py-2 text-center text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Alto">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="font-medium mb-3" data-lang-key="format_label">Formato de Salida</h3>
+                        <div class="flex space-x-2">
+                            <button data-format="jpeg" class="format-btn flex-1 px-4 py-2 rounded-lg bg-neutral-600 text-white font-semibold">JPEG</button>
+                            <button data-format="png" class="format-btn flex-1 px-4 py-2 rounded-lg bg-neutral-700 text-neutral-300 font-semibold">PNG</button>
+                            <button data-format="webp" class="format-btn flex-1 px-4 py-2 rounded-lg bg-neutral-700 text-neutral-300 font-semibold">WebP</button>
+                        </div>
+                    </div>
+
+                    <div id="quality-control">
+                        <label for="quality" class="block mb-2 font-medium" data-lang-key="quality_label">Calidad (<span id="quality-value">80</span>%)</label>
+                        <input type="range" id="quality" min="10" max="100" value="80" class="w-full">
+                    </div>
+                    
+                    <div class="flex-grow"></div> <!-- Espaciador -->
+
+                    <!-- NUEVO: Botones de acción actualizados -->
+                    <div class="pt-4 border-t border-neutral-700 flex flex-col space-y-3">
+                         <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
+                            <button id="copy-btn" class="w-full sm:w-1/2 bg-green-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-green-700 transition-colors disabled:bg-neutral-500 disabled:cursor-not-allowed flex items-center justify-center" data-lang-key="copy_button" disabled>
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                Copiar
+                            </button>
+                             <button id="download-btn" class="w-full sm:w-1/2 bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors disabled:bg-neutral-500 disabled:cursor-not-allowed flex items-center justify-center" data-lang-key="download_button" disabled>
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                Descargar
+                            </button>
+                         </div>
+                         <button id="reset-btn" class="w-full bg-neutral-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-neutral-500 transition-colors" data-lang-key="reset_button">Cargar otra imagen</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="w-full text-center p-4 text-neutral-500 text-sm">
+        <p>
+            <span data-lang-key="footer_rights">Todos los derechos reservados para</span>
+            <a href="https://studio--hitsterai.us-central1.hosted.app/es" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline">Hitster Ai</a> | 
+            <a href="mailto:baez@hitster.page" class="text-blue-400 hover:underline" data-lang-key="footer_contact">Contáctanos</a>
+        </p>
+    </footer>
+
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Optimizador de Imágenes para CleanShot",
+      "description": "Una herramienta web para reducir el tamaño y optimizar capturas de pantalla e imágenes. Permite cambiar el formato (JPEG, PNG, WebP), la escala y la calidad.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires HTML5 support",
+      "offers": {
+        "@type": "Offer",
+        "price": "0"
+      },
+      "creator": {
+        "@type": "Organization",
+        "name": "Hitster Ai",
+        "url": "https://studio--hitsterai.us-central1.hosted.app/es"
+      }
+    }
+    </script>
+
+    <script>
+        // --- Diccionario de traducciones ---
+        const translations = {
+            es: {
+                title: "Optimizador de Imágenes",
+                main_header: "Optimizador de Capturas",
+                upload_prompt_main: "Arrastra y suelta una imagen aquí",
+                upload_prompt_sub: "o haz clic para seleccionar un archivo",
+                dimensions_label: "Dimensiones",
+                width_placeholder: "Ancho",
+                height_placeholder: "Alto",
+                format_label: "Formato de Salida",
+                quality_label: "Calidad",
+                download_button: "Descargar",
+                copy_button: "Copiar",
+                reset_button: "Cargar otra imagen",
+                original_size_label: "Original:",
+                new_size_label: "Nuevo:",
+                footer_rights: "Todos los derechos reservados para",
+                footer_contact: "Contáctanos",
+                meta_description: "Optimiza y reduce el tamaño de tus capturas de pantalla y otras imágenes fácilmente. Soporta JPEG, PNG y WebP con ajustes de calidad y escala.",
+                image_preview_alt: "Previsualización de la imagen a optimizar",
+                copied_feedback: "¡Copiado al portapapeles!",
+            },
+            en: {
+                title: "Image Optimizer",
+                main_header: "Screenshot Optimizer",
+                upload_prompt_main: "Drag and drop an image here",
+                upload_prompt_sub: "or click to select a file",
+                dimensions_label: "Dimensions",
+                width_placeholder: "Width",
+                height_placeholder: "Height",
+                format_label: "Output Format",
+                quality_label: "Quality",
+                download_button: "Download",
+                copy_button: "Copy",
+                reset_button: "Upload another image",
+                original_size_label: "Original:",
+                new_size_label: "New:",
+                footer_rights: "All rights reserved for",
+                footer_contact: "Contact us",
+                meta_description: "Easily optimize and reduce the file size of your screenshots and other images. Supports JPEG, PNG, and WebP with quality and scale adjustments.",
+                image_preview_alt: "Preview of the image to be optimized",
+                copied_feedback: "Copied to clipboard!",
+            }
+        };
+
+        // --- Variables y referencias al DOM ---
+        let currentLang = 'es';
+        let originalImage = null;
+        let originalFileName = '';
+        let originalFileSize = 0;
+        let outputFormat = 'jpeg';
+        let aspectRatioLocked = true;
+        let originalAspectRatio = 1;
+        
+        const uploadArea = document.getElementById('upload-area');
+        const imageInput = document.getElementById('image-input');
+        const editorArea = document.getElementById('editor-area');
+        const imagePreview = document.getElementById('image-preview');
+        const widthInput = document.getElementById('width-input');
+        const heightInput = document.getElementById('height-input');
+        const aspectLockBtn = document.getElementById('aspect-lock-btn');
+        const lockIcon = document.getElementById('lock-icon');
+        const unlockIcon = document.getElementById('unlock-icon');
+        const formatButtons = document.querySelectorAll('.format-btn');
+        const qualityControl = document.getElementById('quality-control');
+        const qualitySlider = document.getElementById('quality');
+        const qualityValue = document.getElementById('quality-value');
+        const downloadBtn = document.getElementById('download-btn');
+        const copyBtn = document.getElementById('copy-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const originalSizeDisplay = document.getElementById('original-size');
+        const newSizeDisplay = document.getElementById('new-size');
+        const copyFeedback = document.getElementById('copy-feedback');
+
+        // --- Funciones ---
+
+        // Función para cambiar el idioma
+        const setLanguage = (lang) => {
+            if (lang === currentLang) return;
+            currentLang = lang;
+            document.documentElement.lang = lang;
+
+            document.querySelectorAll('[data-lang-key]').forEach(element => {
+                const key = element.getAttribute('data-lang-key');
+                if (translations[lang][key] && !['copy_button', 'download_button'].includes(key)) {
+                     element.textContent = translations[lang][key];
+                } else if (key === 'copy_button' || key === 'download_button') {
+                    // Solo actualiza el texto del botón, manteniendo el SVG
+                    const textNode = Array.from(element.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
+                    if(textNode) textNode.textContent = ` ${translations[lang][key]}`;
+                }
+            });
+
+            // Actualizar atributos específicos para SEO y accesibilidad
+            document.getElementById('meta-description').setAttribute('content', translations[lang].meta_description);
+            document.getElementById('image-preview').setAttribute('alt', translations[lang].image_preview_alt);
+            widthInput.setAttribute('placeholder', translations[lang].width_placeholder);
+            heightInput.setAttribute('placeholder', translations[lang].height_placeholder);
+            
+            // Actualizar botones de idioma
+            document.getElementById('lang-es').classList.toggle('bg-neutral-600', lang === 'es');
+            document.getElementById('lang-es').classList.toggle('text-white', lang === 'es');
+            document.getElementById('lang-es').classList.toggle('bg-neutral-800', lang !== 'es');
+            document.getElementById('lang-es').classList.toggle('text-neutral-400', lang !== 'es');
+
+            document.getElementById('lang-en').classList.toggle('bg-neutral-600', lang === 'en');
+            document.getElementById('lang-en').classList.toggle('text-white', lang === 'en');
+            document.getElementById('lang-en').classList.toggle('bg-neutral-800', lang !== 'en');
+            document.getElementById('lang-en').classList.toggle('text-neutral-400', lang !== 'en');
+            
+            updateSizeDisplays();
+        };
+
+        const formatBytes = (bytes, decimals = 2) => {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const dm = decimals < 0 ? 0 : decimals;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+        };
+
+        const handleFile = (file) => {
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    originalImage = new Image();
+                    originalImage.onload = () => {
+                        imagePreview.src = e.target.result;
+                        originalAspectRatio = originalImage.width / originalImage.height;
+                        widthInput.value = originalImage.width;
+                        heightInput.value = originalImage.height;
+                        
+                        uploadArea.classList.add('hidden');
+                        editorArea.classList.remove('hidden');
+                        originalFileName = file.name;
+                        originalFileSize = file.size;
+                        updateSizeDisplays();
+                        processImage();
+                        downloadBtn.disabled = false;
+                        copyBtn.disabled = false;
+                    };
+                    originalImage.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        };
+
+        const updateSizeDisplays = (newSize) => {
+            const originalLabel = translations[currentLang].original_size_label;
+            originalSizeDisplay.textContent = `${originalLabel} ${formatBytes(originalFileSize)}`;
+            
+            if (newSize) {
+                const newLabel = translations[currentLang].new_size_label;
+                newSizeDisplay.textContent = `${newLabel} ${formatBytes(newSize)}`;
+            } else {
+                newSizeDisplay.textContent = '';
+            }
+        };
+
+        const processImage = () => {
+            if (!originalImage) return;
+
+            const newWidth = parseInt(widthInput.value);
+            const newHeight = parseInt(heightInput.value);
+            const quality = parseInt(qualitySlider.value) / 100;
+            
+            if (isNaN(newWidth) || isNaN(newHeight) || newWidth <= 0 || newHeight <= 0) return;
+
+            const canvas = document.createElement('canvas');
+            canvas.width = newWidth;
+            canvas.height = newHeight;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(originalImage, 0, 0, canvas.width, canvas.height);
+
+            canvas.toBlob((blob) => {
+                if(blob) {
+                    updateSizeDisplays(blob.size);
+                }
+            }, `image/${outputFormat}`, quality);
+        };
+        
+        const getFinalBlob = () => {
+            return new Promise((resolve) => {
+                if (!originalImage) return resolve(null);
+                
+                const newWidth = parseInt(widthInput.value);
+                const newHeight = parseInt(heightInput.value);
+                const quality = parseInt(qualitySlider.value) / 100;
+                
+                if (isNaN(newWidth) || isNaN(newHeight) || newWidth <= 0 || newHeight <= 0) {
+                    return resolve(null);
+                }
+
+                const canvas = document.createElement('canvas');
+                canvas.width = newWidth;
+                canvas.height = newHeight;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(originalImage, 0, 0, canvas.width, canvas.height);
+
+                canvas.toBlob((blob) => { resolve(blob); }, `image/${outputFormat}`, quality);
+            });
+        };
+        
+        const showCopyFeedback = () => {
+            copyFeedback.classList.remove('opacity-0');
+            setTimeout(() => {
+                copyFeedback.classList.add('opacity-0');
+            }, 2000);
+        };
+
+        // --- Event Listeners ---
+        document.getElementById('lang-es').addEventListener('click', () => setLanguage('es'));
+        document.getElementById('lang-en').addEventListener('click', () => setLanguage('en'));
+
+        uploadArea.addEventListener('click', () => imageInput.click());
+        uploadArea.addEventListener('dragover', (e) => { e.preventDefault(); uploadArea.classList.add('border-blue-500'); });
+        uploadArea.addEventListener('dragleave', () => { uploadArea.classList.remove('border-blue-500'); });
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('border-blue-500');
+            const file = e.dataTransfer.files[0];
+            handleFile(file);
+        });
+        imageInput.addEventListener('change', (e) => handleFile(e.target.files[0]));
+        
+        widthInput.addEventListener('input', () => {
+            if (aspectRatioLocked && originalAspectRatio) {
+                const newWidth = parseInt(widthInput.value);
+                if (!isNaN(newWidth)) heightInput.value = Math.round(newWidth / originalAspectRatio);
+            }
+            processImage();
+        });
+
+        heightInput.addEventListener('input', () => {
+            if (aspectRatioLocked && originalAspectRatio) {
+                const newHeight = parseInt(heightInput.value);
+                if (!isNaN(newHeight)) widthInput.value = Math.round(newHeight * originalAspectRatio);
+            }
+            processImage();
+        });
+        
+        aspectLockBtn.addEventListener('click', () => {
+            aspectRatioLocked = !aspectRatioLocked;
+            lockIcon.classList.toggle('hidden', !aspectRatioLocked);
+            unlockIcon.classList.toggle('hidden', aspectRatioLocked);
+        });
+
+        qualitySlider.addEventListener('input', (e) => {
+            qualityValue.textContent = e.target.value;
+            processImage();
+        });
+
+        formatButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                outputFormat = button.dataset.format;
+                formatButtons.forEach(btn => {
+                    btn.classList.remove('bg-neutral-600', 'text-white');
+                    btn.classList.add('bg-neutral-700', 'text-neutral-300');
+                });
+                button.classList.add('bg-neutral-600', 'text-white');
+                button.classList.remove('bg-neutral-700', 'text-neutral-300');
+                qualityControl.style.display = (outputFormat === 'png') ? 'none' : 'block';
+                processImage();
+            });
+        });
+        
+        downloadBtn.addEventListener('click', async () => {
+            const blob = await getFinalBlob();
+            if (blob) {
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                const baseName = originalFileName.substring(0, originalFileName.lastIndexOf('.'));
+                link.download = `${baseName}-optimized.${outputFormat}`;
+                link.href = url;
+                link.click();
+                URL.revokeObjectURL(url);
+            }
+        });
+        
+        copyBtn.addEventListener('click', async () => {
+            const blob = await getFinalBlob();
+            if (blob) {
+                try {
+                    await navigator.clipboard.write([ new ClipboardItem({ [blob.type]: blob }) ]);
+                    showCopyFeedback();
+                } catch (err) {
+                    console.error('Failed to copy image: ', err);
+                    alert('Error: No se pudo copiar la imagen al portapapeles.');
+                }
+            }
+        });
+
+        resetBtn.addEventListener('click', () => {
+            originalImage = null;
+            imageInput.value = '';
+            editorArea.classList.add('hidden');
+            uploadArea.classList.remove('hidden');
+            downloadBtn.disabled = true;
+            copyBtn.disabled = true;
+            
+            widthInput.value = '';
+            heightInput.value = '';
+            qualitySlider.value = 80;
+            qualityValue.textContent = '80';
+            outputFormat = 'jpeg';
+            formatButtons.forEach(btn => {
+                btn.classList.remove('bg-neutral-600', 'text-white');
+                btn.classList.add('bg-neutral-700', 'text-neutral-300');
+            });
+            document.querySelector('button[data-format="jpeg"]').classList.add('bg-neutral-600', 'text-white');
+            document.querySelector('button[data-format="jpeg"]').classList.remove('bg-neutral-700', 'text-neutral-300');
+            qualityControl.style.display = 'block';
+            aspectRatioLocked = true;
+            lockIcon.classList.remove('hidden');
+            unlockIcon.classList.add('hidden');
+        });
+    </script>
+</body>
+</html>
+
