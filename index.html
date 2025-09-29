@@ -341,7 +341,7 @@
                         
                         uploadArea.classList.add('hidden');
                         editorArea.classList.remove('hidden');
-                        originalFileName = file.name;
+                        originalFileName = file.name || 'image.png'; // Asignar un nombre por defecto para archivos del portapapeles
                         originalFileSize = file.size;
                         updateSizeDisplays();
                         processImage();
@@ -432,10 +432,28 @@
         });
         imageInput.addEventListener('change', (e) => handleFile(e.target.files[0]));
         
+        // NUEVO: Escuchar el evento de pegar en toda la página
+        document.addEventListener('paste', (e) => {
+            const items = (e.clipboardData || window.clipboardData).items;
+            if (!items) return;
+
+            for (let i = 0; i < items.length; i++) {
+                if (items[i].type.indexOf('image') !== -1) {
+                    const file = items[i].getAsFile();
+                    // Solo procesar si el área de carga está visible.
+                    if (!uploadArea.classList.contains('hidden')) {
+                         e.preventDefault();
+                         handleFile(file);
+                    }
+                    break; 
+                }
+            }
+        });
+
         widthInput.addEventListener('input', () => {
             if (aspectRatioLocked && originalAspectRatio) {
                 const newWidth = parseInt(widthInput.value);
-                if (!isNaN(newWidth)) heightInput.value = Math.round(newWidth / originalAspectRatio);
+                if (!isNaN(newWidth) && newWidth > 0) heightInput.value = Math.round(newWidth / originalAspectRatio);
             }
             processImage();
         });
@@ -443,7 +461,7 @@
         heightInput.addEventListener('input', () => {
             if (aspectRatioLocked && originalAspectRatio) {
                 const newHeight = parseInt(heightInput.value);
-                if (!isNaN(newHeight)) widthInput.value = Math.round(newHeight * originalAspectRatio);
+                if (!isNaN(newHeight) && newHeight > 0) widthInput.value = Math.round(newHeight * originalAspectRatio);
             }
             processImage();
         });
@@ -494,7 +512,8 @@
                     showCopyFeedback();
                 } catch (err) {
                     console.error('Failed to copy image: ', err);
-                    alert('Error: No se pudo copiar la imagen al portapapeles.');
+                    const alertMsg = currentLang === 'es' ? 'Error: No se pudo copiar la imagen al portapapeles.' : 'Error: Could not copy image to clipboard.';
+                    alert(alertMsg);
                 }
             }
         });
