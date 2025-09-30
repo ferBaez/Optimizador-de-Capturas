@@ -303,7 +303,7 @@
                 meta_description: "Optimiza imágenes al instante con nuestra herramienta web responsiva. Pega desde el portapapeles, arrastra y suelta, o selecciona archivos. Redimensiona, comprime y convierte a JPEG, PNG y WebP en cualquier dispositivo.",
                 image_preview_alt: "Previsualización de la imagen a optimizar",
                 copied_feedback: "¡Copiado al portapapeles!",
-                copy_error_feedback: "Error al copiar. Su navegador puede no admitirlo o la página no tener permisos.",
+                copy_error_feedback: "La copia automática falló. Por favor, usa el botón 'Descargar'.",
                 instructions_title: "Instrucciones de Uso",
                 privacy_policy_title: "Aviso de Privacidad",
                 privacy_policy_title_short: "Aviso de Privacidad",
@@ -456,7 +456,7 @@
                 meta_description: "Instantly optimize images with our responsive web tool. Paste from clipboard, drag and drop, or select files. Resize, compress, and convert to JPEG, PNG, and WebP on any device.",
                 image_preview_alt: "Preview of the image to be optimized",
                 copied_feedback: "Copied to clipboard!",
-                copy_error_feedback: "Copy failed. Your browser may not support this or the page may lack permission.",
+                copy_error_feedback: "Automatic copy failed. Please use the 'Download' button.",
                 instructions_title: "How to Use",
                 privacy_policy_title: "Privacy Policy",
                 privacy_policy_title_short: "Privacy Policy",
@@ -606,7 +606,10 @@
             document.querySelectorAll('[data-lang-key]').forEach(element => {
                 const key = element.getAttribute('data-lang-key');
                 const translation = translations[lang][key];
-                if (translation === undefined) return;
+                if (translation === undefined) {
+                    console.warn(`Translation key not found: ${key} for lang: ${lang}`);
+                    return;
+                };
 
                 if (key === 'title') {
                     document.title = translation;
@@ -615,9 +618,13 @@
                 } else {
                     const icon = element.querySelector('svg');
                     if (icon) {
-                        element.textContent = '';
-                        element.appendChild(icon);
-                        element.appendChild(document.createTextNode(` ${translation}`));
+                        const textNode = document.createTextNode(` ${translation}`);
+                        Array.from(element.childNodes).forEach(child => {
+                            if(child.nodeType === Node.TEXT_NODE) {
+                                element.removeChild(child);
+                            }
+                        });
+                        element.appendChild(textNode);
                     } else {
                         element.textContent = translation;
                     }
@@ -880,15 +887,15 @@
                     try {
                         await navigator.clipboard.write([new ClipboardItem({ [blob.type]: blob })]);
                         showCopyFeedback();
-                        return;
+                        return; 
                     } catch (err) {
-                        console.warn('La API moderna del portapapeles falló. Intentando método alternativo.', err);
+                        console.warn('Modern clipboard API failed. Trying fallback.', err);
                     }
                 }
-
-                try {
-                    const reader = new FileReader();
-                    reader.onload = function() {
+                
+                const reader = new FileReader();
+                reader.onload = function() {
+                    try {
                         const dataUrl = reader.result;
                         const tempDiv = document.createElement('div');
                         tempDiv.contentEditable = true;
@@ -915,18 +922,20 @@
                         if (success) {
                             showCopyFeedback();
                         } else {
-                            throw new Error('document.execCommand("copy") devolvió false.');
+                            throw new Error('document.execCommand("copy") returned false.');
                         }
-                    };
-                    reader.onerror = function() {
-                         throw new Error('FileReader falló al leer el blob.');
-                    };
-                    reader.readAsDataURL(blob);
-                } catch (err) {
-                    console.error('El método alternativo para copiar también falló:', err);
-                    const errorMsg = translations[currentLang].copy_error_feedback;
-                    showErrorFeedback(errorMsg);
-                }
+                    } catch(err) {
+                        console.error('Fallback copy method failed:', err);
+                        const errorMsg = translations[currentLang].copy_error_feedback;
+                        showErrorFeedback(errorMsg);
+                    }
+                };
+                reader.onerror = function() {
+                     console.error('FileReader failed to read the blob for fallback copy.');
+                     const errorMsg = translations[currentLang].copy_error_feedback;
+                     showErrorFeedback(errorMsg);
+                };
+                reader.readAsDataURL(blob);
             });
 
             elements.resetBtn.addEventListener('click', () => {
