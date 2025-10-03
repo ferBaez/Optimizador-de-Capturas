@@ -309,7 +309,7 @@
                 privacy_policy_title_short: "Aviso de Privacidad",
                 instructions_title_short: "Instrucciones",
                 instructions_content: `
-                    <div class="text-neutral-400 space-y-4 text-left">
+                    <div class="text-neutral-400 space-y-4 text-justify">
                         <h3 class="text-xl font-semibold text-white">Guía de Usuario: Optimizador de Imágenes</h3>
                         <p>¡Bienvenido! Esta guía te mostrará cómo usar todas las funciones de la aplicación para reducir el tamaño de tus imágenes y capturas de pantalla de forma rápida y sencilla.</p>
                         
@@ -363,7 +363,7 @@
                     </div>
                 `,
                 privacy_policy_content: `
-                    <div class="text-neutral-400 space-y-4 text-left">
+                    <div class="text-neutral-400 space-y-4 text-justify">
                         <p class="text-sm">Fecha de última actualización: 23 de junio de 2025</p>
                         <p>Bienvenido a Hitster Ai. Tu privacidad es de suma importancia para nosotros. Este Aviso de Privacidad describe cómo recopilamos, utilizamos, protegemos y compartimos tu información personal cuando visitas y utilizas nuestro sitio web y nuestros servicios. Al utilizar Hitster Ai, aceptas las prácticas descritas en este documento.</p>
                         
@@ -462,7 +462,7 @@
                 privacy_policy_title_short: "Privacy Policy",
                 instructions_title_short: "Instructions",
                 instructions_content: `
-                    <div class="text-neutral-400 space-y-4 text-left">
+                    <div class="text-neutral-400 space-y-4 text-justify">
                         <h3 class="text-xl font-semibold text-white">User Guide: Image Optimizer</h3>
                         <p>Welcome! This guide will show you how to use all the app's features to reduce the size of your images and screenshots quickly and easily.</p>
                         
@@ -516,7 +516,7 @@
                     </div>
                 `,
                 privacy_policy_content: `
-                    <div class="text-neutral-400 space-y-4 text-left">
+                    <div class="text-neutral-400 space-y-4 text-justify">
                         <p class="text-sm">Last updated: June 23, 2025</p>
                         <p>Welcome to Hitster Ai. Your privacy is of the utmost importance to us. This Privacy Notice describes how we collect, use, protect, and share your personal information when you visit and use our website and services. By using Hitster Ai, you agree to the practices described in this document.</p>
                         
@@ -893,9 +893,9 @@
                     }
                 }
                 
-                const reader = new FileReader();
-                reader.onload = function() {
-                    try {
+                try {
+                    const reader = new FileReader();
+                    reader.onload = function() {
                         const dataUrl = reader.result;
                         const tempDiv = document.createElement('div');
                         tempDiv.contentEditable = true;
@@ -924,18 +924,16 @@
                         } else {
                             throw new Error('document.execCommand("copy") returned false.');
                         }
-                    } catch(err) {
-                        console.error('Fallback copy method failed:', err);
-                        const errorMsg = translations[currentLang].copy_error_feedback;
-                        showErrorFeedback(errorMsg);
-                    }
-                };
-                reader.onerror = function() {
-                     console.error('FileReader failed to read the blob for fallback copy.');
-                     const errorMsg = translations[currentLang].copy_error_feedback;
-                     showErrorFeedback(errorMsg);
-                };
-                reader.readAsDataURL(blob);
+                    };
+                    reader.onerror = function() {
+                         throw new Error('FileReader failed to read the blob for fallback copy.');
+                    };
+                    reader.readAsDataURL(blob);
+                } catch(err) {
+                    console.error('Fallback copy method failed:', err);
+                    const errorMsg = translations[currentLang].copy_error_feedback;
+                    showErrorFeedback(errorMsg);
+                }
             });
 
             elements.resetBtn.addEventListener('click', () => {
