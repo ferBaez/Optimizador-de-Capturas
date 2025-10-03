@@ -193,7 +193,7 @@
                              <img id="image-preview" src="#" alt="Previsualización de la imagen a optimizar" class="max-w-full max-h-[60vh] object-contain rounded-lg">
                             <div class="text-center mt-4 w-full">
                                 <p id="original-size" class="text-sm text-neutral-400"></p>
-                                <p id="new-size" class="text-lg font-semibold text-green-400"></p>
+                                <p id="new-size" class="text-lg font-semibold"></p>
                             </div>
                         </div>
                         <!-- Batch Image Gallery -->
@@ -781,7 +781,6 @@
             originalSizeP.textContent = `${translations[currentLang].original_size_label} ${formatBytes(file.size)}`;
 
             const newSizeP = document.createElement('p');
-            newSizeP.className = 'text-green-400 font-semibold';
             newSizeP.id = `new-size-${index}`;
             newSizeP.textContent = `${translations[currentLang].new_size_label} ...`;
 
@@ -827,6 +826,13 @@
                     const { originalSizeDisplay, newSizeDisplay } = getDOMElements();
                     originalSizeDisplay.textContent = `${translations[currentLang].original_size_label} ${formatBytes(originalFileSize)}`;
                     newSizeDisplay.textContent = `${translations[currentLang].new_size_label} ${formatBytes(blob.size)}`;
+                    if (blob.size > originalFileSize) {
+                        newSizeDisplay.classList.remove('text-green-400');
+                        newSizeDisplay.classList.add('text-red-400');
+                    } else {
+                        newSizeDisplay.classList.remove('text-red-400');
+                        newSizeDisplay.classList.add('text-green-400');
+                    }
                 }
             }, `image/${outputFormat}`, quality);
         };
@@ -839,7 +845,16 @@
                      if (blob) {
                          item.newSize = blob.size;
                          const newSizeDisplay = document.getElementById(`new-size-${i}`);
-                         if(newSizeDisplay) newSizeDisplay.textContent = `${translations[currentLang].new_size_label} ${formatBytes(blob.size)}`;
+                         if(newSizeDisplay) {
+                             newSizeDisplay.textContent = `${translations[currentLang].new_size_label} ${formatBytes(blob.size)}`;
+                            if (blob.size > item.originalFile.size) {
+                                newSizeDisplay.classList.remove('text-green-400');
+                                newSizeDisplay.classList.add('text-red-400');
+                            } else {
+                                newSizeDisplay.classList.remove('text-red-400');
+                                newSizeDisplay.classList.add('text-green-400');
+                            }
+                         }
                      }
                 }
              }
