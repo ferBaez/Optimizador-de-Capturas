@@ -8,13 +8,13 @@
     <!-- ============== INICIO DE OPTIMIZACIÓN SEO AVANZADA ================ -->
     <!-- =================================================================== -->
 
-    <title data-lang-key="title">Optimizador de Imágenes Responsivo - Comprime y Redimensiona al Instante</title>
+    <title data-lang-key="title">Optimizador de Imágenes por Lotes - Comprime Múltiples Imágenes</title>
     
     <!-- Descripción para Motores de Búsqueda (150-160 caracteres) -->
-    <meta id="meta-description" name="description" content="Optimiza imágenes al instante con nuestra herramienta web responsiva. Pega desde el portapapeles, arrastra y suelta, o selecciona archivos. Redimensiona, comprime y convierte a JPEG, PNG y WebP en cualquier dispositivo.">
+    <meta id="meta-description" name="description" content="Optimiza múltiples imágenes a la vez (por lotes) con nuestra herramienta web gratuita. Usa preajustes, comprime y convierte a JPEG, PNG y WebP. Arrastra y suelta para empezar.">
     
     <!-- Palabras Clave -->
-    <meta name="keywords" content="optimizador de imagen, compresor de imagen, redimensionar imagen, diseño responsivo, web tool, cleanshot, pegar imagen, arrastrar y soltar, convertir imagen, reducir tamaño, optimizar para web, multi-idioma, image optimizer, responsive design, image compressor, resize image, paste from clipboard, drag and drop">
+    <meta name="keywords" content="optimizar imagenes por lotes, compresor de imagenes multiple, reducir tamaño imagenes, batch image optimizer, batch image compressor, optimizador de imagen, redimensionar imagen, diseño responsivo, cleanshot, pegar imagen, arrastrar y soltar, convertir imagen, optimizar para web, multi-idioma">
     
     <!-- Autor y Robots -->
     <meta name="author" content="Hitster Ai">
@@ -46,15 +46,15 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Hitster Ai Image Optimizer">
     <meta property="og:url" content="https://[TU-DOMINIO-FINAL.COM]">
-    <meta property="og:title" content="Optimizador de Imágenes Online y Gratuito | Hitster Ai">
-    <meta property="og:description" content="Herramienta web responsiva para reducir el tamaño de tus imágenes y capturas de pantalla sin perder calidad. Rápido, seguro y en tu navegador.">
+    <meta property="og:title" content="Optimizador de Imágenes por Lotes | Hitster Ai">
+    <meta property="og:description" content="Ahorra tiempo optimizando múltiples imágenes a la vez. Nuestra herramienta gratuita soporta carga por lotes, preajustes y compresión avanzada.">
     <meta property="og:image" content="https://[TU-DOMINIO-FINAL.COM]/og-image.jpg"> 
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://[TU-DOMINIO-FINAL.COM]">
-    <meta name="twitter:title" content="Optimizador de Imágenes Online y Gratuito | Hitster Ai">
-    <meta name="twitter:description" content="Herramienta web responsiva para reducir el tamaño de tus imágenes y capturas de pantalla sin perder calidad. Rápido, seguro y en tu navegador.">
+    <meta name="twitter:title" content="Optimizador de Imágenes por Lotes | Hitster Ai">
+    <meta name="twitter:description" content="Ahorra tiempo optimizando múltiples imágenes a la vez. Nuestra herramienta gratuita soporta carga por lotes, preajustes y compresión avanzada.">
     <meta name="twitter:image" content="https://[TU-DOMINIO-FINAL.COM]/twitter-image.jpg"> 
 
     <!-- =================================================================== -->
@@ -62,6 +62,7 @@
     <!-- =================================================================== -->
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -175,68 +176,87 @@
     <main class="flex-grow container mx-auto p-4 sm:p-6 md:p-8">
         <div class="max-w-4xl mx-auto">
             
-            <div id="upload-area" class="w-full border-4 border-dashed border-neutral-700 rounded-2xl p-6 md:p-8 text-center cursor-pointer hover:border-neutral-600 transition-colors bg-neutral-800 mt-8">
-                <input type="file" id="image-input" class="hidden" accept="image/*">
+            <div id="upload-area" class="w-full border-4 border-dashed border-neutral-700 rounded-2xl p-6 md:p-12 text-center cursor-pointer hover:border-neutral-600 transition-colors bg-neutral-800 mt-8">
+                <input type="file" id="image-input" class="hidden" accept="image/*" multiple>
                 <div class="flex flex-col items-center">
                     <svg class="w-12 h-12 md:w-16 md:h-16 text-neutral-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                    <p class="text-base md:text-lg" data-lang-key="upload_prompt_main">Arrastra y suelta una imagen aquí</p>
-                    <p class="text-sm md:text-base text-neutral-500" data-lang-key="upload_prompt_sub">o haz clic para seleccionar un archivo</p>
+                    <p class="text-base sm:text-lg md:text-xl font-medium" data-lang-key="upload_prompt_main">Arrastra y suelta una imagen aquí</p>
+                    <p class="text-sm sm:text-base text-neutral-500" data-lang-key="upload_prompt_sub">o haz clic para seleccionar un archivo</p>
                 </div>
             </div>
 
-            <div id="editor-area" class="hidden mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
-                
-                <div class="flex flex-col items-center justify-center bg-neutral-800 p-4 rounded-2xl">
-                    <img id="image-preview" src="#" alt="Previsualización de la imagen a optimizar" class="max-w-full max-h-[300px] md:max-h-[400px] object-contain rounded-lg">
-                    <div class="text-center mt-4 w-full">
-                        <p id="original-size" class="text-sm text-neutral-400"></p>
-                        <p id="new-size" class="text-lg font-semibold text-green-400"></p>
-                    </div>
-                </div>
-
-                <div class="bg-neutral-800 p-6 rounded-2xl flex flex-col space-y-6">
-                    <div>
-                        <label class="block mb-2 font-medium" data-lang-key="dimensions_label">Dimensiones</label>
-                        <div class="flex items-center space-x-2">
-                            <input type="number" id="width-input" class="w-full bg-neutral-700 border border-neutral-600 rounded-md px-3 py-2 text-center text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ancho">
-                            <button id="aspect-lock-btn" class="p-2 rounded-md bg-neutral-600 hover:bg-neutral-500 transition-colors" title="Mantener proporción" aria-label="Bloquear o desbloquear la proporción de aspecto">
-                                <svg id="lock-icon" class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd"></path></svg>
-                                <svg id="unlock-icon" class="w-5 h-5 text-white hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5a3 3 0 10-6 0V9h6zM10 5.5a3 3 0 00-3 3V9h2V8.5a1 1 0 112 0V9h2V8.5a3 3 0 00-3-3z"></path></svg>
-                            </button>
-                            <input type="number" id="height-input" class="w-full bg-neutral-700 border border-neutral-600 rounded-md px-3 py-2 text-center text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Alto">
+            <div id="editor-container" class="hidden mt-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                    <div id="preview-container" class="md:col-span-2">
+                         <!-- Single Image Preview -->
+                        <div id="editor-area" class="hidden flex-col items-center justify-center bg-neutral-800 p-4 rounded-2xl h-full">
+                             <img id="image-preview" src="#" alt="Previsualización de la imagen a optimizar" class="max-w-full max-h-[60vh] object-contain rounded-lg">
+                            <div class="text-center mt-4 w-full">
+                                <p id="original-size" class="text-sm text-neutral-400"></p>
+                                <p id="new-size" class="text-lg font-semibold text-green-400"></p>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div>
-                        <h3 class="font-medium mb-3" data-lang-key="format_label">Formato de Salida</h3>
-                        <div class="grid grid-cols-3 gap-2">
-                            <button data-format="jpeg" class="format-btn px-4 py-2 rounded-lg bg-neutral-600 text-white font-semibold">JPEG</button>
-                            <button data-format="png" class="format-btn px-4 py-2 rounded-lg bg-neutral-700 text-neutral-300 font-semibold">PNG</button>
-                            <button data-format="webp" class="format-btn px-4 py-2 rounded-lg bg-neutral-700 text-neutral-300 font-semibold">WebP</button>
+                        <!-- Batch Image Gallery -->
+                        <div id="gallery-area" class="hidden max-h-[70vh] overflow-y-auto bg-neutral-800 p-4 rounded-2xl">
+                            <div id="gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                                <!-- Thumbnails will be injected here -->
+                            </div>
                         </div>
                     </div>
 
-                    <div id="quality-control">
-                         <label for="quality" class="block mb-2 font-medium">
-                            <span data-lang-key="quality_label">Calidad</span> (<span id="quality-value">80</span>%)
-                        </label>
-                        <input type="range" id="quality" min="10" max="100" value="80" class="w-full">
-                    </div>
-                    
-                    <div class="flex-grow"></div>
+                    <div class="bg-neutral-800 p-6 rounded-2xl flex flex-col space-y-4 md:space-y-6 md:col-span-1">
+                        <div id="dimensions-control">
+                            <label class="block mb-2 font-medium" data-lang-key="dimensions_label">Dimensiones</label>
+                            <div class="flex items-center space-x-2">
+                                <input type="number" id="width-input" class="w-full bg-neutral-700 border border-neutral-600 rounded-md px-3 py-2 text-center text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ancho">
+                                <button id="aspect-lock-btn" class="p-2 rounded-md bg-neutral-600 hover:bg-neutral-500 transition-colors" title="Mantener proporción" aria-label="Bloquear o desbloquear la proporción de aspecto">
+                                    <svg id="lock-icon" class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd"></path></svg>
+                                    <svg id="unlock-icon" class="w-5 h-5 text-white hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5a3 3 0 10-6 0V9h6zM10 5.5a3 3 0 00-3 3V9h2V8.5a1 1 0 112 0V9h2V8.5a3 3 0 00-3-3z"></path></svg>
+                                </button>
+                                <input type="number" id="height-input" class="w-full bg-neutral-700 border border-neutral-600 rounded-md px-3 py-2 text-center text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Alto">
+                            </div>
+                        </div>
 
-                    <div class="pt-4 border-t border-neutral-700 flex flex-col space-y-3">
-                         <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
-                            <button id="copy-btn" class="w-full sm:w-1/2 bg-green-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-green-700 transition-colors disabled:bg-neutral-500 disabled:cursor-not-allowed flex items-center justify-center" disabled>
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-                                <span class="ml-2" data-lang-key="copy_button">Copiar</span>
-                            </button>
-                             <button id="download-btn" class="w-full sm:w-1/2 bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors disabled:bg-neutral-500 disabled:cursor-not-allowed flex items-center justify-center" disabled>
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                                <span class="ml-2" data-lang-key="download_button">Descargar</span>
-                            </button>
-                         </div>
-                         <button id="reset-btn" class="w-full bg-neutral-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-neutral-500 transition-colors" data-lang-key="reset_button">Cargar otra imagen</button>
+                         <div>
+                            <h3 class="font-medium mb-3" data-lang-key="presets_label">Preajustes</h3>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button data-preset="web" class="preset-btn px-4 py-2 text-sm rounded-lg bg-neutral-700 text-neutral-300 font-semibold" data-lang-key="preset_web">Blog/Web</button>
+                                <button data-preset="email" class="preset-btn px-4 py-2 text-sm rounded-lg bg-neutral-700 text-neutral-300 font-semibold" data-lang-key="preset_email">Email/Chat</button>
+                                <button data-preset="social" class="preset-btn px-4 py-2 text-sm rounded-lg bg-neutral-700 text-neutral-300 font-semibold" data-lang-key="preset_social">Red Social</button>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="font-medium mb-3" data-lang-key="format_label">Formato de Salida</h3>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button data-format="jpeg" class="format-btn px-4 py-2 rounded-lg bg-neutral-600 text-white font-semibold">JPEG</button>
+                                <button data-format="png" class="format-btn px-4 py-2 rounded-lg bg-neutral-700 text-neutral-300 font-semibold">PNG</button>
+                                <button data-format="webp" class="format-btn px-4 py-2 rounded-lg bg-neutral-700 text-neutral-300 font-semibold">WebP</button>
+                            </div>
+                        </div>
+
+                        <div id="quality-control">
+                             <label for="quality" class="block mb-2 font-medium">
+                                <span data-lang-key="quality_label">Calidad</span> (<span id="quality-value">80</span>%)
+                            </label>
+                            <input type="range" id="quality" min="10" max="100" value="80" class="w-full">
+                        </div>
+                        
+                        <div class="flex-grow"></div>
+
+                        <div class="pt-4 border-t border-neutral-700 flex flex-col space-y-3">
+                             <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
+                                <button id="copy-btn" class="w-full sm:w-1/2 bg-green-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-green-700 transition-colors disabled:bg-neutral-500 disabled:cursor-not-allowed flex items-center justify-center" disabled>
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                    <span class="ml-2" data-lang-key="copy_button">Copiar</span>
+                                </button>
+                                 <button id="download-btn" class="w-full sm:w-1/2 bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors disabled:bg-neutral-500 disabled:cursor-not-allowed flex items-center justify-center" disabled>
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                    <span class="ml-2" data-lang-key="download_button">Descargar</span>
+                                </button>
+                             </div>
+                             <button id="reset-btn" class="w-full bg-neutral-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-neutral-500 transition-colors" data-lang-key="reset_button">Cargar otra imagen</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -260,9 +280,9 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Optimizador de Imágenes y Capturas de Pantalla",
-      "description": "Herramienta web gratuita y responsiva para optimizar, redimensionar y comprimir imágenes. Soporta múltiples formatos (JPEG, PNG, WebP), carga de archivos por arrastrar y soltar, y pegado directo desde el portapapeles. Disponible en español e inglés.",
+      "@type": "SoftwareApplication",
+      "name": "Optimizador de Imágenes por Lotes",
+      "description": "Herramienta web gratuita para optimizar, redimensionar y comprimir múltiples imágenes a la vez (procesamiento por lotes). Soporta preajustes, JPEG, PNG, WebP, arrastrar y soltar, y es totalmente responsiva.",
       "applicationCategory": "MultimediaApplication",
       "operatingSystem": "All",
       "browserRequirements": "Requires HTML5 support",
@@ -283,16 +303,21 @@
     <script>
         const translations = {
             es: {
-                title: "Optimizador de Imágenes Responsivo - Comprime y Redimensiona al Instante",
+                title: "Optimizador de Imágenes por Lotes - Comprime Múltiples Imágenes",
                 main_header: "Optimizador de Capturas",
                 upload_prompt_main: "Arrastra y suelta una imagen aquí",
                 upload_prompt_sub: "o haz clic para seleccionar un archivo",
                 dimensions_label: "Dimensiones",
                 width_placeholder: "Ancho",
                 height_placeholder: "Alto",
+                presets_label: "Preajustes",
+                preset_web: "Blog/Web",
+                preset_email: "Email/Chat",
+                preset_social: "Red Social",
                 format_label: "Formato de Salida",
                 quality_label: "Calidad",
                 download_button: "Descargar",
+                download_all_button: "Descargar todo (.zip)",
                 copy_button: "Copiar",
                 reset_button: "Cargar otra imagen",
                 original_size_label: "Original:",
@@ -300,7 +325,7 @@
                 footer_rights: "Todos los derechos reservados para",
                 footer_contact: "Contáctanos",
                 language_label: "Lenguaje",
-                meta_description: "Optimiza imágenes al instante con nuestra herramienta web responsiva. Pega desde el portapapeles, arrastra y suelta, o selecciona archivos. Redimensiona, comprime y convierte a JPEG, PNG y WebP en cualquier dispositivo.",
+                meta_description: "Optimiza múltiples imágenes a la vez (por lotes) con nuestra herramienta web gratuita. Usa preajustes, comprime y convierte a JPEG, PNG y WebP. Arrastra y suelta para empezar.",
                 image_preview_alt: "Previsualización de la imagen a optimizar",
                 copied_feedback: "¡Copiado al portapapeles!",
                 copy_error_feedback: "La copia automática falló. Por favor, usa el botón 'Descargar'.",
@@ -311,54 +336,51 @@
                 instructions_content: `
                     <div class="text-neutral-400 space-y-4 text-justify">
                         <h3 class="text-xl font-semibold text-white">Guía de Usuario: Optimizador de Imágenes</h3>
-                        <p>¡Bienvenido! Esta guía te mostrará cómo usar todas las funciones de la aplicación para reducir el tamaño de tus imágenes y capturas de pantalla de forma rápida y sencilla.</p>
-                        
-                        <h4 class="text-lg font-semibold text-white pt-2">Paso 1: Cargar tu Imagen</h4>
-                        <p>Tienes tres formas muy fáciles de empezar:</p>
-                        <ul class="list-disc list-inside ml-4 space-y-2">
-                            <li><strong>Arrastrar y Soltar:</strong> Simplemente arrastra un archivo de imagen desde tu escritorio y suéltalo en el área punteada.</li>
-                            <li><strong>Pegar desde el Portapapeles:</strong> Toma una captura de pantalla (<code>Cmd+Shift+4</code>, <code>Win+Shift+S</code>, etc.) y pégala directamente en la página con <code>Ctrl+V</code> o <code>Cmd+V</code>. ¡No necesitas guardar el archivo primero!</li>
-                            <li><strong>Seleccionar Archivo:</strong> Haz clic en el área punteada para abrir el explorador de archivos y selecciona la imagen que deseas optimizar.</li>
-                        </ul>
-                        <p>Una vez cargada, verás la previsualización de tu imagen a la izquierda y las herramientas de optimización a la derecha.</p>
-                        
-                        <h4 class="text-lg font-semibold text-white pt-2">Paso 2: Optimizar tu Imagen</h4>
-                        <p>Ahora puedes ajustar la configuración para obtener el resultado perfecto.</p>
-                        <p class="font-semibold text-neutral-200">Dimensiones:</p>
-                        <ul class="list-disc list-inside ml-4">
-                            <li>Ingresa el ancho (Width) o alto (Height) deseado en píxeles.</li>
-                            <li>Por defecto, la proporción de la imagen se mantiene. Haz clic en el ícono del candado para desactivar esta opción y ajustar las dimensiones libremente.</li>
-                        </ul>
-                        <p class="font-semibold text-neutral-200 mt-2">Formato de Salida:</p>
-                        <ul class="list-disc list-inside ml-4">
-                            <li><strong>JPEG:</strong> Ideal para fotografías. Ofrece un buen equilibrio entre calidad y tamaño.</li>
-                            <li><strong>PNG:</strong> Perfecto para imágenes con transparencias o gráficos con texto. La compresión es sin pérdida de calidad, pero los archivos pueden ser más grandes.</li>
-                            <li><strong>WebP:</strong> Un formato moderno que ofrece una excelente compresión con alta calidad. Es ideal para la web, pero asegúrate de que sea compatible donde la vayas a usar.</li>
-                        </ul>
-                        <p class="font-semibold text-neutral-200 mt-2">Calidad (Solo para JPEG y WebP):</p>
-                        <ul class="list-disc list-inside ml-4">
-                            <li>Mueve el deslizador para ajustar el nivel de compresión. Un valor más bajo (ej. 70%) resultará en un archivo más pequeño, mientras que un valor más alto (ej. 90%) mantendrá más calidad.</li>
-                            <li>El valor recomendado para un buen equilibrio es 80%.</li>
-                        </ul>
-                        <p>Mientras haces los cambios, verás el nuevo tamaño del archivo actualizado en tiempo real debajo de la imagen.</p>
+                        <p>¡Bienvenido! Esta guía te mostrará cómo usar todas las funciones de la aplicación, incluyendo el nuevo procesamiento por lotes, para optimizar tus imágenes de forma rápida y sencilla.</p>
 
-                        <h4 class="text-lg font-semibold text-white pt-2">Paso 3: Usar tu Imagen Optimizada</h4>
-                        <p>Una vez que estés satisfecho con el resultado, tienes dos opciones:</p>
-                        <p class="font-semibold text-neutral-200">Copiar al Portapapeles (¡La opción más rápida!):</p>
-                        <ul class="list-disc list-inside ml-4">
-                            <li>Haz clic en el botón verde "Copiar".</li>
-                            <li>La imagen optimizada se copiará en tu portapapeles, lista para ser pegada (<code>Ctrl+V</code> / <code>Cmd+V</code>) en un correo, documento, chat o cualquier otra aplicación.</li>
+                        <h4 class="text-lg font-semibold text-white pt-2">Paso 1: Cargar tus Imágenes</h4>
+                        <p>Puedes cargar una o varias imágenes a la vez:</p>
+                        <ul class="list-disc list-inside ml-4 space-y-2">
+                            <li><strong>Arrastrar y Soltar:</strong> Arrastra uno o varios archivos de imagen y suéltalos en el área punteada.</li>
+                            <li><strong>Seleccionar Archivos:</strong> Haz clic en el área punteada para abrir el explorador de archivos y selecciona una o más imágenes.</li>
+                            <li><strong>Pegar desde el Portapapeles (solo una imagen):</strong> Toma una captura de pantalla y pégala directamente en la página con <code>Ctrl+V</code> o <code>Cmd+V</code>.</li>
                         </ul>
-                        <p class="font-semibold text-neutral-200 mt-2">Descargar el Archivo:</p>
+                        <p>Si cargas una sola imagen, verás una vista previa grande. Si cargas varias, verás una galería de miniaturas.</p>
+
+                        <h4 class="text-lg font-semibold text-white pt-2">Paso 2: Optimizar tus Imágenes</h4>
+                        <p>Todos los ajustes que realices se aplicarán a todas las imágenes cargadas simultáneamente.</p>
+                        <p class="font-semibold text-neutral-200 mt-2">Preajustes (Presets):</p>
                         <ul class="list-disc list-inside ml-4">
-                            <li>Haz clic en el botón azul "Descargar".</li>
-                            <li>La imagen optimizada se guardará en tu carpeta de descargas con el sufijo "-optimized".</li>
+                            <li>Usa los botones de preajustes (Blog/Web, Email/Chat, etc.) para aplicar configuraciones óptimas con un solo clic.</li>
+                        </ul>
+                        <p class="font-semibold text-neutral-200 mt-2">Dimensiones (solo para una imagen):</p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Si solo cargaste una imagen, puedes ajustar el ancho (Width) o alto (Height) exacto en píxeles.</li>
+                            <li>Haz clic en el ícono del candado para mantener o liberar la proporción.</li>
+                        </ul>
+                        <p class="font-semibold text-neutral-200 mt-2">Formato y Calidad:</p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Elige entre <strong>JPEG</strong> (fotos), <strong>PNG</strong> (gráficos/transparencias) o <strong>WebP</strong> (formato web moderno).</li>
+                            <li>Ajusta el deslizador de <strong>Calidad</strong> para encontrar el balance perfecto entre tamaño y apariencia visual (no aplica para PNG).</li>
+                        </ul>
+                        <p>Verás el nuevo tamaño del archivo actualizado en tiempo real en cada miniatura o debajo de la vista previa.</p>
+
+                        <h4 class="text-lg font-semibold text-white pt-2">Paso 3: Usar tus Imágenes Optimizadas</h4>
+                        <p>Una vez que estés satisfecho, tienes dos opciones:</p>
+                        <p class="font-semibold text-neutral-200">Descargar:</p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li><strong>Descargar:</strong> Si cargaste una sola imagen, la guardará como un archivo individual.</li>
+                            <li><strong>Descargar todo (.zip):</strong> Si cargaste varias imágenes, las empaquetará todas en un único archivo .zip.</li>
+                        </ul>
+                        <p class="font-semibold text-neutral-200 mt-2">Copiar (solo para una imagen):</p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Si solo tienes una imagen cargada, puedes hacer clic en "Copiar" para pegarla directamente en otra aplicación.</li>
                         </ul>
 
                         <h4 class="text-lg font-semibold text-white pt-2">Funciones Adicionales</h4>
                         <ul class="list-disc list-inside ml-4">
-                            <li><strong>Cambiar Idioma:</strong> Usa los botones ES / EN en la esquina superior derecha para cambiar el idioma de la interfaz.</li>
-                            <li><strong>Cargar otra Imagen:</strong> Haz clic en el botón "Cargar otra imagen" para reiniciar el proceso y empezar con un nuevo archivo.</li>
+                            <li><strong>Memoria de Configuración:</strong> La app recuerda tus últimos ajustes de formato y calidad.</li>
+                            <li><strong>Cargar otras:</strong> Haz clic en "Cargar otra imagen" para reiniciar el proceso.</li>
                         </ul>
                     </div>
                 `,
@@ -436,16 +458,21 @@
                 `,
             },
             en: {
-                title: "Responsive Image Optimizer - Instantly Compress & Resize",
+                title: "Batch Image Optimizer - Compress Multiple Images at Once",
                 main_header: "Screenshot Optimizer",
                 upload_prompt_main: "Drag and drop an image here",
                 upload_prompt_sub: "or click to select a file",
                 dimensions_label: "Dimensions",
                 width_placeholder: "Width",
                 height_placeholder: "Height",
+                presets_label: "Presets",
+                preset_web: "Blog/Web",
+                preset_email: "Email/Chat",
+                preset_social: "Social Media",
                 format_label: "Output Format",
                 quality_label: "Quality",
                 download_button: "Download",
+                download_all_button: "Download all (.zip)",
                 copy_button: "Copy",
                 reset_button: "Upload another image",
                 original_size_label: "Original:",
@@ -464,54 +491,51 @@
                 instructions_content: `
                     <div class="text-neutral-400 space-y-4 text-justify">
                         <h3 class="text-xl font-semibold text-white">User Guide: Image Optimizer</h3>
-                        <p>Welcome! This guide will show you how to use all the app's features to reduce the size of your images and screenshots quickly and easily.</p>
+                        <p>Welcome! This guide will show you how to use all the app's features, including the new batch processing, to optimize your images quickly and easily.</p>
                         
-                        <h4 class="text-lg font-semibold text-white pt-2">Step 1: Upload Your Image</h4>
-                        <p>You have three easy ways to start:</p>
+                        <h4 class="text-lg font-semibold text-white pt-2">Step 1: Upload Your Images</h4>
+                        <p>You can upload one or multiple images at once:</p>
                         <ul class="list-disc list-inside ml-4 space-y-2">
-                            <li><strong>Drag and Drop:</strong> Simply drag an image file from your desktop and drop it onto the dashed area.</li>
-                            <li><strong>Paste from Clipboard:</strong> Take a screenshot (<code>Cmd+Shift+4</code>, <code>Win+Shift+S</code>, etc.) and paste it directly on the page with <code>Ctrl+V</code> or <code>Cmd+V</code>. No need to save the file first!</li>
-                            <li><strong>Select File:</strong> Click the dashed area to open your file browser and select the image you want to optimize.</li>
+                            <li><strong>Drag and Drop:</strong> Drag one or more image files and drop them onto the dashed area.</li>
+                            <li><strong>Select Files:</strong> Click the dashed area to open your file browser and select one or more images.</li>
+                            <li><strong>Paste from Clipboard (single image only):</strong> Take a screenshot and paste it directly onto the page with <code>Ctrl+V</code> or <code>Cmd+V</code>.</li>
                         </ul>
-                        <p>Once uploaded, you will see the preview of your image on the left and the optimization tools on the right.</p>
+                        <p>If you upload a single image, you'll see a large preview. If you upload multiple, you'll see a thumbnail gallery.</p>
                         
-                        <h4 class="text-lg font-semibold text-white pt-2">Step 2: Optimize Your Image</h4>
-                        <p>Now you can adjust the settings to get the perfect result.</p>
-                        <p class="font-semibold text-neutral-200">Dimensions:</p>
+                        <h4 class="text-lg font-semibold text-white pt-2">Step 2: Optimize Your Images</h4>
+                        <p>All adjustments you make will apply to all loaded images simultaneously.</p>
+                        <p class="font-semibold text-neutral-200 mt-2">Presets:</p>
                         <ul class="list-disc list-inside ml-4">
-                            <li>Enter the desired width or height in pixels.</li>
-                            <li>By default, the aspect ratio is maintained. Click the lock icon to disable this option and adjust dimensions freely.</li>
+                            <li>Use the preset buttons (Blog/Web, Email/Chat, etc.) to apply optimal settings with a single click.</li>
                         </ul>
-                        <p class="font-semibold text-neutral-200 mt-2">Output Format:</p>
+                        <p class="font-semibold text-neutral-200 mt-2">Dimensions (single image only):</p>
                         <ul class="list-disc list-inside ml-4">
-                            <li><strong>JPEG:</strong> Ideal for photographs. It offers a good balance between quality and file size.</li>
-                            <li><strong>PNG:</strong> Perfect for images with transparency or graphics with text. Compression is lossless, but files can be larger.</li>
-                            <li><strong>WebP:</strong> A modern format that offers excellent compression with high quality. It's great for the web, but make sure it's compatible where you plan to use it.</li>
+                            <li>If you only uploaded one image, you can adjust the exact width or height in pixels.</li>
+                            <li>Click the lock icon to maintain or release the aspect ratio.</li>
                         </ul>
-                        <p class="font-semibold text-neutral-200 mt-2">Quality (For JPEG and WebP only):</p>
+                        <p class="font-semibold text-neutral-200 mt-2">Format & Quality:</p>
                         <ul class="list-disc list-inside ml-4">
-                            <li>Move the slider to adjust the compression level. A lower value (e.g., 70%) will result in a smaller file, while a higher value (e.g., 90%) will maintain more quality.</li>
-                            <li>The recommended value for a good balance is 80%.</li>
+                            <li>Choose between <strong>JPEG</strong> (photos), <strong>PNG</strong> (graphics/transparency), or <strong>WebP</strong> (modern web format).</li>
+                            <li>Adjust the <strong>Quality</strong> slider to find the perfect balance between file size and visual appearance (not applicable for PNG).</li>
                         </ul>
-                        <p>As you make changes, you'll see the new file size update in real-time below the image.</p>
+                        <p>You will see the new file size update in real-time on each thumbnail or below the preview.</p>
 
-                        <h4 class="text-lg font-semibold text-white pt-2">Step 3: Use Your Optimized Image</h4>
+                        <h4 class="text-lg font-semibold text-white pt-2">Step 3: Use Your Optimized Images</h4>
                         <p>Once you are satisfied with the result, you have two options:</p>
-                        <p class="font-semibold text-neutral-200">Copy to Clipboard (The fastest option!):</p>
+                        <p class="font-semibold text-neutral-200">Download:</p>
                         <ul class="list-disc list-inside ml-4">
-                            <li>Click the green "Copy" button.</li>
-                            <li>The optimized image will be copied to your clipboard, ready to be pasted (<code>Ctrl+V</code> / <code>Cmd+V</code>) into an email, document, chat, or any other application.</li>
+                            <li><strong>Download:</strong> If you uploaded a single image, it will be saved as an individual file.</li>
+                            <li><strong>Download all (.zip):</strong> If you uploaded multiple images, it will package them all into a single .zip file.</li>
                         </ul>
-                        <p class="font-semibold text-neutral-200 mt-2">Download the File:</p>
+                        <p class="font-semibold text-neutral-200 mt-2">Copy (single image only):</p>
                         <ul class="list-disc list-inside ml-4">
-                            <li>Click the blue "Download" button.</li>
-                            <li>The optimized image will be saved to your downloads folder with the "-optimized" suffix.</li>
+                            <li>If you only have one image loaded, you can click "Copy" to paste it directly into another application.</li>
                         </ul>
 
                         <h4 class="text-lg font-semibold text-white pt-2">Additional Features</h4>
                         <ul class="list-disc list-inside ml-4">
-                            <li><strong>Switch Language:</strong> Use the ES / EN buttons in the top-right corner to change the interface language.</li>
-                            <li><strong>Upload Another Image:</strong> Click the "Upload another image" button to reset the process and start with a new file.</li>
+                            <li><strong>Settings Memory:</strong> The app remembers your last format and quality settings.</li>
+                            <li><strong>Upload More:</strong> Click "Cargar otra imagen" (Upload another image) to reset the process.</li>
                         </ul>
                     </div>
                 `,
@@ -591,12 +615,13 @@
         };
 
         let currentLang = null; 
-        let originalImage = null;
-        let originalFileName = '';
-        let originalFileSize = 0;
+        let loadedImages = [];
+        let isBatchMode = false;
+        let originalImage = null; // Used for single image mode
+        let originalFileName = ''; // Used for single image mode
+        let originalFileSize = 0; // Used for single image mode
         let outputFormat = 'jpeg';
         let aspectRatioLocked = true;
-        let originalAspectRatio = 1;
         
         const setLanguage = (lang) => {
             if (lang === currentLang) return; 
@@ -606,23 +631,18 @@
             document.querySelectorAll('[data-lang-key]').forEach(element => {
                 const key = element.getAttribute('data-lang-key');
                 const translation = translations[lang][key];
-                if (translation === undefined) {
-                    console.warn(`Translation key not found: ${key} for lang: ${lang}`);
-                    return;
-                };
+                if (translation === undefined) return;
 
                 if (key === 'title') {
                     document.title = translation;
                 } else if (key.endsWith('_content')) {
                     element.innerHTML = translation;
                 } else {
-                    const icon = element.querySelector('svg');
+                     const icon = element.querySelector('svg');
                     if (icon) {
                         const textNode = document.createTextNode(` ${translation}`);
                         Array.from(element.childNodes).forEach(child => {
-                            if(child.nodeType === Node.TEXT_NODE) {
-                                element.removeChild(child);
-                            }
+                            if(child.nodeType === Node.TEXT_NODE) element.removeChild(child);
                         });
                         element.appendChild(textNode);
                     } else {
@@ -632,14 +652,14 @@
             });
 
             document.getElementById('meta-description').setAttribute('content', translations[lang].meta_description);
-            document.getElementById('image-preview').setAttribute('alt', translations[lang].image_preview_alt);
+            if (!isBatchMode) document.getElementById('image-preview').setAttribute('alt', translations[lang].image_preview_alt);
             document.getElementById('width-input').setAttribute('placeholder', translations[lang].width_placeholder);
             document.getElementById('height-input').setAttribute('placeholder', translations[lang].height_placeholder);
             
             document.getElementById('lang-es').classList.toggle('bg-neutral-700', lang === 'es');
             document.getElementById('lang-en').classList.toggle('bg-neutral-700', lang === 'en');
             
-            if(originalImage) updateSizeDisplays();
+            if(originalImage || isBatchMode) updateAllDisplays();
         };
 
         const formatBytes = (bytes, decimals = 2) => {
@@ -651,82 +671,211 @@
             return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
         };
 
-        const handleFile = (file) => {
+        const handleFiles = (files) => {
+            if (files.length === 0) return;
+            
+            if (files.length === 1) {
+                isBatchMode = false;
+                handleSingleFile(files[0]);
+            } else {
+                isBatchMode = true;
+                handleMultipleFiles(Array.from(files));
+            }
+        };
+
+        const handleSingleFile = (file) => {
             if (file && file.type.startsWith('image/')) {
                 const reader = new FileReader();
                 reader.onload = (e) => {
                     originalImage = new Image();
                     originalImage.onload = () => {
-                        const {
-                            uploadArea, editorArea, imagePreview, widthInput, 
-                            heightInput, downloadBtn, copyBtn 
-                        } = getDOMElements();
+                        const { uploadArea, editorContainer, editorArea, galleryArea, imagePreview, widthInput, heightInput, downloadBtn, copyBtn, dimensionsControl } = getDOMElements();
                         
                         imagePreview.src = e.target.result;
-                        originalAspectRatio = originalImage.width / originalImage.height;
                         widthInput.value = originalImage.width;
                         heightInput.value = originalImage.height;
                         
                         uploadArea.classList.add('hidden');
-                        editorArea.classList.remove('hidden');
+                        editorContainer.classList.remove('hidden');
+                        editorArea.style.display = 'flex';
+                        galleryArea.style.display = 'none';
+                        dimensionsControl.style.display = 'block';
+
                         originalFileName = file.name || 'image.png';
                         originalFileSize = file.size;
-                        updateSizeDisplays();
-                        processImage();
-                        downloadBtn.disabled = false;
+                        
                         copyBtn.disabled = false;
+                        downloadBtn.disabled = false;
+
+                        updateAllDisplays();
                     };
                     originalImage.src = e.target.result;
                 };
                 reader.readAsDataURL(file);
             }
         };
+        
+        const handleMultipleFiles = (files) => {
+            loadedImages = [];
+            const { uploadArea, editorContainer, editorArea, galleryArea, galleryGrid, downloadBtn, copyBtn, dimensionsControl } = getDOMElements();
 
-        const updateSizeDisplays = (newSize) => {
-            const { originalSizeDisplay, newSizeDisplay } = getDOMElements();
-            const originalLabel = translations[currentLang].original_size_label;
-            originalSizeDisplay.textContent = `${originalLabel} ${formatBytes(originalFileSize)}`;
-            if (newSize !== undefined) {
-                const newLabel = translations[currentLang].new_size_label;
-                newSizeDisplay.textContent = `${newLabel} ${formatBytes(newSize)}`;
-            } else if (originalImage) {
-                 getFinalBlob().then(blob => {
-                    if (blob) {
-                        const newLabel = translations[currentLang].new_size_label;
-                        newSizeDisplay.textContent = `${newLabel} ${formatBytes(blob.size)}`;
-                    }
-                 });
+            galleryGrid.innerHTML = ''; // Clear previous thumbnails
+            
+            let filesLoaded = 0;
+            files.forEach((file, index) => {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        const img = new Image();
+                        img.onload = () => {
+                            loadedImages[index] = {
+                                originalFile: file,
+                                image: img,
+                                newSize: 0
+                            };
+                            
+                            const thumb = createThumbnail(img, file, index);
+                            galleryGrid.appendChild(thumb);
+
+                            filesLoaded++;
+                            if (filesLoaded === files.length) {
+                                updateAllDisplays();
+                            }
+                        };
+                        img.src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            uploadArea.classList.add('hidden');
+            editorContainer.classList.remove('hidden');
+            editorArea.style.display = 'none';
+            galleryArea.style.display = 'block';
+            dimensionsControl.style.display = 'none';
+            
+            copyBtn.disabled = true; // Disable copy in batch mode
+            downloadBtn.disabled = false;
+        };
+        
+        const createThumbnail = (img, file, index) => {
+            const thumbDiv = document.createElement('div');
+            thumbDiv.className = 'relative group';
+            thumbDiv.dataset.index = index;
+
+            const imgElement = document.createElement('img');
+            imgElement.src = img.src;
+            imgElement.className = 'w-full h-24 object-cover rounded-md';
+
+            const overlay = document.createElement('div');
+            overlay.className = 'absolute inset-0 bg-black bg-opacity-70 flex flex-col items-center justify-center p-1 rounded-md text-xs';
+
+            const originalSizeP = document.createElement('p');
+            originalSizeP.className = 'text-neutral-400';
+            originalSizeP.textContent = `${translations[currentLang].original_size_label} ${formatBytes(file.size)}`;
+
+            const newSizeP = document.createElement('p');
+            newSizeP.className = 'text-green-400 font-semibold';
+            newSizeP.id = `new-size-${index}`;
+            newSizeP.textContent = `${translations[currentLang].new_size_label} ...`;
+
+            overlay.appendChild(originalSizeP);
+            overlay.appendChild(newSizeP);
+            thumbDiv.appendChild(imgElement);
+            thumbDiv.appendChild(overlay);
+
+            return thumbDiv;
+        };
+
+        const updateAllDisplays = () => {
+            const { downloadBtn } = getDOMElements();
+            if (isBatchMode) {
+                downloadBtn.querySelector('span').textContent = translations[currentLang].download_all_button;
+                processBatchImages();
             } else {
-                newSizeDisplay.textContent = '';
+                downloadBtn.querySelector('span').textContent = translations[currentLang].download_button;
+                processSingleImage();
             }
         };
 
-        const processImage = () => {
+        const processSingleImage = () => {
             if (!originalImage) return;
             const { widthInput, heightInput, qualitySlider } = getDOMElements();
-            const newWidth = parseInt(widthInput.value);
-            const newHeight = parseInt(heightInput.value);
+            
+            let newWidth = parseInt(widthInput.value);
+            let newHeight = parseInt(heightInput.value);
             const quality = parseInt(qualitySlider.value) / 100;
+            
             if (isNaN(newWidth) || isNaN(newHeight) || newWidth <= 0 || newHeight <= 0) return;
+
             const canvas = document.createElement('canvas');
             canvas.width = newWidth;
             canvas.height = newHeight;
-            canvas.getContext('2d').drawImage(originalImage, 0, 0, canvas.width, canvas.height);
-            canvas.toBlob((blob) => { if(blob) { updateSizeDisplays(blob.size); } }, `image/${outputFormat}`, quality);
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(originalImage, 0, 0, newWidth, newHeight);
+
+            canvas.toBlob((blob) => {
+                if(blob) {
+                    const { originalSizeDisplay, newSizeDisplay } = getDOMElements();
+                    originalSizeDisplay.textContent = `${translations[currentLang].original_size_label} ${formatBytes(originalFileSize)}`;
+                    newSizeDisplay.textContent = `${translations[currentLang].new_size_label} ${formatBytes(blob.size)}`;
+                }
+            }, `image/${outputFormat}`, quality);
         };
         
-        const getFinalBlob = () => {
+        const processBatchImages = async () => {
+             for(let i = 0; i < loadedImages.length; i++) {
+                const item = loadedImages[i];
+                if(item) {
+                     const blob = await getOptimizedBlob(item.image, { usePresets: true });
+                     if (blob) {
+                         item.newSize = blob.size;
+                         const newSizeDisplay = document.getElementById(`new-size-${i}`);
+                         if(newSizeDisplay) newSizeDisplay.textContent = `${translations[currentLang].new_size_label} ${formatBytes(blob.size)}`;
+                     }
+                }
+             }
+        };
+
+        const getOptimizedBlob = (image, options = {}) => {
             return new Promise((resolve) => {
-                if (!originalImage) return resolve(null);
-                const { widthInput, heightInput, qualitySlider } = getDOMElements();
-                const newWidth = parseInt(widthInput.value);
-                const newHeight = parseInt(heightInput.value);
+                const { qualitySlider, widthInput, heightInput } = getDOMElements();
                 const quality = parseInt(qualitySlider.value) / 100;
+                let newWidth, newHeight;
+
+                if (options.usePresets) {
+                    // For batch mode, we rely on presets which might define maxWidth or scale
+                    const activePreset = document.querySelector('.preset-btn.bg-neutral-600');
+                    if (activePreset) {
+                        const presetName = activePreset.dataset.preset;
+                        const presets = {
+                            web: { format: 'webp', quality: 80, maxWidth: 1200 },
+                            email: { format: 'jpeg', quality: 70, scale: 0.5 },
+                            social: { format: 'jpeg', quality: 85, maxWidth: 1080 }
+                        };
+                        const config = presets[presetName];
+                        if (config.maxWidth && image.width > config.maxWidth) {
+                            newWidth = config.maxWidth;
+                            newHeight = Math.round(config.maxWidth / (image.width / image.height));
+                        } else if (config.scale) {
+                            newWidth = Math.round(image.width * config.scale);
+                            newHeight = Math.round(image.height * config.scale);
+                        }
+                    }
+                }
+                
+                // Fallback to original dimensions if no preset logic applied
+                if (!newWidth || !newHeight) {
+                    newWidth = options.usePresets ? image.width : parseInt(widthInput.value);
+                    newHeight = options.usePresets ? image.height : parseInt(heightInput.value);
+                }
+                
                 if (isNaN(newWidth) || isNaN(newHeight) || newWidth <= 0 || newHeight <= 0) return resolve(null);
+                
                 const canvas = document.createElement('canvas');
                 canvas.width = newWidth;
                 canvas.height = newHeight;
-                canvas.getContext('2d').drawImage(originalImage, 0, 0, canvas.width, canvas.height);
+                canvas.getContext('2d').drawImage(image, 0, 0, newWidth, newHeight);
                 canvas.toBlob((blob) => { resolve(blob); }, `image/${outputFormat}`, quality);
             });
         };
@@ -748,14 +897,19 @@
             return {
                 uploadArea: document.getElementById('upload-area'),
                 imageInput: document.getElementById('image-input'),
+                editorContainer: document.getElementById('editor-container'),
                 editorArea: document.getElementById('editor-area'),
+                galleryArea: document.getElementById('gallery-area'),
+                galleryGrid: document.getElementById('gallery-grid'),
                 imagePreview: document.getElementById('image-preview'),
                 widthInput: document.getElementById('width-input'),
                 heightInput: document.getElementById('height-input'),
+                dimensionsControl: document.getElementById('dimensions-control'),
                 aspectLockBtn: document.getElementById('aspect-lock-btn'),
                 lockIcon: document.getElementById('lock-icon'),
                 unlockIcon: document.getElementById('unlock-icon'),
                 formatButtons: document.querySelectorAll('.format-btn'),
+                presetButtons: document.querySelectorAll('.preset-btn'),
                 qualityControl: document.getElementById('quality-control'),
                 qualitySlider: document.getElementById('quality'),
                 qualityValue: document.getElementById('quality-value'),
@@ -782,78 +936,57 @@
         function setupEventListeners() {
             const elements = getDOMElements();
 
-            document.getElementById('lang-es').addEventListener('click', (e) => {
-                e.preventDefault();
-                setLanguage('es');
-                elements.languageMenu.classList.add('hidden');
-            });
-            document.getElementById('lang-en').addEventListener('click', (e) => {
-                e.preventDefault();
-                setLanguage('en');
-                elements.languageMenu.classList.add('hidden');
-            });
+            document.getElementById('lang-es').addEventListener('click', (e) => { e.preventDefault(); setLanguage('es'); elements.languageMenu.classList.add('hidden'); });
+            document.getElementById('lang-en').addEventListener('click', (e) => { e.preventDefault(); setLanguage('en'); elements.languageMenu.classList.add('hidden'); });
 
-            elements.languageToggleBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                elements.languageMenu.classList.toggle('hidden');
-            });
-
-            document.addEventListener('click', (e) => {
-                if (elements.languageDropdownContainer && !elements.languageDropdownContainer.contains(e.target)) {
-                    elements.languageMenu.classList.add('hidden');
-                }
-            });
+            elements.languageToggleBtn.addEventListener('click', (e) => { e.stopPropagation(); elements.languageMenu.classList.toggle('hidden'); });
+            document.addEventListener('click', (e) => { if (elements.languageDropdownContainer && !elements.languageDropdownContainer.contains(e.target)) { elements.languageMenu.classList.add('hidden'); } });
             
             elements.uploadArea.addEventListener('click', () => elements.imageInput.click());
             elements.uploadArea.addEventListener('dragover', (e) => { e.preventDefault(); elements.uploadArea.classList.add('border-blue-500'); });
             elements.uploadArea.addEventListener('dragleave', () => { elements.uploadArea.classList.remove('border-blue-500'); });
-            elements.uploadArea.addEventListener('drop', (e) => {
-                e.preventDefault();
-                elements.uploadArea.classList.remove('border-blue-500');
-                handleFile(e.dataTransfer.files[0]);
-            });
-            elements.imageInput.addEventListener('change', (e) => handleFile(e.target.files[0]));
+            elements.uploadArea.addEventListener('drop', (e) => { e.preventDefault(); elements.uploadArea.classList.remove('border-blue-500'); handleFiles(e.dataTransfer.files); });
+            elements.imageInput.addEventListener('change', (e) => handleFiles(e.target.files));
             
             document.addEventListener('paste', (e) => {
                 const items = (e.clipboardData || window.clipboardData).items;
                 if (!items) return;
-                for (let i = 0; i < items.length; i++) {
-                    if (items[i].type.indexOf('image') !== -1) {
-                        const file = items[i].getAsFile();
-                        if (!getDOMElements().uploadArea.classList.contains('hidden')) {
-                             e.preventDefault();
-                             handleFile(file);
-                        }
-                        break; 
-                    }
+                const imageFile = Array.from(items).find(item => item.type.indexOf('image') !== -1)?.getAsFile();
+                if (imageFile && !getDOMElements().uploadArea.classList.contains('hidden')) {
+                     e.preventDefault();
+                     handleFiles([imageFile]);
                 }
             });
 
             elements.widthInput.addEventListener('input', () => {
-                if (aspectRatioLocked && originalAspectRatio) {
+                if (aspectRatioLocked && originalImage) {
                     const newWidth = parseInt(elements.widthInput.value);
+                    const originalAspectRatio = originalImage.width / originalImage.height;
                     if (!isNaN(newWidth) && newWidth > 0) elements.heightInput.value = Math.round(newWidth / originalAspectRatio);
                 }
-                processImage();
+                processSingleImage();
             });
 
             elements.heightInput.addEventListener('input', () => {
-                if (aspectRatioLocked && originalAspectRatio) {
+                if (aspectRatioLocked && originalImage) {
                     const newHeight = parseInt(elements.heightInput.value);
+                    const originalAspectRatio = originalImage.width / originalImage.height;
                     if (!isNaN(newHeight) && newHeight > 0) elements.widthInput.value = Math.round(newHeight * originalAspectRatio);
                 }
-                processImage();
+                processSingleImage();
             });
             
             elements.aspectLockBtn.addEventListener('click', () => {
                 aspectRatioLocked = !aspectRatioLocked;
                 elements.lockIcon.classList.toggle('hidden', !aspectRatioLocked);
                 elements.unlockIcon.classList.toggle('hidden', aspectRatioLocked);
+                localStorage.setItem('aspectRatioLocked', aspectRatioLocked);
             });
 
             elements.qualitySlider.addEventListener('input', (e) => {
                 elements.qualityValue.textContent = e.target.value;
-                processImage();
+                updateAllDisplays();
+                localStorage.setItem('quality', e.target.value);
             });
 
             elements.formatButtons.forEach(button => {
@@ -862,25 +995,44 @@
                     elements.formatButtons.forEach(btn => btn.classList.replace('bg-neutral-600', 'bg-neutral-700'));
                     button.classList.replace('bg-neutral-700', 'bg-neutral-600');
                     elements.qualityControl.style.display = (outputFormat === 'png') ? 'none' : 'block';
-                    processImage();
+                    updateAllDisplays();
+                    localStorage.setItem('outputFormat', outputFormat);
                 });
             });
             
             elements.downloadBtn.addEventListener('click', async () => {
-                const blob = await getFinalBlob();
-                if (blob) {
-                    const url = URL.createObjectURL(blob);
-                    const link = document.createElement('a');
-                    const baseName = originalFileName.substring(0, originalFileName.lastIndexOf('.'));
-                    link.download = `${baseName}-optimized.${outputFormat}`;
-                    link.href = url;
-                    link.click();
-                    URL.revokeObjectURL(url);
+                if (isBatchMode) {
+                    const zip = new JSZip();
+                    for (const item of loadedImages) {
+                        if (item) {
+                            const blob = await getOptimizedBlob(item.image, { usePresets: true });
+                            const baseName = item.originalFile.name.substring(0, item.originalFile.name.lastIndexOf('.'));
+                            zip.file(`${baseName}-optimized.${outputFormat}`, blob);
+                        }
+                    }
+                    zip.generateAsync({type:"blob"}).then(function(content) {
+                        const link = document.createElement('a');
+                        link.href = URL.createObjectURL(content);
+                        link.download = "optimized-images.zip";
+                        link.click();
+                        URL.revokeObjectURL(link.href);
+                    });
+                } else {
+                    const blob = await getOptimizedBlob(originalImage);
+                    if (blob) {
+                        const url = URL.createObjectURL(blob);
+                        const link = document.createElement('a');
+                        const baseName = originalFileName.substring(0, originalFileName.lastIndexOf('.'));
+                        link.download = `${baseName}-optimized.${outputFormat}`;
+                        link.href = url;
+                        link.click();
+                        URL.revokeObjectURL(url);
+                    }
                 }
             });
             
             elements.copyBtn.addEventListener('click', async () => {
-                const blob = await getFinalBlob();
+                const blob = await getOptimizedBlob(originalImage);
                 if (!blob) return;
 
                 if (navigator.clipboard && navigator.clipboard.write) {
@@ -937,63 +1089,98 @@
             });
 
             elements.resetBtn.addEventListener('click', () => {
-                const {
-                    uploadArea, editorArea, imageInput, downloadBtn, copyBtn,
-                    widthInput, heightInput, qualitySlider, qualityValue,
-                    formatButtons, qualityControl, lockIcon, unlockIcon
-                } = getDOMElements();
+                const { uploadArea, editorContainer, imageInput, downloadBtn, copyBtn, widthInput, heightInput } = getDOMElements();
 
                 originalImage = null;
+                loadedImages = [];
+                isBatchMode = false;
                 imageInput.value = '';
-                editorArea.classList.add('hidden');
+                editorContainer.classList.add('hidden');
                 uploadArea.classList.remove('hidden');
                 downloadBtn.disabled = true;
                 copyBtn.disabled = true;
-                
                 widthInput.value = '';
                 heightInput.value = '';
-                qualitySlider.value = 80;
-                qualityValue.textContent = '80';
-                outputFormat = 'jpeg';
-                formatButtons.forEach(btn => btn.classList.replace('bg-neutral-600', 'bg-neutral-700'));
-                document.querySelector('button[data-format="jpeg"]').classList.replace('bg-neutral-700', 'bg-neutral-600');
-                qualityControl.style.display = 'block';
-                aspectRatioLocked = true;
-                lockIcon.classList.remove('hidden');
-                unlockIcon.classList.add('hidden');
+                loadSettings(); 
             });
 
-            elements.instructionsBtns.forEach(btn => btn.addEventListener('click', () => {
-                elements.instructionsModal.classList.remove('hidden');
-            }));
-
-            elements.closeInstructionsModalBtn.addEventListener('click', () => {
-                elements.instructionsModal.classList.add('hidden');
-            });
-
-            elements.instructionsModal.addEventListener('click', (e) => {
-                if (e.target === elements.instructionsModal) {
-                    elements.instructionsModal.classList.add('hidden');
-                }
-            });
+            elements.instructionsBtns.forEach(btn => btn.addEventListener('click', () => { elements.instructionsModal.classList.remove('hidden'); }));
+            elements.closeInstructionsModalBtn.addEventListener('click', () => { elements.instructionsModal.classList.add('hidden'); });
+            elements.instructionsModal.addEventListener('click', (e) => { if (e.target === elements.instructionsModal) elements.instructionsModal.classList.add('hidden'); });
             
-            elements.privacyBtns.forEach(btn => btn.addEventListener('click', () => {
-                elements.privacyModal.classList.remove('hidden');
-            }));
+            elements.privacyBtns.forEach(btn => btn.addEventListener('click', () => { elements.privacyModal.classList.remove('hidden'); }));
+            elements.closePrivacyModalBtn.addEventListener('click', () => { elements.privacyModal.classList.add('hidden'); });
+            elements.privacyModal.addEventListener('click', (e) => { if (e.target === elements.privacyModal) elements.privacyModal.classList.add('hidden'); });
 
-            elements.closePrivacyModalBtn.addEventListener('click', () => {
-                elements.privacyModal.classList.add('hidden');
+            const presets = {
+                web: { format: 'webp', quality: 80, maxWidth: 1200 },
+                email: { format: 'jpeg', quality: 70, scale: 0.5 },
+                social: { format: 'jpeg', quality: 85, maxWidth: 1080 }
+            };
+
+            elements.presetButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    if (!originalImage && !isBatchMode) return;
+                    
+                    elements.presetButtons.forEach(pBtn => pBtn.classList.replace('bg-neutral-600', 'bg-neutral-700'));
+                    btn.classList.replace('bg-neutral-700', 'bg-neutral-600');
+
+                    const presetName = btn.dataset.preset;
+                    const config = presets[presetName];
+                    const { qualitySlider, qualityValue, formatButtons, qualityControl } = getDOMElements();
+                    
+                    outputFormat = config.format;
+                    formatButtons.forEach(fBtn => fBtn.classList.replace('bg-neutral-600', 'bg-neutral-700'));
+                    document.querySelector(`button[data-format="${outputFormat}"]`).classList.replace('bg-neutral-700', 'bg-neutral-600');
+                    qualityControl.style.display = (outputFormat === 'png') ? 'none' : 'block';
+                    localStorage.setItem('outputFormat', outputFormat);
+
+                    qualitySlider.value = config.quality;
+                    qualityValue.textContent = config.quality;
+                    localStorage.setItem('quality', config.quality);
+
+                    if (!isBatchMode) {
+                        const { widthInput, heightInput } = getDOMElements();
+                        const originalAspectRatio = originalImage.width / originalImage.height;
+                         if (config.maxWidth && originalImage.width > config.maxWidth) {
+                            widthInput.value = config.maxWidth;
+                            heightInput.value = Math.round(config.maxWidth / originalAspectRatio);
+                        } else if (config.scale) {
+                            widthInput.value = Math.round(originalImage.width * config.scale);
+                            heightInput.value = Math.round(originalImage.height * config.scale);
+                        } else {
+                            widthInput.value = originalImage.width;
+                            heightInput.value = originalImage.height;
+                        }
+                    }
+                    
+                    updateAllDisplays();
+                });
             });
+        }
+
+        function loadSettings() {
+            const { qualitySlider, qualityValue, lockIcon, unlockIcon, formatButtons, qualityControl } = getDOMElements();
             
-            elements.privacyModal.addEventListener('click', (e) => {
-                if (e.target === elements.privacyModal) {
-                    elements.privacyModal.classList.add('hidden');
-                }
-            });
+            const savedFormat = localStorage.getItem('outputFormat') || 'jpeg';
+            outputFormat = savedFormat;
+            formatButtons.forEach(btn => btn.classList.replace('bg-neutral-600', 'bg-neutral-700'));
+            document.querySelector(`button[data-format="${savedFormat}"]`).classList.replace('bg-neutral-700', 'bg-neutral-600');
+            qualityControl.style.display = (savedFormat === 'png') ? 'none' : 'block';
+
+            const savedQuality = localStorage.getItem('quality') || '80';
+            qualitySlider.value = savedQuality;
+            qualityValue.textContent = savedQuality;
+
+            const savedLock = localStorage.getItem('aspectRatioLocked');
+            aspectRatioLocked = savedLock !== null ? JSON.parse(savedLock) : true;
+            lockIcon.classList.toggle('hidden', !aspectRatioLocked);
+            unlockIcon.classList.toggle('hidden', aspectRatioLocked);
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             setupEventListeners();
+            loadSettings();
             setLanguage('es'); 
         });
     </script>
