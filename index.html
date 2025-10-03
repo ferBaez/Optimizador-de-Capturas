@@ -215,6 +215,14 @@
                                 </button>
                                 <input type="number" id="height-input" class="w-full bg-neutral-700 border border-neutral-600 rounded-md px-3 py-2 text-center text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Alto">
                             </div>
+                            <div id="dimension-sliders" class="mt-4 space-y-4">
+                                <div>
+                                    <input type="range" id="width-slider" min="10">
+                                </div>
+                                <div>
+                                    <input type="range" id="height-slider" min="10">
+                                </div>
+                            </div>
                         </div>
 
                          <div>
@@ -689,17 +697,22 @@
                 reader.onload = (e) => {
                     originalImage = new Image();
                     originalImage.onload = () => {
-                        const { uploadArea, editorContainer, editorArea, galleryArea, imagePreview, widthInput, heightInput, downloadBtn, copyBtn, dimensionsControl } = getDOMElements();
+                        const { uploadArea, editorContainer, editorArea, galleryArea, imagePreview, widthInput, heightInput, widthSlider, heightSlider, downloadBtn, copyBtn, dimensionsControl, dimensionSliders } = getDOMElements();
                         
                         imagePreview.src = e.target.result;
                         widthInput.value = originalImage.width;
                         heightInput.value = originalImage.height;
+                        widthSlider.max = originalImage.width * 2;
+                        heightSlider.max = originalImage.height * 2;
+                        widthSlider.value = originalImage.width;
+                        heightSlider.value = originalImage.height;
                         
                         uploadArea.classList.add('hidden');
                         editorContainer.classList.remove('hidden');
                         editorArea.style.display = 'flex';
                         galleryArea.style.display = 'none';
                         dimensionsControl.style.display = 'block';
+                        dimensionSliders.style.display = 'block';
 
                         originalFileName = file.name || 'image.png';
                         originalFileSize = file.size;
@@ -717,7 +730,7 @@
         
         const handleMultipleFiles = (files) => {
             loadedImages = [];
-            const { uploadArea, editorContainer, editorArea, galleryArea, galleryGrid, downloadBtn, copyBtn, dimensionsControl } = getDOMElements();
+            const { uploadArea, editorContainer, editorArea, galleryArea, galleryGrid, downloadBtn, copyBtn, dimensionsControl, dimensionSliders } = getDOMElements();
 
             galleryGrid.innerHTML = ''; // Clear previous thumbnails
             
@@ -728,19 +741,11 @@
                     reader.onload = (e) => {
                         const img = new Image();
                         img.onload = () => {
-                            loadedImages[index] = {
-                                originalFile: file,
-                                image: img,
-                                newSize: 0
-                            };
-                            
+                            loadedImages[index] = { originalFile: file, image: img, newSize: 0 };
                             const thumb = createThumbnail(img, file, index);
                             galleryGrid.appendChild(thumb);
-
                             filesLoaded++;
-                            if (filesLoaded === files.length) {
-                                updateAllDisplays();
-                            }
+                            if (filesLoaded === files.length) updateAllDisplays();
                         };
                         img.src = e.target.result;
                     };
@@ -753,8 +758,9 @@
             editorArea.style.display = 'none';
             galleryArea.style.display = 'block';
             dimensionsControl.style.display = 'none';
+            dimensionSliders.style.display = 'none';
             
-            copyBtn.disabled = true; // Disable copy in batch mode
+            copyBtn.disabled = true;
             downloadBtn.disabled = false;
         };
         
@@ -800,7 +806,7 @@
 
         const processSingleImage = () => {
             if (!originalImage) return;
-            const { widthInput, heightInput, qualitySlider } = getDOMElements();
+            const { widthInput, heightInput, qualitySlider, widthSlider, heightSlider } = getDOMElements();
             
             let newWidth = parseInt(widthInput.value);
             let newHeight = parseInt(heightInput.value);
@@ -808,11 +814,13 @@
             
             if (isNaN(newWidth) || isNaN(newHeight) || newWidth <= 0 || newHeight <= 0) return;
 
+            widthSlider.value = newWidth;
+            heightSlider.value = newHeight;
+
             const canvas = document.createElement('canvas');
             canvas.width = newWidth;
             canvas.height = newHeight;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(originalImage, 0, 0, newWidth, newHeight);
+            canvas.getContext('2d').drawImage(originalImage, 0, 0, newWidth, newHeight);
 
             canvas.toBlob((blob) => {
                 if(blob) {
@@ -844,7 +852,6 @@
                 let newWidth, newHeight;
 
                 if (options.usePresets) {
-                    // For batch mode, we rely on presets which might define maxWidth or scale
                     const activePreset = document.querySelector('.preset-btn.bg-neutral-600');
                     if (activePreset) {
                         const presetName = activePreset.dataset.preset;
@@ -864,7 +871,6 @@
                     }
                 }
                 
-                // Fallback to original dimensions if no preset logic applied
                 if (!newWidth || !newHeight) {
                     newWidth = options.usePresets ? image.width : parseInt(widthInput.value);
                     newHeight = options.usePresets ? image.height : parseInt(heightInput.value);
@@ -881,9 +887,8 @@
         };
         
         const showCopyFeedback = () => {
-            const { copyFeedback } = getDOMElements();
-            copyFeedback.classList.remove('opacity-0');
-            setTimeout(() => { copyFeedback.classList.add('opacity-0'); }, 2000);
+            getDOMElements().copyFeedback.classList.remove('opacity-0');
+            setTimeout(() => { getDOMElements().copyFeedback.classList.add('opacity-0'); }, 2000);
         };
         
         const showErrorFeedback = (message) => {
@@ -904,6 +909,9 @@
                 imagePreview: document.getElementById('image-preview'),
                 widthInput: document.getElementById('width-input'),
                 heightInput: document.getElementById('height-input'),
+                widthSlider: document.getElementById('width-slider'),
+                heightSlider: document.getElementById('height-slider'),
+                dimensionSliders: document.getElementById('dimension-sliders'),
                 dimensionsControl: document.getElementById('dimensions-control'),
                 aspectLockBtn: document.getElementById('aspect-lock-btn'),
                 lockIcon: document.getElementById('lock-icon'),
@@ -958,23 +966,29 @@
                 }
             });
 
-            elements.widthInput.addEventListener('input', () => {
-                if (aspectRatioLocked && originalImage) {
-                    const newWidth = parseInt(elements.widthInput.value);
-                    const originalAspectRatio = originalImage.width / originalImage.height;
-                    if (!isNaN(newWidth) && newWidth > 0) elements.heightInput.value = Math.round(newWidth / originalAspectRatio);
+            const syncInputs = (source, target, isWidth) => {
+                if (!originalImage) return;
+                const value = parseInt(source.value);
+                const originalAspectRatio = originalImage.width / originalImage.height;
+                if (aspectRatioLocked) {
+                    if (isWidth) {
+                        const newHeight = Math.round(value / originalAspectRatio);
+                        elements.heightInput.value = newHeight;
+                        elements.heightSlider.value = newHeight;
+                    } else {
+                        const newWidth = Math.round(value * originalAspectRatio);
+                        elements.widthInput.value = newWidth;
+                        elements.widthSlider.value = newWidth;
+                    }
                 }
+                target.value = value;
                 processSingleImage();
-            });
+            };
 
-            elements.heightInput.addEventListener('input', () => {
-                if (aspectRatioLocked && originalImage) {
-                    const newHeight = parseInt(elements.heightInput.value);
-                    const originalAspectRatio = originalImage.width / originalImage.height;
-                    if (!isNaN(newHeight) && newHeight > 0) elements.widthInput.value = Math.round(newHeight * originalAspectRatio);
-                }
-                processSingleImage();
-            });
+            elements.widthInput.addEventListener('input', () => syncInputs(elements.widthInput, elements.widthSlider, true));
+            elements.widthSlider.addEventListener('input', () => syncInputs(elements.widthSlider, elements.widthInput, true));
+            elements.heightInput.addEventListener('input', () => syncInputs(elements.heightInput, elements.heightSlider, false));
+            elements.heightSlider.addEventListener('input', () => syncInputs(elements.heightSlider, elements.heightInput, false));
             
             elements.aspectLockBtn.addEventListener('click', () => {
                 aspectRatioLocked = !aspectRatioLocked;
