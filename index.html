@@ -10,47 +10,36 @@
 
     <title data-lang-key="title">Optimizador de Imágenes Gratis v2.0: Comprimir, Convertir a PDF y Redimensionar</title>
     
-    <!-- Meta Descripción optimizada para Snippets -->
     <meta id="meta-description" name="description" content="Herramienta web gratuita para optimizar imágenes masivamente. Comprime JPG/PNG/WebP, convierte a PDF y redimensiona sin subir archivos a la nube. Privacidad total y procesamiento local.">
-    
-    <!-- Palabras Clave (Keywords) incluyendo términos de búsqueda por voz (AEO) -->
     <meta name="keywords" content="optimizador de imagenes gratis, comprimir fotos sin perder calidad, convertir imagenes a pdf, redimensionar imagenes por lotes, limpiar metadatos exif, herramienta web privacidad, cleanshot alternative, batch image optimizer, convert jpg to pdf online private">
-    
     <meta name="author" content="Hitster Ai">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="theme-color" content="#171717">
 
-    <!-- URL Canónica -->
     <link rel="canonical" href="https://[TU-DOMINIO-FINAL.COM]">
-
-    <!-- Hreflang para SEO Internacional -->
     <link rel="alternate" hreflang="es" href="https://[TU-DOMINIO-FINAL.COM]">
     <link rel="alternate" hreflang="en" href="https://[TU-DOMINIO-FINAL.COM]">
     <link rel="alternate" hreflang="x-default" href="https://[TU-DOMINIO-FINAL.COM]">
 
-    <!-- Favicons -->
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png"> 
     <link rel="manifest" href="/site.webmanifest">
 
-    <!-- Open Graph (Facebook/LinkedIn/WhatsApp) -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Hitster Ai Image Optimizer">
     <meta property="og:url" content="https://[TU-DOMINIO-FINAL.COM]">
     <meta property="og:title" content="Optimizador de Imágenes v2.0 | Privado y por Lotes">
-    <meta property="og:description" content="La forma más segura de comprimir y convertir imágenes. Procesamiento 100% local en tu navegador, sin subir archivos. Prueba el comparador visual.">
+    <meta property="og:description" content="La forma más segura de comprimir y convertir imágenes. Procesamiento 100% local en tu navegador. Prueba el comparador visual.">
     <meta property="og:image" content="https://[TU-DOMINIO-FINAL.COM]/og-image.jpg"> 
     <meta property="og:locale" content="es_ES">
 
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://[TU-DOMINIO-FINAL.COM]">
     <meta name="twitter:title" content="Optimizador de Imágenes v2.0 | Hitster Ai">
     <meta name="twitter:description" content="Comprime, redimensiona y convierte a PDF tus imágenes localmente. Privacidad garantizada.">
     <meta name="twitter:image" content="https://[TU-DOMINIO-FINAL.COM]/twitter-image.jpg"> 
 
-    <!-- Librerías Externas -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
@@ -64,7 +53,6 @@
         input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
         input[type="number"] { -moz-appearance: textfield; }
         
-        /* Sliders personalizados */
         input[type="range"].custom-range {
             -webkit-appearance: none; appearance: none; width: 100%; height: 6px; background: #404040; border-radius: 9999px; outline: none; cursor: pointer;
         }
@@ -76,20 +64,12 @@
             width: 18px; height: 18px; background: #3b82f6; border-radius: 50%; border: 2px solid #171717; cursor: pointer;
         }
 
-        /* Estilos para el slider de comparación */
-        #compare-slider {
-            -webkit-appearance: none; appearance: none; background: transparent;
-        }
-        #compare-slider::-webkit-slider-thumb {
-            -webkit-appearance: none; appearance: none; width: 2px; height: 200px; background: transparent; cursor: col-resize;
-        }
-        #compare-slider::-moz-range-thumb {
-            width: 2px; height: 200px; background: transparent; cursor: col-resize; border: none;
-        }
+        #compare-slider { -webkit-appearance: none; appearance: none; background: transparent; }
+        #compare-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 2px; height: 200px; background: transparent; cursor: col-resize; }
+        #compare-slider::-moz-range-thumb { width: 2px; height: 200px; background: transparent; cursor: col-resize; border: none; }
 
         #copy-feedback, #error-feedback { transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; }
         
-        /* Scrollbar personalizada */
         .custom-scrollbar::-webkit-scrollbar { width: 8px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: #171717; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #404040; border-radius: 4px; }
@@ -99,26 +79,26 @@
 <body class="bg-neutral-950 text-neutral-300 flex flex-col min-h-screen selection:bg-blue-500/30">
 
     <!-- Modales -->
-    <div id="instructions-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50" role="dialog" aria-modal="true" aria-labelledby="instructions-title">
+    <div id="instructions-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50" role="dialog" aria-modal="true">
         <div class="bg-neutral-900 border border-neutral-700/50 rounded-2xl shadow-2xl w-full max-w-2xl max-h-[85vh] flex flex-col">
             <header class="flex items-center justify-between p-5 border-b border-neutral-800">
-                <h2 id="instructions-title" class="text-xl font-bold text-white" data-lang-key="instructions_title">Instrucciones</h2>
-                <button id="close-instructions-modal-btn" class="text-neutral-400 hover:text-white transition-colors p-1 rounded-md hover:bg-neutral-800" aria-label="Cerrar instrucciones">
+                <h2 class="text-xl font-bold text-white" data-lang-key="instructions_title">Instrucciones</h2>
+                <button id="close-instructions-modal-btn" class="text-neutral-400 hover:text-white transition-colors p-1 rounded-md hover:bg-neutral-800">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </header>
-            <div class="p-6 overflow-y-auto custom-scrollbar text-justify" data-lang-key="instructions_content"></div>
+            <div class="p-6 overflow-y-auto custom-scrollbar text-justify text-sm" data-lang-key="instructions_content"></div>
         </div>
     </div>
-    <div id="privacy-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50" role="dialog" aria-modal="true" aria-labelledby="privacy-title">
+    <div id="privacy-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50" role="dialog" aria-modal="true">
         <div class="bg-neutral-900 border border-neutral-700/50 rounded-2xl shadow-2xl w-full max-w-2xl max-h-[85vh] flex flex-col">
             <header class="flex items-center justify-between p-5 border-b border-neutral-800">
-                <h2 id="privacy-title" class="text-xl font-bold text-white" data-lang-key="privacy_policy_title">Privacidad</h2>
-                <button id="close-privacy-modal-btn" class="text-neutral-400 hover:text-white transition-colors p-1 rounded-md hover:bg-neutral-800" aria-label="Cerrar privacidad">
+                <h2 class="text-xl font-bold text-white" data-lang-key="privacy_policy_title">Aviso de Privacidad</h2>
+                <button id="close-privacy-modal-btn" class="text-neutral-400 hover:text-white transition-colors p-1 rounded-md hover:bg-neutral-800">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </header>
-            <div class="p-6 overflow-y-auto custom-scrollbar text-justify" data-lang-key="privacy_policy_content"></div>
+            <div class="p-6 overflow-y-auto custom-scrollbar text-justify text-sm" data-lang-key="privacy_policy_content"></div>
         </div>
     </div>
 
@@ -186,12 +166,12 @@
                             <div class="relative w-full h-full rounded-2xl overflow-hidden flex items-center justify-center bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTAgMGgyMHYyMEgwVjB6IiBmaWxsPSIjMTcxNzE3IiAvPjxwYXRoIGQ9Ik0wIDBoMTB2MTBIMFYwek0xMCAxMGgxMHYxMEgxMFYxMHoiIGZpbGw9IiMyNjI2MjYiIGZpbGwtb3BhY2l0eT0iMC41IiAvPjwvc3ZnPg==')]">
                                 <div class="relative w-full h-full max-h-[60vh] flex items-center justify-center" id="compare-wrapper">
                                     <!-- Original Image (Behind) -->
-                                    <img id="image-original-bg" src="#" class="max-w-full max-h-full object-contain absolute" draggable="false" alt="Imagen original">
+                                    <img id="image-original-bg" src="#" class="max-w-full max-h-full object-contain absolute" draggable="false" alt="Original">
                                     <span class="absolute top-4 left-4 bg-black/60 text-white text-xs px-2 py-1 rounded backdrop-blur-sm z-0" data-lang-key="compare_original">Original</span>
                                     
                                     <!-- Optimized Image (Front - Clipped) -->
                                     <div id="image-optimized-container" class="absolute inset-0 w-full h-full flex items-center justify-center" style="clip-path: inset(0 50% 0 0);">
-                                        <img id="image-preview" src="#" class="max-w-full max-h-full object-contain" draggable="false" alt="Imagen optimizada">
+                                        <img id="image-preview" src="#" class="max-w-full max-h-full object-contain" draggable="false" alt="Optimized">
                                         <span class="absolute top-4 right-4 bg-blue-600/80 text-white text-xs px-2 py-1 rounded backdrop-blur-sm z-20" data-lang-key="compare_optimized">Optimizado</span>
                                     </div>
 
@@ -203,7 +183,7 @@
                                     </div>
                                     
                                     <!-- Invisible Range Input for Interaction -->
-                                    <input type="range" min="0" max="100" value="50" id="compare-range" class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-40 m-0 p-0" aria-label="Comparar imágenes">
+                                    <input type="range" min="0" max="100" value="50" id="compare-range" class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-40 m-0 p-0" aria-label="Comparar">
                                 </div>
                             </div>
 
@@ -306,7 +286,6 @@
                                         <span class="text-xs sm:text-sm truncate" data-lang-key="download_button">Descargar</span>
                                     </button>
                                  </div>
-                                 <!-- PDF Download Button -->
                                  <button id="download-pdf-btn" class="hidden w-full bg-red-600/90 text-white font-bold py-3 px-2 rounded-xl hover:bg-red-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg shadow-red-900/20 group" disabled>
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
                                     <span class="text-xs sm:text-sm" data-lang-key="download_pdf_button">Descargar todo (PDF)</span>
@@ -324,8 +303,8 @@
     </main>
     
     <div class="w-full flex justify-center items-center space-x-3 pb-6 px-4">
-        <button id="privacy-btn" class="px-4 py-2 text-xs rounded-full bg-neutral-900 border border-neutral-800 text-neutral-500 font-medium hover:bg-neutral-800 hover:text-neutral-300 transition-all" data-lang-key="privacy_policy_title_short">Privacidad</button>
-        <button id="instructions-btn" class="px-4 py-2 text-xs rounded-full bg-neutral-900 border border-neutral-800 text-neutral-500 font-medium hover:bg-neutral-800 hover:text-neutral-300 transition-all" data-lang-key="instructions_title_short">Instrucciones</button>
+        <button id="privacy-btn" class="px-4 py-2 text-xs rounded-full bg-neutral-900 border border-neutral-800 text-neutral-500 font-medium hover:bg-neutral-800 hover:text-neutral-300 transition-all privacy-btn-trigger" data-lang-key="privacy_policy_title_short">Aviso de Privacidad</button>
+        <button id="instructions-btn" class="px-4 py-2 text-xs rounded-full bg-neutral-900 border border-neutral-800 text-neutral-500 font-medium hover:bg-neutral-800 hover:text-neutral-300 transition-all instructions-btn-trigger" data-lang-key="instructions_title_short">Instrucciones</button>
     </div>
 
     <footer class="w-full text-center p-6 border-t border-neutral-800/50 bg-neutral-950/50">
@@ -335,7 +314,7 @@
         </p>
     </footer>
 
-    <!-- AEO & SEO: Structured Data (JSON-LD) for Software App + FAQ -->
+    <!-- AEO & SEO: Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -345,41 +324,23 @@
           "name": "Optimizador de Imágenes por Lotes",
           "operatingSystem": "Web Browser",
           "applicationCategory": "MultimediaApplication",
-          "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-          },
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
           "description": "Herramienta gratuita y segura para comprimir, redimensionar y convertir imágenes a PDF en el navegador.",
           "featureList": "Compresión por lotes, conversión a PDF, eliminación de metadatos EXIF, procesamiento local.",
           "screenshot": "https://[TU-DOMINIO-FINAL.COM]/og-image.jpg",
-           "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.9",
-            "ratingCount": "1250"
-          },
-           "author": {
-              "@type": "Organization",
-              "name": "Hitster Ai",
-              "url": "https://studio--hitsterai.us-central1.hosted.app/es"
-           }
+           "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "ratingCount": "1250" },
+           "author": { "@type": "Organization", "name": "Hitster Ai", "url": "https://studio--hitsterai.us-central1.hosted.app/es" }
         },
         {
           "@type": "FAQPage",
           "mainEntity": [{
             "@type": "Question",
             "name": "¿Cómo comprimir imágenes sin perder calidad?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Utiliza nuestro optimizador de imágenes gratuito. Arrastra tus archivos JPG, PNG o WebP y ajusta el nivel de calidad con el deslizador para ver el resultado en tiempo real."
-            }
+            "acceptedAnswer": { "@type": "Answer", "text": "Utiliza nuestro optimizador de imágenes gratuito. Arrastra tus archivos JPG, PNG o WebP y ajusta el nivel de calidad con el deslizador para ver el resultado en tiempo real." }
           }, {
             "@type": "Question",
             "name": "¿Es seguro subir mis fotos a este optimizador?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Sí, totalmente. A diferencia de otros sitios, Hitster Ai procesa tus imágenes localmente en tu navegador. Tus archivos nunca se envían a ningún servidor."
-            }
+            "acceptedAnswer": { "@type": "Answer", "text": "Sí, totalmente. A diferencia de otros sitios, Hitster Ai procesa tus imágenes localmente en tu navegador. Tus archivos nunca se envían a ningún servidor." }
           }]
         }
       ]
@@ -387,7 +348,7 @@
     </script>
 
     <script>
-        // (Mismo código JS que la última versión funcional, sin cambios lógicos)
+        // DEFINICIÓN COMPLETA DE TRADUCCIONES CON CONTENIDO HTML
         const translations = {
             es: {
                 title: "Optimizador de Imágenes v2.0",
@@ -418,13 +379,76 @@
                 copy_error_feedback: "Usa Descargar",
                 privacy_badge: "EXIF Limpio",
                 instructions_title: "Instrucciones",
-                privacy_policy_title: "Privacidad",
-                privacy_policy_title_short: "Privacidad",
+                privacy_policy_title: "Aviso de Privacidad",
+                privacy_policy_title_short: "Aviso de Privacidad",
                 instructions_title_short: "Instrucciones",
-                instructions_content: `<div class="text-neutral-400 space-y-4 text-justify text-sm"><p>Bienvenido a la v2.0. Arrastra imágenes, usa el slider para comparar calidad, y descarga en ZIP o PDF.</p></div>`,
-                privacy_policy_content: `<div class="text-neutral-400 space-y-4 text-justify text-sm"><p>Sus imágenes se procesan localmente en su navegador. Los metadatos EXIF se eliminan automáticamente.</p></div>`,
                 compare_original: "Original",
-                compare_optimized: "Optimizado"
+                compare_optimized: "Optimizado",
+                
+                // Contenido HTML completo
+                instructions_content: `
+                    <div class="text-neutral-400 space-y-4 text-justify text-sm">
+                        <h3 class="text-xl font-semibold text-white">Guía de Usuario: Optimizador v2.0</h3>
+                        <p>¡Bienvenido! Esta guía te mostrará cómo usar todas las funciones de la aplicación, incluyendo el nuevo procesamiento por lotes, para optimizar tus imágenes de forma rápida y sencilla.</p>
+                        
+                        <h4 class="text-lg font-semibold text-white pt-2">1. Carga</h4>
+                        <ul class="list-disc list-inside ml-4 space-y-1">
+                            <li>Arrastra múltiples imágenes a la vez o haz clic para seleccionarlas.</li>
+                            <li>Pega desde el portapapeles (Ctrl+V) para imágenes individuales.</li>
+                        </ul>
+                        
+                        <h4 class="text-lg font-semibold text-white pt-2">2. Edición</h4>
+                        <ul class="list-disc list-inside ml-4 space-y-1">
+                            <li><strong>Slider Antes/Después:</strong> En vista de imagen única, arrastra la línea vertical sobre la imagen para comparar la calidad original vs optimizada.</li>
+                            <li><strong>Preajustes:</strong> Configura rápidamente para Web, Email o Redes Sociales.</li>
+                            <li><strong>Dimensiones:</strong> Ajusta el tamaño exacto en píxeles. Usa el candado para mantener la proporción.</li>
+                        </ul>
+                        
+                        <h4 class="text-lg font-semibold text-white pt-2">3. Exportar</h4>
+                        <ul class="list-disc list-inside ml-4 space-y-1">
+                            <li><strong>Descargar:</strong> Guarda el archivo optimizado individualmente.</li>
+                            <li><strong>ZIP:</strong> Descarga todas las imágenes comprimidas en un solo archivo ZIP (modo lotes).</li>
+                            <li><strong>PDF:</strong> Convierte todo el lote de imágenes en un solo documento PDF.</li>
+                            <li><strong>Copiar:</strong> Copia la imagen optimizada al portapapeles (solo imagen única).</li>
+                        </ul>
+                    </div>`,
+                
+                privacy_policy_content: `
+                    <div class="text-neutral-400 space-y-4 text-justify text-sm">
+                        <p><strong>Fecha de última actualización:</strong> 23 de junio de 2025</p>
+                        <p>Bienvenido a Hitster Ai. Tu privacidad es de suma importancia para nosotros. Este Aviso de Privacidad describe cómo recopilamos, utilizamos, protegemos y compartimos tu información personal cuando visitas y utilizas nuestro sitio web y nuestros servicios. Al utilizar Hitster Ai, aceptas las prácticas descritas en este documento.</p>
+                        
+                        <h3 class="text-lg font-semibold text-white pt-2">1. Identidad y Domicilio del Responsable</h3>
+                        <p>Hitster Ai (en adelante, "nosotros", "nuestro"), con domicilio en Avenida Francisco I. Madero 104, Colonia Céspedes, Pachuca de Soto, Hidalgo, C.P. 42090, es el responsable del tratamiento de tus datos personales. Para cualquier asunto, contáctanos en: <a href="mailto:baez@hitster.page" class="text-blue-400 hover:underline">baez@hitster.page</a></p>
+                        
+                        <h3 class="text-lg font-semibold text-white pt-2">2. Datos Personales que Recabamos</h3>
+                        <p>Recopilamos diferentes tipos de datos personales para operar y mejorar nuestros servicios:</p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li><strong>Datos directos:</strong> Información de contacto, cuenta y perfil.</li>
+                            <li><strong>Datos automáticos:</strong> Uso de la plataforma, datos del dispositivo (IP, navegador) y cookies.</li>
+                        </ul>
+                        
+                        <h3 class="text-lg font-semibold text-white pt-2">3. Finalidades del Tratamiento</h3>
+                        <p>Usamos tus datos para proveer servicios de IA, gestionar cuentas, brindar soporte y seguridad. También para análisis y mejoras (con consentimiento).</p>
+                        
+                        <h3 class="text-lg font-semibold text-white pt-2">4. Transferencia de Datos</h3>
+                        <p>Compartimos datos con proveedores de servicios (nube, pagos) y por requerimiento legal. No vendemos tus datos.</p>
+                        
+                        <h3 class="text-lg font-semibold text-white pt-2">5. Cookies</h3>
+                        <p>Usamos cookies para mejorar la funcionalidad. Puedes rechazarlas en tu navegador.</p>
+                        
+                        <h3 class="text-lg font-semibold text-white pt-2">6. Derechos ARCO</h3>
+                        <p>Tienes derecho a Acceder, Rectificar, Cancelar y Oponerte al uso de tus datos. Envía tu solicitud a baez@hitster.page.</p>
+
+                         <h3 class="text-lg font-semibold text-white pt-2">7. Revocación del Consentimiento</h3>
+                        <p>Puedes revocar el consentimiento que nos hayas otorgado para el tratamiento de tus datos personales en cualquier momento. Ten en cuenta que la revocación no tendrá efectos retroactivos. Para revocar tu consentimiento, envía tu solicitud a baez@hitster.page.</p>
+                        
+                        <h3 class="text-lg font-semibold text-white pt-2">8. Medidas de Seguridad</h3>
+                        <p>Implementamos medidas de seguridad. <strong>Tus imágenes se procesan localmente en tu navegador y los metadatos EXIF se eliminan automáticamente.</strong></p>
+
+                        <h3 class="text-lg font-semibold text-white pt-2">9. Cambios a este Aviso de Privacidad</h3>
+                        <p>Nos reservamos el derecho de efectuar en cualquier momento modificaciones o actualizaciones al presente aviso de privacidad. Cualquier cambio será notificado a través de nuestro sitio web o mediante comunicación directa a tu correo electrónico. Te recomendamos revisar periódicamente este aviso.</p>
+                    </div>`
             },
             en: {
                 title: "Image Optimizer v2.0",
@@ -455,64 +479,72 @@
                 copy_error_feedback: "Use Download",
                 privacy_badge: "Clean EXIF",
                 instructions_title: "Instructions",
-                privacy_policy_title: "Privacy",
-                privacy_policy_title_short: "Privacy",
+                privacy_policy_title: "Privacy Policy",
+                privacy_policy_title_short: "Privacy Policy",
                 instructions_title_short: "Instructions",
-                instructions_content: `<div class="text-neutral-400 space-y-4 text-justify text-sm"><p>Welcome to v2.0. Drag images, use the slider to compare quality, and download as ZIP or PDF.</p></div>`,
-                privacy_policy_content: `<div class="text-neutral-400 space-y-4 text-justify text-sm"><p>Your images are processed locally. EXIF metadata is stripped automatically.</p></div>`,
                 compare_original: "Original",
-                compare_optimized: "Optimized"
+                compare_optimized: "Optimized",
+                
+                // HTML Content
+                instructions_content: `
+                    <div class="text-neutral-400 space-y-4 text-justify text-sm">
+                        <h3 class="text-xl font-semibold text-white">User Guide v2.0</h3>
+                        <p>Welcome! This guide shows you how to use the new features of version 2.0.</p>
+                        <h4 class="text-lg font-semibold text-white pt-2">1. Uploading</h4>
+                        <ul class="list-disc list-inside ml-4 space-y-1">
+                            <li>Drag & drop multiple images at once.</li>
+                            <li>Paste directly from clipboard (Ctrl+V).</li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-white pt-2">2. Editing</h4>
+                        <ul class="list-disc list-inside ml-4 space-y-1">
+                            <li><strong>Before/After Slider:</strong> Drag the line over the image to compare original vs optimized quality.</li>
+                            <li><strong>Presets:</strong> Quick settings for Web, Email, or Social Media.</li>
+                            <li><strong>Dimensions:</strong> Set exact pixels. Use the lock icon to maintain aspect ratio.</li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-white pt-2">3. Exporting</h4>
+                        <ul class="list-disc list-inside ml-4 space-y-1">
+                            <li><strong>Download:</strong> Save single optimized file.</li>
+                            <li><strong>ZIP:</strong> Download all compressed images in one archive.</li>
+                            <li><strong>PDF:</strong> Convert the batch into a single PDF document.</li>
+                        </ul>
+                    </div>`,
+                
+                privacy_policy_content: `
+                    <div class="text-neutral-400 space-y-4 text-justify text-sm">
+                        <p><strong>Last updated:</strong> June 23, 2025</p>
+                        <p>Welcome to Hitster Ai. Your privacy is paramount. This Privacy Notice describes how we collect, use, protect, and share your personal information.</p>
+                        
+                        <h3 class="text-lg font-semibold text-white pt-2">1. Identity of the Controller</h3>
+                        <p>Hitster Ai, located at Avenida Francisco I. Madero 104, Pachuca de Soto, Hidalgo, C.P. 42090, is responsible for your personal data. Contact: <a href="mailto:baez@hitster.page" class="text-blue-400 hover:underline">baez@hitster.page</a></p>
+                        
+                        <h3 class="text-lg font-semibold text-white pt-2">2. Data Collected</h3>
+                        <p>We collect data to improve services: Direct info (contact, account) and Automatic info (usage, device, cookies).</p>
+                        
+                        <h3 class="text-lg font-semibold text-white pt-2">3. Purposes</h3>
+                        <p>To provide AI services, manage accounts, support, and security. Also for analytics and improvements (with consent).</p>
+                        
+                        <h3 class="text-lg font-semibold text-white pt-2">4. Data Transfer</h3>
+                        <p>Shared with service providers (cloud, analytics, payments) and for legal requirements. We do not sell data.</p>
+
+                        <h3 class="text-lg font-semibold text-white pt-2">5. Use of Cookies</h3>
+                        <p>We use cookies to improve site functionality. You can configure your browser to reject them.</p>
+                        
+                        <h3 class="text-lg font-semibold text-white pt-2">6. ARCO Rights</h3>
+                        <p>You have rights to Access, Rectify, Cancel, and Object to your data usage. To exercise these rights, contact baez@hitster.page with your details and request.</p>
+
+                        <h3 class="text-lg font-semibold text-white pt-2">7. Revocation of Consent</h3>
+                        <p>You may revoke your consent for data processing at any time without retroactive effect. Send your request to baez@hitster.page.</p>
+                        
+                        <h3 class="text-lg font-semibold text-white pt-2">8. Security Measures</h3>
+                        <p>We implement administrative, technical, and physical measures to protect your data. <strong>Your images are processed locally in your browser. EXIF metadata is stripped automatically.</strong></p>
+
+                        <h3 class="text-lg font-semibold text-white pt-2">9. Changes to Privacy Notice</h3>
+                        <p>We reserve the right to modify this notice at any time. Changes will be notified via our website or email. Please review periodically.</p>
+                    </div>`
             }
         };
-        
-        // Restore long text
-        translations.es.instructions_content = `
-            <div class="text-neutral-400 space-y-4 text-justify text-sm">
-                <h3 class="text-xl font-semibold text-white">Guía de Usuario: Optimizador v2.0</h3>
-                <h4 class="text-lg font-semibold text-white pt-2">1. Carga</h4>
-                <ul class="list-disc list-inside ml-4 space-y-1">
-                    <li>Arrastra múltiples imágenes.</li>
-                    <li>Pega desde portapapeles (Ctrl+V).</li>
-                </ul>
-                <h4 class="text-lg font-semibold text-white pt-2">2. Edición</h4>
-                <ul class="list-disc list-inside ml-4 space-y-1">
-                    <li>Usa el slider sobre la imagen para comparar Antes/Después.</li>
-                    <li>Aplica preajustes rápidos.</li>
-                </ul>
-                <h4 class="text-lg font-semibold text-white pt-2">3. Exportar</h4>
-                <ul class="list-disc list-inside ml-4 space-y-1">
-                    <li>Descarga individual o todo en ZIP.</li>
-                    <li>Convierte lote a un solo PDF.</li>
-                </ul>
-            </div>`;
-        translations.es.privacy_policy_content = `
-            <div class="text-neutral-400 space-y-4 text-justify text-sm">
-                <p><strong>Fecha:</strong> 23 de junio de 2025</p>
-                <p>En Hitster Ai, tu privacidad es prioridad. El procesamiento es 100% local en tu dispositivo.</p>
-                <h3 class="text-lg font-semibold text-white pt-2">Datos Personales</h3>
-                <p>No recolectamos imágenes. Solo estadísticas de uso anónimas para mejorar el servicio.</p>
-                <h3 class="text-lg font-semibold text-white pt-2">Seguridad</h3>
-                <p>Tus fotos nunca salen de tu navegador. Los metadatos EXIF se limpian automáticamente.</p>
-            </div>`;
-        
-        translations.en.instructions_content = `
-            <div class="text-neutral-400 space-y-4 text-justify text-sm">
-                <h3 class="text-xl font-semibold text-white">User Guide v2.0</h3>
-                <ul class="list-disc list-inside ml-4 space-y-1">
-                    <li>Drag & drop multiple images.</li>
-                    <li>Paste from clipboard.</li>
-                    <li>Use slider to compare quality.</li>
-                    <li>Download as ZIP or PDF.</li>
-                </ul>
-            </div>`;
-        translations.en.privacy_policy_content = `
-            <div class="text-neutral-400 space-y-4 text-justify text-sm">
-                <p><strong>Date:</strong> June 23, 2025</p>
-                <p>Processing is 100% local. Your images never leave your device.</p>
-            </div>`;
 
-
-        // --- Logic (Variables & Functions) ---
+        // --- Core Variables ---
         let currentLang = null;
         let loadedImages = [];
         let isBatchMode = false;
@@ -564,8 +596,10 @@
             errorFeedback: document.getElementById('error-feedback'),
             errorMessage: document.getElementById('error-message'),
             
-            instructionsBtns: document.querySelectorAll('#instructions-btn'),
-            privacyBtns: document.querySelectorAll('#privacy-btn'),
+            // Use classes for footer buttons
+            instructionsBtns: document.querySelectorAll('.instructions-btn-trigger'),
+            privacyBtns: document.querySelectorAll('.privacy-btn-trigger'),
+            
             instructionsModal: document.getElementById('instructions-modal'),
             closeInstructionsModalBtn: document.getElementById('close-instructions-modal-btn'),
             privacyModal: document.getElementById('privacy-modal'),
@@ -629,7 +663,7 @@
                         originalFileSize = file.size;
                         
                         els.imagePreview.src = img.src;
-                        els.imageOriginalBg.src = img.src;
+                        els.imageOriginalBg.src = img.src; 
                         
                         els.widthInput.value = img.width;
                         els.heightInput.value = img.height;
@@ -722,7 +756,7 @@
                 const blob = await getOptimizedBlob(originalImage, w, h);
                 if(blob) {
                      const url = URL.createObjectURL(blob);
-                     els.imagePreview.src = url; 
+                     els.imagePreview.src = url;
                      
                      els.originalSizeDisplay.textContent = `${translations[currentLang].original_size_label} ${formatBytes(originalFileSize)}`;
                      els.newSizeDisplay.textContent = `${translations[currentLang].new_size_label} ${formatBytes(blob.size)}`;
@@ -777,6 +811,20 @@
             elements.uploadArea.ondragleave = () => elements.uploadArea.classList.remove('border-blue-500');
             elements.uploadArea.ondrop = (e) => { e.preventDefault(); handleFiles(e.dataTransfer.files); };
             elements.imageInput.onchange = (e) => handleFiles(e.target.files);
+            
+            document.onpaste = (e) => {
+                 const items = (e.clipboardData || window.clipboardData).items;
+                 const files = [];
+                 for (let i=0; i<items.length; i++) {
+                     if(items[i].type.indexOf("image") !== -1) {
+                         files.push(items[i].getAsFile());
+                     }
+                 }
+                 if(files.length > 0 && !elements.uploadArea.classList.contains('hidden')) {
+                     e.preventDefault();
+                     handleFiles(files);
+                 }
+            };
 
             const sync = (val, isW) => {
                 if(!originalImage) return;
